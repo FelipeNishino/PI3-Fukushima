@@ -22,5 +22,20 @@ namespace PI3___Fukushima
         {
 
         }
+
+
+        private void btnListarPartidas_Click(object sender, EventArgs e)
+        {
+            string retorno = Jogo.ListarPartidas("T").Replace("\r", "");
+
+            string[] partidas = retorno.Split('\n');
+
+            cboPartidas.Items.Clear();
+            
+            foreach (string partida in partidas) {
+                cboPartidas.Items.Add(partida);
+            }
+            
+        }
     }
 }

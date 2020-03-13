@@ -1,0 +1,12 @@
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.exe.config
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.exe
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.pdb
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\bin\Debug\AzulServer.dll
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\bin\Debug\AzulServer.xml
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csprojAssemblyReference.cache
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.Form1.resources
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.Properties.Resources.resources
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.GenerateResource.cache
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.CopyComplete
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.exe
+C:\Users\gustavo.ysreis\Desktop\PI 3\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.pdb
