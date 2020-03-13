@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboPartidas = new System.Windows.Forms.ComboBox();
+            this.btnListarPartidas = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnListarPartidas = new System.Windows.Forms.Button();
-            this.cboPartidas = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +46,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Listar";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // cboPartidas
+            // 
+            this.cboPartidas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPartidas.FormattingEnabled = true;
+            this.cboPartidas.Location = new System.Drawing.Point(125, 40);
+            this.cboPartidas.Name = "cboPartidas";
+            this.cboPartidas.Size = new System.Drawing.Size(121, 21);
+            this.cboPartidas.TabIndex = 1;
+            // 
+            // btnListarPartidas
+            // 
+            this.btnListarPartidas.Location = new System.Drawing.Point(7, 40);
+            this.btnListarPartidas.Name = "btnListarPartidas";
+            this.btnListarPartidas.Size = new System.Drawing.Size(75, 23);
+            this.btnListarPartidas.TabIndex = 0;
+            this.btnListarPartidas.Text = "Listar";
+            this.btnListarPartidas.UseVisualStyleBackColor = true;
+            this.btnListarPartidas.Click += new System.EventHandler(this.btnListarPartidas_Click);
             // 
             // groupBox2
             // 
@@ -65,25 +83,6 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Criar";
-            // 
-            // btnListarPartidas
-            // 
-            this.btnListarPartidas.Location = new System.Drawing.Point(7, 40);
-            this.btnListarPartidas.Name = "btnListarPartidas";
-            this.btnListarPartidas.Size = new System.Drawing.Size(75, 23);
-            this.btnListarPartidas.TabIndex = 0;
-            this.btnListarPartidas.Text = "Listar";
-            this.btnListarPartidas.UseVisualStyleBackColor = true;
-            this.btnListarPartidas.Click += new System.EventHandler(this.btnListarPartidas_Click);
-            // 
-            // cboPartidas
-            // 
-            this.cboPartidas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPartidas.FormattingEnabled = true;
-            this.cboPartidas.Location = new System.Drawing.Point(126, 40);
-            this.cboPartidas.Name = "cboPartidas";
-            this.cboPartidas.Size = new System.Drawing.Size(121, 21);
-            this.cboPartidas.TabIndex = 1;
             // 
             // Form1
             // 

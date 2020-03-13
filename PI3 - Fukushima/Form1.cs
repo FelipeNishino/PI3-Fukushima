@@ -24,6 +24,7 @@ namespace PI3___Fukushima
         }
 
 
+
         private void btnListarPartidas_Click(object sender, EventArgs e)
         {
             string retorno = Jogo.ListarPartidas("T").Replace("\r", "");
