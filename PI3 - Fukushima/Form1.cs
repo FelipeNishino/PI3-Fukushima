@@ -44,35 +44,50 @@ namespace PI3___Fukushima
 
         private void btnEntrarPartida_Click(object sender, EventArgs e)
         {
-            if (txtIdPartida.Text == "") { 
-               MessageBox.Show("ERRO: Campo ID está vazio", "ERRO");
-            }
-            if (txtNomePartida.Text == "") { 
-               MessageBox.Show("ERRO: Campo NOME está vazio", "ERRO");
-            }
-            if (txtSenhaPartida.Text == "")
-            {
-                MessageBox.Show("ERRO: Campo SENHA está vazio", "ERRO");
-            }
+           
+            string retorno = Jogo.EntrarPartida(Int32.Parse(txtIdEntrarPartida.Text), txtNomeJogadorEntrar.Text, txtSenhaEntrarPartida.Text);
 
-            if (txtStatusPartida.Text == "Jogando") { 
-                MessageBox.Show("ERRO: Partida com o status de JOGANDO, não será possivel conectar", "ERRO");
-            }
+            verificarErro(retorno);
+            
 
-            Jogo.EntrarPartida(Int32.Parse(txtIdPartida.Text), txtNomePartida.Text, txtSenhaPartida.Text);
         }
 
         private void cboPartidas_SelectedIndexChanged(object sender, EventArgs e)
         {
             string[] itens = cboPartidas.SelectedItem.ToString().Split(',');
-            txtIdPartida.Text = itens[0];
-            txtNomePartida.Text = itens[1];
-            txtStatusPartida.Text = (itens[3] == "J") ? "Jogando" : "Aberta";
+            txtIdEntrarPartida.Text = itens[0];
+            txtStatusEntrarPartida.Text = (itens[3] == "J") ? "Jogando" : "Aberta";
         }
 
         private void btnCriarPartida_Click(object sender, EventArgs e)
         {
-            //Jogo.CriarPartida()
+            if (txtNomeCriarPartida.Text == "") {
+               MessageBox.Show("ERRO: Campo NOME está vazio", "ERRO");
+                return;
+            }
+            if (txtSenhaCriarPartida.Text == "") { 
+               MessageBox.Show("ERRO: Campo SENHA está vazio", "ERRO");
+                return;
+            }
+
+            string retorno = Jogo.CriarPartida(txtNomeCriarPartida.Text, txtSenhaCriarPartida.Text);
+            verificarErro(retorno);
+
+        }
+
+        private void lblStatusPartida_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void verificarErro(string retorno) {
+            if (retorno.Substring(0, 4) == "ERRO")
+            {
+                MessageBox.Show(retorno);
+            }
+            else {
+                lblFeedBack.Text += retorno;
+            }
         }
     }
 }
