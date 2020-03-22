@@ -22,3 +22,4 @@ D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.cspr
 D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.CopyComplete
 D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.exe
 D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.pdb
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.frmPartida.resources

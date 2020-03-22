@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AzulServer;
 
+
 namespace PI3___Fukushima
 {
     public partial class Form1 : Form
     {
-
-        
 
         public Form1()
         {
@@ -30,25 +29,25 @@ namespace PI3___Fukushima
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
         {
-            string retorno = Jogo.ListarPartidas("T").Replace("\r", "");
-
-            string[] partidas = retorno.Split('\n');
+            List<Partida> partidas = Partida.listarPartidas();
 
             cboPartidas.Items.Clear();
             
-            foreach (string partida in partidas) {
-                cboPartidas.Items.Add(partida);
+            foreach (Partida partida in partidas) {
+                cboPartidas.Items.Add(partida.nome);
             }
             
         }
 
         private void btnEntrarPartida_Click(object sender, EventArgs e)
         {
-           
-            string retorno = Jogo.EntrarPartida(Int32.Parse(txtIdEntrarPartida.Text), txtNomeJogadorEntrar.Text, txtSenhaEntrarPartida.Text);
 
-            verificarErro(retorno);
-            
+            //string retorno = Jogo.EntrarPartida(Int32.Parse(txtIdEntrarPartida.Text), txtNomeJogadorEntrar.Text, txtSenhaEntrarPartida.Text);
+
+            //verificarErro(retorno);
+
+            frmPartida frmPartida = new frmPartida();
+            frmPartida.ShowDialog();
 
         }
 
@@ -61,18 +60,20 @@ namespace PI3___Fukushima
 
         private void btnCriarPartida_Click(object sender, EventArgs e)
         {
-            if (txtNomeCriarPartida.Text == "") {
-               MessageBox.Show("ERRO: Campo NOME está vazio", "ERRO");
-                return;
-            }
-            if (txtSenhaCriarPartida.Text == "") { 
-               MessageBox.Show("ERRO: Campo SENHA está vazio", "ERRO");
-                return;
-            }
+            //if (txtNomeCriarPartida.Text == "") {
+            //   MessageBox.Show("ERRO: Campo NOME está vazio", "ERRO");
+            //    return;
+            //}
+            //if (txtSenhaCriarPartida.Text == "") { 
+            //   MessageBox.Show("ERRO: Campo SENHA está vazio", "ERRO");
+            //    return;
+            //}
 
-            string retorno = Jogo.CriarPartida(txtNomeCriarPartida.Text, txtSenhaCriarPartida.Text);
-            verificarErro(retorno);
+            //string retorno = Jogo.CriarPartida(txtNomeCriarPartida.Text, txtSenhaCriarPartida.Text);
+            //verificarErro(retorno);
 
+            frmPartida frmPartida = new frmPartida();
+            frmPartida.ShowDialog();
         }
 
         private void lblStatusPartida_Click(object sender, EventArgs e)
