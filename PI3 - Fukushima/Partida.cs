@@ -40,5 +40,26 @@ namespace PI3___Fukushima
 
             return partidas;
         }
+
+        public static List<Jogador> listarJogadores(int id)
+        {
+            List<Jogador> jogadores = new List<Jogador>();
+
+            string retorno = Jogo.ListarJogadores(id).Replace("\r", "");
+            string[] jogadoresRetorno = retorno.Split('\n');
+
+            for (int i = 0; i < jogadoresRetorno.Length && jogadoresRetorno[i] != ""; i++){
+                string[] itens = jogadoresRetorno[i].Split(',');
+
+                Jogador jogador = new Jogador();
+                jogador.id = Convert.ToInt32(itens[0]);
+                jogador.nome = itens[1];
+                jogador.score = Convert.ToInt32(itens[2]);
+
+                jogadores.Add(jogador);
+            }
+
+            return jogadores;
+        }
     }
 }

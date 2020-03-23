@@ -42,9 +42,9 @@ namespace PI3___Fukushima
         private void btnEntrarPartida_Click(object sender, EventArgs e)
         {
 
-            //string retorno = Jogo.EntrarPartida(Int32.Parse(txtIdEntrarPartida.Text), txtNomeJogadorEntrar.Text, txtSenhaEntrarPartida.Text);
+            string retorno = Jogo.EntrarPartida(Int32.Parse(txtIdEntrarPartida.Text), txtNomeJogadorEntrar.Text, txtSenhaEntrarPartida.Text);
 
-            //verificarErro(retorno);
+            verificarErro(retorno);
 
             frmPartida frmPartida = new frmPartida();
             frmPartida.ShowDialog();
