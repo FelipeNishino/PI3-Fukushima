@@ -34,6 +34,7 @@ namespace PI3___Fukushima
             
             //foreach (Partida partida in partidas) {
             //    cboPartidas.Items.Add(partida.nome);
+            //
             //}
 
             foreach (Partida partida in partidas)
