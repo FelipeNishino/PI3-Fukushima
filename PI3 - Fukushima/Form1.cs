@@ -26,8 +26,6 @@ namespace PI3___Fukushima
             lblFeedBack.Text = "";
         }
 
-
-
         private void btnListarPartidas_Click(object sender, EventArgs e)
         {
             List<Partida> partidas = Partida.listarPartidas();
@@ -46,7 +44,6 @@ namespace PI3___Fukushima
 
         private void btnEntrarPartida_Click(object sender, EventArgs e)
         {
-
             string retorno = Jogo.EntrarPartida(Int32.Parse(txtIdEntrarPartida.Text), txtNomeJogadorEntrar.Text, txtSenhaEntrarPartida.Text);
 
             if (verificarErro(retorno)) {
@@ -79,11 +76,6 @@ namespace PI3___Fukushima
             verificarErro(retorno);
         }
 
-        private void lblStatusPartida_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public bool verificarErro(string retorno) {
             lblFeedBack.Text = retorno;
 
@@ -96,11 +88,6 @@ namespace PI3___Fukushima
                 }
             }
             return false;
-        }
-
-        private void lblFeedBack_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)

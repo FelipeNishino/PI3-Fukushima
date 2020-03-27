@@ -70,7 +70,7 @@
             // 
             this.cboPartidas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPartidas.FormattingEnabled = true;
-            this.cboPartidas.Location = new System.Drawing.Point(88, 40);
+            this.cboPartidas.Location = new System.Drawing.Point(88, 38);
             this.cboPartidas.Name = "cboPartidas";
             this.cboPartidas.Size = new System.Drawing.Size(316, 21);
             this.cboPartidas.TabIndex = 1;
@@ -78,9 +78,9 @@
             // 
             // btnListarPartidas
             // 
-            this.btnListarPartidas.Location = new System.Drawing.Point(7, 40);
+            this.btnListarPartidas.Location = new System.Drawing.Point(6, 38);
             this.btnListarPartidas.Name = "btnListarPartidas";
-            this.btnListarPartidas.Size = new System.Drawing.Size(75, 23);
+            this.btnListarPartidas.Size = new System.Drawing.Size(75, 21);
             this.btnListarPartidas.TabIndex = 0;
             this.btnListarPartidas.Text = "Listar";
             this.btnListarPartidas.UseVisualStyleBackColor = true;
@@ -112,7 +112,6 @@
             this.lblStatusEntrarPartida.Size = new System.Drawing.Size(37, 13);
             this.lblStatusEntrarPartida.TabIndex = 8;
             this.lblStatusEntrarPartida.Text = "Status";
-            this.lblStatusEntrarPartida.Click += new System.EventHandler(this.lblStatusPartida_Click);
             // 
             // txtStatusEntrarPartida
             // 
@@ -253,7 +252,6 @@
             this.lblFeedBack.Size = new System.Drawing.Size(55, 13);
             this.lblFeedBack.TabIndex = 4;
             this.lblFeedBack.Text = "Feedback";
-            this.lblFeedBack.Click += new System.EventHandler(this.lblFeedBack_Click);
             // 
             // button1
             // 

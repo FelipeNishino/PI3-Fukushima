@@ -27,7 +27,7 @@ namespace PI3___Fukushima
             InitializeComponent();
 
             txtStatusPartida.Text = statusPartida;
-            lblFeedback.Text = lblFabricas.Text = "";
+            lblFeedback.Text = "";
         } 
 
         private void btnListarJogadoresPartida_Click(object sender, EventArgs e)
@@ -43,7 +43,8 @@ namespace PI3___Fukushima
         private void btnListarFabricas_Click(object sender, EventArgs e)
         {
             string retorno;
-
+            string[] fabricas;
+            
             if (rdoDebugN.Checked)
             {
                 retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
@@ -52,11 +53,14 @@ namespace PI3___Fukushima
                 retorno = Jogo.LerFabricas(Convert.ToInt32(txtIdJogador.Text), txtSenhaJogador.Text);
             }
 
-            lblFabricas.Text = retorno;
-        }
+            retorno = retorno.Replace("\r", "");
+            fabricas = retorno.Split('\n');
 
-        private void frmPartida_Load(object sender, EventArgs e)
-        {
+            lstAzulejosFabricas.Items.Clear();
+
+            foreach (string fabrica in fabricas) {
+                lstAzulejosFabricas.Items.Add(fabrica);
+            }
         }
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
@@ -65,26 +69,37 @@ namespace PI3___Fukushima
             txtStatusPartida.Text = "Jogando";
         }
 
-        private void frmPartida_Activated(object sender, EventArgs e)
+        private void btnListarCentro_Click(object sender, EventArgs e)
         {
-        }
+            string retorno;
+            string[] azulejosCentro;
 
-        private void cboFabricas_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            if (rdoDebugN.Checked)
+            {
+                retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
+            }
+            else
+            {
+                retorno = Jogo.LerCentro(Convert.ToInt32(txtIdJogador.Text), txtSenhaJogador.Text);
+            }
 
-        }
+            retorno = retorno.Replace("\r", "");
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            lblFabricas.Text = "";
+            azulejosCentro = retorno.Split('\n');
+
+            lstAzulejosCentro.Items.Clear();
+
+            foreach (string azulejo in azulejosCentro) {
+                lstAzulejosCentro.Items.Add(azulejo);
+            }
         }
     }
 }
 
 /*
-sala id 92
-senha b
+sala id 15
+senha 123
 
-jogador id 109
-jogador senha 5024C1   
+jogador id 27
+jogador senha 3CEC0B   
 */

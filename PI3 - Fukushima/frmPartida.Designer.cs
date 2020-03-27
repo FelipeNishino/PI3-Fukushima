@@ -34,24 +34,28 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstAzulejosFabricas = new System.Windows.Forms.ListBox();
             this.btnListarFabricas = new System.Windows.Forms.Button();
-            this.cboFabricas = new System.Windows.Forms.ComboBox();
             this.txtStatusPartida = new System.Windows.Forms.TextBox();
             this.btnIniciarPartida = new System.Windows.Forms.Button();
             this.lblFeedback = new System.Windows.Forms.Label();
-            this.lblFabricas = new System.Windows.Forms.Label();
             this.txtIdJogador = new System.Windows.Forms.TextBox();
             this.txtSenhaJogador = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.rdoDebugN = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rdoDebugS = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cboFabricas = new System.Windows.Forms.ComboBox();
+            this.lstAzulejosCentro = new System.Windows.Forms.ListBox();
+            this.btnListarCentro = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -87,10 +91,9 @@
             // 
             this.groupBox2.Controls.Add(this.lstAzulejosFabricas);
             this.groupBox2.Controls.Add(this.btnListarFabricas);
-            this.groupBox2.Controls.Add(this.cboFabricas);
             this.groupBox2.Location = new System.Drawing.Point(12, 197);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 250);
+            this.groupBox2.Size = new System.Drawing.Size(200, 221);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fabricas";
@@ -98,38 +101,20 @@
             // lstAzulejosFabricas
             // 
             this.lstAzulejosFabricas.FormattingEnabled = true;
-            this.lstAzulejosFabricas.Location = new System.Drawing.Point(7, 51);
+            this.lstAzulejosFabricas.Location = new System.Drawing.Point(6, 19);
             this.lstAzulejosFabricas.Name = "lstAzulejosFabricas";
             this.lstAzulejosFabricas.Size = new System.Drawing.Size(186, 160);
             this.lstAzulejosFabricas.TabIndex = 3;
             // 
             // btnListarFabricas
             // 
-            this.btnListarFabricas.Location = new System.Drawing.Point(6, 222);
+            this.btnListarFabricas.Location = new System.Drawing.Point(5, 185);
             this.btnListarFabricas.Name = "btnListarFabricas";
             this.btnListarFabricas.Size = new System.Drawing.Size(187, 23);
             this.btnListarFabricas.TabIndex = 2;
             this.btnListarFabricas.Text = "Listar";
             this.btnListarFabricas.UseVisualStyleBackColor = true;
             this.btnListarFabricas.Click += new System.EventHandler(this.btnListarFabricas_Click);
-            // 
-            // cboFabricas
-            // 
-            this.cboFabricas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFabricas.FormattingEnabled = true;
-            this.cboFabricas.Items.AddRange(new object[] {
-            "centro",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"});
-            this.cboFabricas.Location = new System.Drawing.Point(7, 20);
-            this.cboFabricas.Name = "cboFabricas";
-            this.cboFabricas.Size = new System.Drawing.Size(187, 21);
-            this.cboFabricas.TabIndex = 0;
-            this.cboFabricas.SelectedIndexChanged += new System.EventHandler(this.cboFabricas_SelectedIndexChanged);
             // 
             // txtStatusPartida
             // 
@@ -152,20 +137,11 @@
             // lblFeedback
             // 
             this.lblFeedback.AutoSize = true;
-            this.lblFeedback.Location = new System.Drawing.Point(238, 419);
+            this.lblFeedback.Location = new System.Drawing.Point(16, 424);
             this.lblFeedback.Name = "lblFeedback";
             this.lblFeedback.Size = new System.Drawing.Size(55, 13);
             this.lblFeedback.TabIndex = 4;
             this.lblFeedback.Text = "Feedback";
-            // 
-            // lblFabricas
-            // 
-            this.lblFabricas.AutoSize = true;
-            this.lblFabricas.Location = new System.Drawing.Point(238, 248);
-            this.lblFabricas.Name = "lblFabricas";
-            this.lblFabricas.Size = new System.Drawing.Size(62, 13);
-            this.lblFabricas.TabIndex = 5;
-            this.lblFabricas.Text = "LerFábricas";
             // 
             // txtIdJogador
             // 
@@ -173,6 +149,7 @@
             this.txtIdJogador.Name = "txtIdJogador";
             this.txtIdJogador.Size = new System.Drawing.Size(100, 20);
             this.txtIdJogador.TabIndex = 6;
+            this.txtIdJogador.Text = "27";
             // 
             // txtSenhaJogador
             // 
@@ -180,6 +157,7 @@
             this.txtSenhaJogador.Name = "txtSenhaJogador";
             this.txtSenhaJogador.Size = new System.Drawing.Size(100, 20);
             this.txtSenhaJogador.TabIndex = 7;
+            this.txtSenhaJogador.Text = "3CEC0B";
             // 
             // groupBox3
             // 
@@ -187,7 +165,7 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtIdJogador);
             this.groupBox3.Controls.Add(this.txtSenhaJogador);
-            this.groupBox3.Location = new System.Drawing.Point(601, 35);
+            this.groupBox3.Location = new System.Drawing.Point(24, 19);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(176, 83);
             this.groupBox3.TabIndex = 8;
@@ -212,16 +190,6 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "ID";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(241, 215);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Reset Fabricas";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // rdoDebugN
             // 
             this.rdoDebugN.AutoSize = true;
@@ -238,7 +206,7 @@
             // 
             this.groupBox4.Controls.Add(this.rdoDebugS);
             this.groupBox4.Controls.Add(this.rdoDebugN);
-            this.groupBox4.Location = new System.Drawing.Point(662, 124);
+            this.groupBox4.Location = new System.Drawing.Point(85, 108);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(115, 69);
             this.groupBox4.TabIndex = 11;
@@ -255,28 +223,86 @@
             this.rdoDebugS.Text = "Sim";
             this.rdoDebugS.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.groupBox3);
+            this.groupBox5.Controls.Add(this.groupBox4);
+            this.groupBox5.Controls.Add(this.cboFabricas);
+            this.groupBox5.Location = new System.Drawing.Point(566, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(222, 226);
+            this.groupBox5.TabIndex = 12;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Debug";
+            // 
+            // cboFabricas
+            // 
+            this.cboFabricas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFabricas.Enabled = false;
+            this.cboFabricas.FormattingEnabled = true;
+            this.cboFabricas.Items.AddRange(new object[] {
+            "centro",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
+            this.cboFabricas.Location = new System.Drawing.Point(21, 185);
+            this.cboFabricas.Name = "cboFabricas";
+            this.cboFabricas.Size = new System.Drawing.Size(187, 21);
+            this.cboFabricas.TabIndex = 0;
+            // 
+            // lstAzulejosCentro
+            // 
+            this.lstAzulejosCentro.FormattingEnabled = true;
+            this.lstAzulejosCentro.Location = new System.Drawing.Point(7, 19);
+            this.lstAzulejosCentro.Name = "lstAzulejosCentro";
+            this.lstAzulejosCentro.Size = new System.Drawing.Size(187, 160);
+            this.lstAzulejosCentro.TabIndex = 13;
+            // 
+            // btnListarCentro
+            // 
+            this.btnListarCentro.Location = new System.Drawing.Point(7, 185);
+            this.btnListarCentro.Name = "btnListarCentro";
+            this.btnListarCentro.Size = new System.Drawing.Size(187, 23);
+            this.btnListarCentro.TabIndex = 14;
+            this.btnListarCentro.Text = "Listar";
+            this.btnListarCentro.UseVisualStyleBackColor = true;
+            this.btnListarCentro.Click += new System.EventHandler(this.btnListarCentro_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.lstAzulejosCentro);
+            this.groupBox6.Controls.Add(this.btnListarCentro);
+            this.groupBox6.Location = new System.Drawing.Point(234, 197);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(200, 221);
+            this.groupBox6.TabIndex = 15;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Centro";
+            // 
             // frmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.lblFabricas);
+            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.lblFeedback);
             this.Controls.Add(this.btnIniciarPartida);
             this.Controls.Add(this.txtStatusPartida);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmPartida";
-            this.Load += new System.EventHandler(this.frmPartida_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -286,7 +312,6 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox cboFabricas;
         private System.Windows.Forms.TextBox txtStatusPartida;
         private System.Windows.Forms.Button btnIniciarPartida;
         private System.Windows.Forms.Button btnListarJogadoresPartida;
@@ -294,15 +319,18 @@
         private System.Windows.Forms.ListBox lstListaJogadores;
         private System.Windows.Forms.ListBox lstAzulejosFabricas;
         private System.Windows.Forms.Label lblFeedback;
-        private System.Windows.Forms.Label lblFabricas;
         private System.Windows.Forms.TextBox txtIdJogador;
         private System.Windows.Forms.TextBox txtSenhaJogador;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RadioButton rdoDebugN;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton rdoDebugS;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ComboBox cboFabricas;
+        private System.Windows.Forms.ListBox lstAzulejosCentro;
+        private System.Windows.Forms.Button btnListarCentro;
+        private System.Windows.Forms.GroupBox groupBox6;
     }
 }

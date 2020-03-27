@@ -36,3 +36,16 @@ C:\Users\keeee\source\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukush
 C:\Users\keeee\source\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.CopyComplete
 C:\Users\keeee\source\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.exe
 C:\Users\keeee\source\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.pdb
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.exe.config
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.exe
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.pdb
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\bin\Debug\AzulServer.dll
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\bin\Debug\AzulServer.xml
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csprojAssemblyReference.cache
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.Form1.resources
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.frmPartida.resources
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.Properties.Resources.resources
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.GenerateResource.cache
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.CopyComplete
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.exe
+D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.pdb
