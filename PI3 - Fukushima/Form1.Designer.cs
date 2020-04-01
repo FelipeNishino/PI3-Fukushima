@@ -48,7 +48,7 @@
             this.lblNomePartida = new System.Windows.Forms.Label();
             this.btnCriarPartida = new System.Windows.Forms.Button();
             this.lblVersaoDll = new System.Windows.Forms.Label();
-            this.lblFeedBack = new System.Windows.Forms.Label();
+            this.lblFeedback = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -244,14 +244,14 @@
             this.lblVersaoDll.TabIndex = 3;
             this.lblVersaoDll.Text = "Versão";
             // 
-            // lblFeedBack
+            // lblFeedback
             // 
-            this.lblFeedBack.AutoSize = true;
-            this.lblFeedBack.Location = new System.Drawing.Point(43, 428);
-            this.lblFeedBack.Name = "lblFeedBack";
-            this.lblFeedBack.Size = new System.Drawing.Size(55, 13);
-            this.lblFeedBack.TabIndex = 4;
-            this.lblFeedBack.Text = "Feedback";
+            this.lblFeedback.AutoSize = true;
+            this.lblFeedback.Location = new System.Drawing.Point(43, 428);
+            this.lblFeedback.Name = "lblFeedback";
+            this.lblFeedback.Size = new System.Drawing.Size(55, 13);
+            this.lblFeedback.TabIndex = 4;
+            this.lblFeedback.Text = "Feedback";
             // 
             // button1
             // 
@@ -269,7 +269,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 450);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.lblFeedBack);
+            this.Controls.Add(this.lblFeedback);
             this.Controls.Add(this.lblVersaoDll);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -309,7 +309,7 @@
         private System.Windows.Forms.TextBox txtNomeCriarPartida;
         private System.Windows.Forms.Label lblNomePartida;
         private System.Windows.Forms.TextBox txtSenhaCriarPartida;
-        private System.Windows.Forms.Label lblFeedBack;
+        private System.Windows.Forms.Label lblFeedback;
         private System.Windows.Forms.Button button1;
     }
 }

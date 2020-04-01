@@ -23,7 +23,7 @@ namespace PI3___Fukushima
         private void Form1_Load(object sender, EventArgs e)
         {
             lblVersaoDll.Text = "Versao DLL: " + Jogo.Versao;
-            lblFeedBack.Text = "";
+            lblFeedback.Text = "";
         }
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace PI3___Fukushima
 
         private void btnEntrarPartida_Click(object sender, EventArgs e)
         {
-            string retorno = Jogo.EntrarPartida(Int32.Parse(txtIdEntrarPartida.Text), txtNomeJogadorEntrar.Text, txtSenhaEntrarPartida.Text);
+            string retorno = Jogo.EntrarPartida(Convert.ToInt32(txtIdEntrarPartida.Text), txtNomeJogadorEntrar.Text, txtSenhaEntrarPartida.Text);
 
             if (verificarErro(retorno)) {
                 return;
@@ -78,7 +78,7 @@ namespace PI3___Fukushima
         }
 
         public bool verificarErro(string retorno) {
-            lblFeedBack.Text = retorno;
+            lblFeedback.Text = retorno;
 
             if (retorno.Length > 4)
             { 
@@ -93,7 +93,9 @@ namespace PI3___Fukushima
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmPartida frmPartida = new frmPartida("", txtIdEntrarPartida.Text, "");
+            string dados = "100,19422f";
+            
+            frmPartida frmPartida = new frmPartida(dados, txtIdEntrarPartida.Text, "");
             frmPartida.ShowDialog();
         }
     }

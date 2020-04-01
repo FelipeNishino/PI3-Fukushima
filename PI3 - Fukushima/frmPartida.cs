@@ -45,14 +45,7 @@ namespace PI3___Fukushima
             string retorno;
             string[] fabricas;
             
-            if (rdoDebugN.Checked)
-            {
-                retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
-            }
-            else {
-                retorno = Jogo.LerFabricas(Convert.ToInt32(txtIdJogador.Text), txtSenhaJogador.Text);
-            }
-
+            retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
             retorno = retorno.Replace("\r", "");
             fabricas = retorno.Split('\n');
 
@@ -74,14 +67,7 @@ namespace PI3___Fukushima
             string retorno;
             string[] azulejosCentro;
 
-            if (rdoDebugN.Checked)
-            {
-                retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
-            }
-            else
-            {
-                retorno = Jogo.LerCentro(Convert.ToInt32(txtIdJogador.Text), txtSenhaJogador.Text);
-            }
+            retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
 
             retorno = retorno.Replace("\r", "");
 
@@ -93,6 +79,39 @@ namespace PI3___Fukushima
                 lstAzulejosCentro.Items.Add(azulejo);
             }
         }
+
+        private void btnComprarAzulejo_Click(object sender, EventArgs e)
+        {
+            string retorno;
+            string centro;
+
+            if (cboFabricasCompra.SelectedItem.ToString() == "Centro")
+            {
+                centro = "C";
+            }
+            else 
+            {
+                centro = "F";
+            }
+                
+            retorno = Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], centro, (cboFabricasCompra.SelectedItem.ToString() == "Centro")? 0 : Convert.ToInt32(cboFabricasCompra.SelectedItem), Convert.ToInt32(cboAzulejoCompra.SelectedItem), Convert.ToInt32(cboModeloCompra.SelectedItem));
+            verificarErro(retorno); 
+        }  
+
+        public bool verificarErro(string retorno)
+        {
+            lblFeedback.Text = retorno;
+
+            if (retorno.Length > 4)
+            {
+                if (retorno.Substring(0, 4) == "ERRO")
+                {
+                    MessageBox.Show(retorno);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
 
@@ -100,6 +119,6 @@ namespace PI3___Fukushima
 sala id 15
 senha 123
 
-jogador id 27
-jogador senha 3CEC0B   
+jogador id 100
+jogador senha 19422f   
 */

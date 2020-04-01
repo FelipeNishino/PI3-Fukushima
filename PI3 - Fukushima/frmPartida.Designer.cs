@@ -50,12 +50,21 @@
             this.lstAzulejosCentro = new System.Windows.Forms.ListBox();
             this.btnListarCentro = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btnComprarAzulejo = new System.Windows.Forms.Button();
+            this.cboFabricasCompra = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cboAzulejoCompra = new System.Windows.Forms.ComboBox();
+            this.cboModeloCompra = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -149,7 +158,7 @@
             this.txtIdJogador.Name = "txtIdJogador";
             this.txtIdJogador.Size = new System.Drawing.Size(100, 20);
             this.txtIdJogador.TabIndex = 6;
-            this.txtIdJogador.Text = "27";
+            this.txtIdJogador.Text = "100";
             // 
             // txtSenhaJogador
             // 
@@ -157,7 +166,7 @@
             this.txtSenhaJogador.Name = "txtSenhaJogador";
             this.txtSenhaJogador.Size = new System.Drawing.Size(100, 20);
             this.txtSenhaJogador.TabIndex = 7;
-            this.txtSenhaJogador.Text = "3CEC0B";
+            this.txtSenhaJogador.Text = "19422f";
             // 
             // groupBox3
             // 
@@ -282,11 +291,111 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Centro";
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label5);
+            this.groupBox7.Controls.Add(this.cboModeloCompra);
+            this.groupBox7.Controls.Add(this.cboAzulejoCompra);
+            this.groupBox7.Controls.Add(this.label4);
+            this.groupBox7.Controls.Add(this.label3);
+            this.groupBox7.Controls.Add(this.cboFabricasCompra);
+            this.groupBox7.Controls.Add(this.btnComprarAzulejo);
+            this.groupBox7.Location = new System.Drawing.Point(241, 12);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(193, 179);
+            this.groupBox7.TabIndex = 0;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Comprar";
+            // 
+            // btnComprarAzulejo
+            // 
+            this.btnComprarAzulejo.Location = new System.Drawing.Point(101, 150);
+            this.btnComprarAzulejo.Name = "btnComprarAzulejo";
+            this.btnComprarAzulejo.Size = new System.Drawing.Size(75, 23);
+            this.btnComprarAzulejo.TabIndex = 0;
+            this.btnComprarAzulejo.Text = "Comprar";
+            this.btnComprarAzulejo.UseVisualStyleBackColor = true;
+            this.btnComprarAzulejo.Click += new System.EventHandler(this.btnComprarAzulejo_Click);
+            // 
+            // cboFabricasCompra
+            // 
+            this.cboFabricasCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFabricasCompra.FormattingEnabled = true;
+            this.cboFabricasCompra.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "Centro"});
+            this.cboFabricasCompra.Location = new System.Drawing.Point(55, 19);
+            this.cboFabricasCompra.Name = "cboFabricasCompra";
+            this.cboFabricasCompra.Size = new System.Drawing.Size(121, 21);
+            this.cboFabricasCompra.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Fabrica";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 67);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Azulejo";
+            // 
+            // cboAzulejoCompra
+            // 
+            this.cboAzulejoCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAzulejoCompra.FormattingEnabled = true;
+            this.cboAzulejoCompra.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.cboAzulejoCompra.Location = new System.Drawing.Point(55, 62);
+            this.cboAzulejoCompra.Name = "cboAzulejoCompra";
+            this.cboAzulejoCompra.Size = new System.Drawing.Size(121, 21);
+            this.cboAzulejoCompra.TabIndex = 4;
+            // 
+            // cboModeloCompra
+            // 
+            this.cboModeloCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboModeloCompra.FormattingEnabled = true;
+            this.cboModeloCompra.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.cboModeloCompra.Location = new System.Drawing.Point(55, 108);
+            this.cboModeloCompra.Name = "cboModeloCompra";
+            this.cboModeloCompra.Size = new System.Drawing.Size(121, 21);
+            this.cboModeloCompra.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 111);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Modelo";
+            // 
             // frmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.lblFeedback);
@@ -303,6 +412,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,5 +443,13 @@
         private System.Windows.Forms.ListBox lstAzulejosCentro;
         private System.Windows.Forms.Button btnListarCentro;
         private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.ComboBox cboAzulejoCompra;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cboFabricasCompra;
+        private System.Windows.Forms.Button btnComprarAzulejo;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cboModeloCompra;
     }
 }
