@@ -58,6 +58,8 @@
             this.cboAzulejoCompra = new System.Windows.Forms.ComboBox();
             this.cboModeloCompra = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblTabuleiro = new System.Windows.Forms.Label();
+            this.btnTabuleiro = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -390,11 +392,32 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Modelo";
             // 
+            // lblTabuleiro
+            // 
+            this.lblTabuleiro.AutoSize = true;
+            this.lblTabuleiro.Location = new System.Drawing.Point(568, 254);
+            this.lblTabuleiro.Name = "lblTabuleiro";
+            this.lblTabuleiro.Size = new System.Drawing.Size(51, 13);
+            this.lblTabuleiro.TabIndex = 16;
+            this.lblTabuleiro.Text = "Tabuleiro";
+            // 
+            // btnTabuleiro
+            // 
+            this.btnTabuleiro.Location = new System.Drawing.Point(465, 254);
+            this.btnTabuleiro.Name = "btnTabuleiro";
+            this.btnTabuleiro.Size = new System.Drawing.Size(75, 23);
+            this.btnTabuleiro.TabIndex = 17;
+            this.btnTabuleiro.Text = "Ler";
+            this.btnTabuleiro.UseVisualStyleBackColor = true;
+            this.btnTabuleiro.Click += new System.EventHandler(this.btnTabuleiro_Click);
+            // 
             // frmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnTabuleiro);
+            this.Controls.Add(this.lblTabuleiro);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
@@ -451,5 +474,7 @@
         private System.Windows.Forms.Button btnComprarAzulejo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboModeloCompra;
+        private System.Windows.Forms.Label lblTabuleiro;
+        private System.Windows.Forms.Button btnTabuleiro;
     }
 }

@@ -28,6 +28,7 @@ namespace PI3___Fukushima
 
             txtStatusPartida.Text = statusPartida;
             lblFeedback.Text = "";
+            lblTabuleiro.Text = "";
         } 
 
         private void btnListarJogadoresPartida_Click(object sender, EventArgs e)
@@ -69,6 +70,9 @@ namespace PI3___Fukushima
 
             retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
 
+            verificarErro(retorno);
+
+            
             retorno = retorno.Replace("\r", "");
 
             azulejosCentro = retorno.Split('\n');
@@ -92,8 +96,7 @@ namespace PI3___Fukushima
             else 
             {
                 centro = "F";
-            }
-                
+            }   
             retorno = Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], centro, (cboFabricasCompra.SelectedItem.ToString() == "Centro")? 0 : Convert.ToInt32(cboFabricasCompra.SelectedItem), Convert.ToInt32(cboAzulejoCompra.SelectedItem), Convert.ToInt32(cboModeloCompra.SelectedItem));
             verificarErro(retorno); 
         }  
@@ -112,12 +115,17 @@ namespace PI3___Fukushima
             }
             return false;
         }
+
+        private void btnTabuleiro_Click(object sender, EventArgs e)
+        {
+            lblTabuleiro.Text = Jogo.LerTabuleiro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], Convert.ToInt32(dadosJogador[0])); 
+        }
     }
 }
 
 /*
-sala id 15
-senha 123
+sala id 54
+senha fukushima
 
 jogador id 100
 jogador senha 19422f   
