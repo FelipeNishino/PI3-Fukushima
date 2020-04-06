@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Azulejo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +63,12 @@
     <Compile Include="frmPartida.Designer.cs">
       <DependentUpon>frmPartida.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTabuleiro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTabuleiro.Designer.cs">
+      <DependentUpon>frmTabuleiro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Jogador.cs" />
     <Compile Include="Partida.cs" />
     <Compile Include="Program.cs" />
@@ -73,6 +80,9 @@
     <EmbeddedResource Include="frmPartida.resx">
       <DependentUpon>frmPartida.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmTabuleiro.resx">
+      <DependentUpon>frmTabuleiro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -81,6 +91,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -94,6 +105,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\P06wHU3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bn9cq6x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\A8nlUrz.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
