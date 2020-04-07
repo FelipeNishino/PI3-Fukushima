@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AzulServer;
@@ -14,16 +15,26 @@ namespace PI3___Fukushima
 {
     public partial class Form1 : Form
     {
+        private static System.Timers.Timer timer;
+        string[] dadosJogador;
+        int nJogadores;
 
         public Form1()
         {
+            
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+        {   
             lblVersaoDll.Text = "Versao DLL: " + Jogo.Versao;
             lblFeedback.Text = "";
+            lblTimer.Text = "Timer ativado";
+
+            timer = new System.Timers.Timer(2000);
+            timer.Elapsed += timerTick;
+            timer.AutoReset = true;
+            timer.Start();
         }
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
@@ -51,8 +62,58 @@ namespace PI3___Fukushima
                 return;
             }
 
-            frmPartida frmPartida = new frmPartida(retorno, txtIdEntrarPartida.Text, txtStatusEntrarPartida.Text);
-            frmPartida.ShowDialog();
+            txtDebug.Text = retorno;
+
+            dadosJogador = retorno.Split(',');
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"Users.txt", true))
+            {
+                file.WriteLine(txtIdEntrarPartida.Text + " " + txtSenhaEntrarPartida.Text + " - " + retorno);
+            }
+        }
+
+        delegate void refreshListCallback();
+        private void refreshList()
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.lstSala.InvokeRequired)
+            {
+                refreshListCallback d = new refreshListCallback(refreshList);
+                this.Invoke(d, new object[] { });
+            }
+            else
+            {
+                lstSala.Items.Clear();
+
+                if (!txtIdEntrarPartida.Text.Equals(""))
+                {
+                    foreach (Jogador jogador in Partida.listarJogadores(Convert.ToInt32(txtIdEntrarPartida.Text)))
+                    {
+                        lstSala.Items.Add(jogador.id + ", " + jogador.nome + ", " + jogador.score);
+                    }
+                }
+
+                if (lstSala.Items.Count == 4)
+                {
+                    timer.Stop();
+                    lblTimer.Text = "Timer desativado";
+                }
+            }
+        }
+
+        private void countPlayers() {
+            nJogadores = lstSala.Items.Count;
+            if (nJogadores < 2) {
+                nJogadores = 2;
+            }
+        }
+
+        private void timerTick(Object source, ElapsedEventArgs e)
+        {
+            refreshList();
+            countPlayers();
         }
 
         private void cboPartidas_SelectedIndexChanged(object sender, EventArgs e)
@@ -93,10 +154,32 @@ namespace PI3___Fukushima
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string dados = "35,3D7A8C";
-            
-            frmPartida frmPartida = new frmPartida(dados, txtIdEntrarPartida.Text, "");
+            string[] dados = txtDebug.Text.Split(',');
+
+            timer.Stop();
+
+            frmPartida frmPartida = new frmPartida(dados, txtIdEntrarPartida.Text, "", nJogadores);
             frmPartida.ShowDialog();
+        }
+
+        private void btnIniciarPartida_Click(object sender, EventArgs e)
+        {
+            Jogo.IniciarPartida(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
+
+            timer.Stop();
+
+            frmPartida frmPartida = new frmPartida(dadosJogador, txtIdEntrarPartida.Text, txtStatusEntrarPartida.Text, nJogadores);
+            frmPartida.ShowDialog();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer.Stop();
+        }
+
+        private void txtIdEntrarPartida_TextChanged(object sender, EventArgs e)
+        {
+            timer.Start();
         }
     }
 }

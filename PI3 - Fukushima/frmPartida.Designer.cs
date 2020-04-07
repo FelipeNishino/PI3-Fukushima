@@ -42,11 +42,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.rdoDebugN = new System.Windows.Forms.RadioButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rdoDebugS = new System.Windows.Forms.RadioButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cboFabricas = new System.Windows.Forms.ComboBox();
             this.lstAzulejosCentro = new System.Windows.Forms.ListBox();
             this.btnListarCentro = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -60,10 +56,13 @@
             this.btnComprarAzulejo = new System.Windows.Forms.Button();
             this.lblTabuleiro = new System.Windows.Forms.Label();
             this.btnTabuleiro = new System.Windows.Forms.Button();
+            this.btnDebugAtualizaDadosJogador = new System.Windows.Forms.Button();
+            this.lblDadosJogador = new System.Windows.Forms.Label();
+            this.cboUsers = new System.Windows.Forms.ComboBox();
+            this.lblVez = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -156,7 +155,7 @@
             // 
             // txtIdJogador
             // 
-            this.txtIdJogador.Location = new System.Drawing.Point(52, 19);
+            this.txtIdJogador.Location = new System.Drawing.Point(61, 19);
             this.txtIdJogador.Name = "txtIdJogador";
             this.txtIdJogador.Size = new System.Drawing.Size(100, 20);
             this.txtIdJogador.TabIndex = 6;
@@ -164,7 +163,7 @@
             // 
             // txtSenhaJogador
             // 
-            this.txtSenhaJogador.Location = new System.Drawing.Point(52, 45);
+            this.txtSenhaJogador.Location = new System.Drawing.Point(61, 45);
             this.txtSenhaJogador.Name = "txtSenhaJogador";
             this.txtSenhaJogador.Size = new System.Drawing.Size(100, 20);
             this.txtSenhaJogador.TabIndex = 7;
@@ -172,13 +171,16 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cboUsers);
+            this.groupBox3.Controls.Add(this.btnDebugAtualizaDadosJogador);
+            this.groupBox3.Controls.Add(this.lblDadosJogador);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtIdJogador);
             this.groupBox3.Controls.Add(this.txtSenhaJogador);
             this.groupBox3.Location = new System.Drawing.Point(24, 19);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(176, 83);
+            this.groupBox3.Size = new System.Drawing.Size(176, 160);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Jogador";
@@ -186,7 +188,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 48);
+            this.label2.Location = new System.Drawing.Point(20, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 9;
@@ -195,74 +197,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 22);
+            this.label1.Location = new System.Drawing.Point(20, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "ID";
             // 
-            // rdoDebugN
-            // 
-            this.rdoDebugN.AutoSize = true;
-            this.rdoDebugN.Checked = true;
-            this.rdoDebugN.Location = new System.Drawing.Point(25, 42);
-            this.rdoDebugN.Name = "rdoDebugN";
-            this.rdoDebugN.Size = new System.Drawing.Size(45, 17);
-            this.rdoDebugN.TabIndex = 10;
-            this.rdoDebugN.TabStop = true;
-            this.rdoDebugN.Text = "Não";
-            this.rdoDebugN.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.rdoDebugS);
-            this.groupBox4.Controls.Add(this.rdoDebugN);
-            this.groupBox4.Location = new System.Drawing.Point(85, 108);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(115, 69);
-            this.groupBox4.TabIndex = 11;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Usar txt p/ jogar?";
-            // 
-            // rdoDebugS
-            // 
-            this.rdoDebugS.AutoSize = true;
-            this.rdoDebugS.Location = new System.Drawing.Point(25, 19);
-            this.rdoDebugS.Name = "rdoDebugS";
-            this.rdoDebugS.Size = new System.Drawing.Size(42, 17);
-            this.rdoDebugS.TabIndex = 11;
-            this.rdoDebugS.Text = "Sim";
-            this.rdoDebugS.UseVisualStyleBackColor = true;
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.groupBox3);
-            this.groupBox5.Controls.Add(this.groupBox4);
-            this.groupBox5.Controls.Add(this.cboFabricas);
             this.groupBox5.Location = new System.Drawing.Point(566, 12);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(222, 226);
+            this.groupBox5.Size = new System.Drawing.Size(222, 219);
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Debug";
-            // 
-            // cboFabricas
-            // 
-            this.cboFabricas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFabricas.Enabled = false;
-            this.cboFabricas.FormattingEnabled = true;
-            this.cboFabricas.Items.AddRange(new object[] {
-            "centro",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"});
-            this.cboFabricas.Location = new System.Drawing.Point(21, 185);
-            this.cboFabricas.Name = "cboFabricas";
-            this.cboFabricas.Size = new System.Drawing.Size(187, 21);
-            this.cboFabricas.TabIndex = 0;
             // 
             // lstAzulejosCentro
             // 
@@ -370,17 +319,6 @@
             // 
             this.cboFabricasCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFabricasCompra.FormattingEnabled = true;
-            this.cboFabricasCompra.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "Centro"});
             this.cboFabricasCompra.Location = new System.Drawing.Point(55, 19);
             this.cboFabricasCompra.Name = "cboFabricasCompra";
             this.cboFabricasCompra.Size = new System.Drawing.Size(121, 21);
@@ -399,7 +337,7 @@
             // lblTabuleiro
             // 
             this.lblTabuleiro.AutoSize = true;
-            this.lblTabuleiro.Location = new System.Drawing.Point(568, 254);
+            this.lblTabuleiro.Location = new System.Drawing.Point(462, 280);
             this.lblTabuleiro.Name = "lblTabuleiro";
             this.lblTabuleiro.Size = new System.Drawing.Size(51, 13);
             this.lblTabuleiro.TabIndex = 16;
@@ -415,11 +353,51 @@
             this.btnTabuleiro.UseVisualStyleBackColor = true;
             this.btnTabuleiro.Click += new System.EventHandler(this.btnTabuleiro_Click);
             // 
+            // btnDebugAtualizaDadosJogador
+            // 
+            this.btnDebugAtualizaDadosJogador.Location = new System.Drawing.Point(23, 122);
+            this.btnDebugAtualizaDadosJogador.Name = "btnDebugAtualizaDadosJogador";
+            this.btnDebugAtualizaDadosJogador.Size = new System.Drawing.Size(138, 23);
+            this.btnDebugAtualizaDadosJogador.TabIndex = 12;
+            this.btnDebugAtualizaDadosJogador.Text = "Atualizar dadosJogador";
+            this.btnDebugAtualizaDadosJogador.UseVisualStyleBackColor = true;
+            this.btnDebugAtualizaDadosJogador.Click += new System.EventHandler(this.btnDebugAtualizaDadosJogador_Click);
+            // 
+            // lblDadosJogador
+            // 
+            this.lblDadosJogador.AutoSize = true;
+            this.lblDadosJogador.Location = new System.Drawing.Point(20, 68);
+            this.lblDadosJogador.Name = "lblDadosJogador";
+            this.lblDadosJogador.Size = new System.Drawing.Size(74, 13);
+            this.lblDadosJogador.TabIndex = 10;
+            this.lblDadosJogador.Text = "dadosJogador";
+            // 
+            // cboUsers
+            // 
+            this.cboUsers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboUsers.FormattingEnabled = true;
+            this.cboUsers.Location = new System.Drawing.Point(23, 89);
+            this.cboUsers.Name = "cboUsers";
+            this.cboUsers.Size = new System.Drawing.Size(138, 21);
+            this.cboUsers.TabIndex = 13;
+            this.cboUsers.DropDown += new System.EventHandler(this.cboUsers_DropDown);
+            this.cboUsers.SelectedIndexChanged += new System.EventHandler(this.cboUsers_SelectedIndexChanged);
+            // 
+            // lblVez
+            // 
+            this.lblVez.AutoSize = true;
+            this.lblVez.Location = new System.Drawing.Point(440, 12);
+            this.lblVez.Name = "lblVez";
+            this.lblVez.Size = new System.Drawing.Size(25, 13);
+            this.lblVez.TabIndex = 18;
+            this.lblVez.Text = "Vez";
+            // 
             // frmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblVez);
             this.Controls.Add(this.btnTabuleiro);
             this.Controls.Add(this.lblTabuleiro);
             this.Controls.Add(this.groupBox7);
@@ -431,12 +409,12 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmPartida";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPartida_FormClosing);
+            this.Load += new System.EventHandler(this.frmPartida_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -462,11 +440,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton rdoDebugN;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton rdoDebugS;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox cboFabricas;
         private System.Windows.Forms.ListBox lstAzulejosCentro;
         private System.Windows.Forms.Button btnListarCentro;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -480,5 +454,9 @@
         private System.Windows.Forms.ComboBox cboModeloCompra;
         private System.Windows.Forms.Label lblTabuleiro;
         private System.Windows.Forms.Button btnTabuleiro;
+        private System.Windows.Forms.Button btnDebugAtualizaDadosJogador;
+        private System.Windows.Forms.Label lblDadosJogador;
+        private System.Windows.Forms.ComboBox cboUsers;
+        private System.Windows.Forms.Label lblVez;
     }
 }

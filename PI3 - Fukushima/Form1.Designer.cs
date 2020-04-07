@@ -50,18 +50,24 @@
             this.lblVersaoDll = new System.Windows.Forms.Label();
             this.lblFeedback = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.lstSala = new System.Windows.Forms.ListBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnIniciarPartida = new System.Windows.Forms.Button();
+            this.lblTimer = new System.Windows.Forms.Label();
+            this.txtDebug = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cboPartidas);
             this.groupBox1.Controls.Add(this.btnListarPartidas);
-            this.groupBox1.Location = new System.Drawing.Point(46, 47);
+            this.groupBox1.Location = new System.Drawing.Point(46, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(410, 96);
+            this.groupBox1.Size = new System.Drawing.Size(410, 52);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Listar";
@@ -70,7 +76,7 @@
             // 
             this.cboPartidas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPartidas.FormattingEnabled = true;
-            this.cboPartidas.Location = new System.Drawing.Point(88, 38);
+            this.cboPartidas.Location = new System.Drawing.Point(88, 18);
             this.cboPartidas.Name = "cboPartidas";
             this.cboPartidas.Size = new System.Drawing.Size(316, 21);
             this.cboPartidas.TabIndex = 1;
@@ -78,7 +84,7 @@
             // 
             // btnListarPartidas
             // 
-            this.btnListarPartidas.Location = new System.Drawing.Point(6, 38);
+            this.btnListarPartidas.Location = new System.Drawing.Point(7, 18);
             this.btnListarPartidas.Name = "btnListarPartidas";
             this.btnListarPartidas.Size = new System.Drawing.Size(75, 21);
             this.btnListarPartidas.TabIndex = 0;
@@ -97,7 +103,7 @@
             this.groupBox2.Controls.Add(this.txtNomeJogadorEntrar);
             this.groupBox2.Controls.Add(this.txtIdEntrarPartida);
             this.groupBox2.Controls.Add(this.btnEntrarPartida);
-            this.groupBox2.Location = new System.Drawing.Point(46, 193);
+            this.groupBox2.Location = new System.Drawing.Point(46, 70);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(204, 190);
             this.groupBox2.TabIndex = 1;
@@ -168,6 +174,7 @@
             this.txtIdEntrarPartida.Name = "txtIdEntrarPartida";
             this.txtIdEntrarPartida.Size = new System.Drawing.Size(100, 20);
             this.txtIdEntrarPartida.TabIndex = 1;
+            this.txtIdEntrarPartida.TextChanged += new System.EventHandler(this.txtIdEntrarPartida_TextChanged);
             // 
             // btnEntrarPartida
             // 
@@ -186,7 +193,7 @@
             this.groupBox3.Controls.Add(this.txtNomeCriarPartida);
             this.groupBox3.Controls.Add(this.lblNomePartida);
             this.groupBox3.Controls.Add(this.btnCriarPartida);
-            this.groupBox3.Location = new System.Drawing.Point(256, 193);
+            this.groupBox3.Location = new System.Drawing.Point(256, 70);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 190);
             this.groupBox3.TabIndex = 2;
@@ -238,7 +245,7 @@
             // lblVersaoDll
             // 
             this.lblVersaoDll.AutoSize = true;
-            this.lblVersaoDll.Location = new System.Drawing.Point(372, 428);
+            this.lblVersaoDll.Location = new System.Drawing.Point(372, 475);
             this.lblVersaoDll.Name = "lblVersaoDll";
             this.lblVersaoDll.Size = new System.Drawing.Size(40, 13);
             this.lblVersaoDll.TabIndex = 3;
@@ -247,7 +254,7 @@
             // lblFeedback
             // 
             this.lblFeedback.AutoSize = true;
-            this.lblFeedback.Location = new System.Drawing.Point(43, 428);
+            this.lblFeedback.Location = new System.Drawing.Point(15, 475);
             this.lblFeedback.Name = "lblFeedback";
             this.lblFeedback.Size = new System.Drawing.Size(55, 13);
             this.lblFeedback.TabIndex = 4;
@@ -255,19 +262,67 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(159, 389);
+            this.button1.Location = new System.Drawing.Point(356, 436);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 20);
             this.button1.TabIndex = 9;
-            this.button1.Text = "Entrar dnv";
+            this.button1.Text = "Entrar sem iniciar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lstSala
+            // 
+            this.lstSala.FormattingEnabled = true;
+            this.lstSala.Location = new System.Drawing.Point(6, 19);
+            this.lstSala.Name = "lstSala";
+            this.lstSala.Size = new System.Drawing.Size(288, 121);
+            this.lstSala.TabIndex = 10;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnIniciarPartida);
+            this.groupBox4.Controls.Add(this.lstSala);
+            this.groupBox4.Location = new System.Drawing.Point(46, 275);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(410, 155);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Sala";
+            // 
+            // btnIniciarPartida
+            // 
+            this.btnIniciarPartida.Location = new System.Drawing.Point(329, 117);
+            this.btnIniciarPartida.Name = "btnIniciarPartida";
+            this.btnIniciarPartida.Size = new System.Drawing.Size(75, 23);
+            this.btnIniciarPartida.TabIndex = 11;
+            this.btnIniciarPartida.Text = "Iniciar";
+            this.btnIniciarPartida.UseVisualStyleBackColor = true;
+            this.btnIniciarPartida.Click += new System.EventHandler(this.btnIniciarPartida_Click);
+            // 
+            // lblTimer
+            // 
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Location = new System.Drawing.Point(15, 454);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(33, 13);
+            this.lblTimer.TabIndex = 12;
+            this.lblTimer.Text = "Timer";
+            // 
+            // txtDebug
+            // 
+            this.txtDebug.Location = new System.Drawing.Point(250, 436);
+            this.txtDebug.Name = "txtDebug";
+            this.txtDebug.Size = new System.Drawing.Size(100, 20);
+            this.txtDebug.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 450);
+            this.ClientSize = new System.Drawing.Size(515, 497);
+            this.Controls.Add(this.txtDebug);
+            this.Controls.Add(this.lblTimer);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblFeedback);
             this.Controls.Add(this.lblVersaoDll);
@@ -276,12 +331,14 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,6 +368,11 @@
         private System.Windows.Forms.TextBox txtSenhaCriarPartida;
         private System.Windows.Forms.Label lblFeedback;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox lstSala;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label lblTimer;
+        private System.Windows.Forms.Button btnIniciarPartida;
+        private System.Windows.Forms.TextBox txtDebug;
     }
 }
 
