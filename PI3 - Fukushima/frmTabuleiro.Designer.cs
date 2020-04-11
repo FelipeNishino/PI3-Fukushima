@@ -28,33 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pcbParede = new System.Windows.Forms.PictureBox();
+            this.pcbModelo = new System.Windows.Forms.PictureBox();
             this.lblModelo = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbParede)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbModelo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // pcbParede
             // 
-            this.pictureBox1.BackgroundImage = global::PI3___Fukushima.Properties.Resources.A8nlUrz;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(436, 91);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(343, 319);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.pcbParede.BackgroundImage = global::PI3___Fukushima.Properties.Resources.A8nlUrz;
+            this.pcbParede.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pcbParede.Location = new System.Drawing.Point(437, 68);
+            this.pcbParede.Name = "pcbParede";
+            this.pcbParede.Size = new System.Drawing.Size(341, 341);
+            this.pcbParede.TabIndex = 3;
+            this.pcbParede.TabStop = false;
             // 
-            // pictureBox2
+            // pcbModelo
             // 
-            this.pictureBox2.BackgroundImage = global::PI3___Fukushima.Properties.Resources.P06wHU3;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Image = global::PI3___Fukushima.Properties.Resources.P06wHU3;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 70);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(374, 340);
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
+            this.pcbModelo.BackgroundImage = global::PI3___Fukushima.Properties.Resources.P06wHU3;
+            this.pcbModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pcbModelo.Image = global::PI3___Fukushima.Properties.Resources.P06wHU3;
+            this.pcbModelo.Location = new System.Drawing.Point(34, 44);
+            this.pcbModelo.Name = "pcbModelo";
+            this.pcbModelo.Size = new System.Drawing.Size(374, 374);
+            this.pcbModelo.TabIndex = 2;
+            this.pcbModelo.TabStop = false;
             // 
             // lblModelo
             // 
@@ -66,6 +68,17 @@
             this.lblModelo.TabIndex = 0;
             this.lblModelo.Click += new System.EventHandler(this.lblModelo_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.ImageLocation = "";
+            this.pictureBox1.Location = new System.Drawing.Point(341, 69);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(65, 65);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmTabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -73,14 +86,16 @@
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pcbParede);
+            this.Controls.Add(this.pcbModelo);
             this.Controls.Add(this.lblModelo);
             this.DoubleBuffered = true;
             this.Name = "frmTabuleiro";
             this.Text = "frmTabuleiro";
             this.Load += new System.EventHandler(this.frmTabuleiro_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pcbParede)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbModelo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -89,7 +104,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblModelo;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pcbModelo;
+        private System.Windows.Forms.PictureBox pcbParede;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

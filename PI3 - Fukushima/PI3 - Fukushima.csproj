@@ -70,6 +70,7 @@
       <DependentUpon>frmTabuleiro.cs</DependentUpon>
     </Compile>
     <Compile Include="Jogador.cs" />
+    <Compile Include="Modelo.cs" />
     <Compile Include="Partida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +115,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\A8nlUrz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Branco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vermelho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Amarelo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Azul.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

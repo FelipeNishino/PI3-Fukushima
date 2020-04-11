@@ -93,7 +93,7 @@ namespace PI3___Fukushima
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string dados = "35,3D7A8C";
+            string dados = "23,4D2A4B";
             
             frmPartida frmPartida = new frmPartida(dados, txtIdEntrarPartida.Text, "");
             frmPartida.ShowDialog();
