@@ -49,3 +49,19 @@ D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushim
 D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.CopyComplete
 D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.exe
 D:\Felipe\Documents\repos\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.pdb
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.exe.config
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.exe
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\bin\Debug\PI3 - Fukushima.pdb
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\bin\Debug\AzulServer.dll
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\bin\Debug\AzulServer.xml
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csprojAssemblyReference.cache
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.Form1.resources
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.frmPartida.resources
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.Properties.Resources.resources
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.GenerateResource.cache
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.CoreCompileInputs.cache
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.csproj.CopyComplete
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.exe
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3 - Fukushima.pdb
+C:\Users\kaue_sbsousa\Desktop\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.frmTabuleiro.resources
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Debug\PI3___Fukushima.frmTabuleiro.resources

@@ -140,7 +140,16 @@ namespace PI3___Fukushima
 
         private void btnTabuleiro_Click(object sender, EventArgs e)
         {
-            lblTabuleiro.Text = Jogo.LerTabuleiro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], Convert.ToInt32(dadosJogador[0])); 
+            lblTabuleiro.Text = Jogo.LerTabuleiro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], Convert.ToInt32(dadosJogador[0]));
+            Tabuleiro tabuleiro = new Tabuleiro();
+            tabuleiro.Listar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], tabuleiro);
+
+            foreach (Azulejo imageAzulejo in tabuleiro.modelo.arrayAzulejos)
+            {
+                if (imageAzulejo != null && imageAzulejo.id == 1) {
+                    pcb11.Image = imageAzulejo.imagem.Image;
+                }
+            }
         }
 
         private void btnDebugAtualizaDadosJogador_Click(object sender, EventArgs e)
@@ -189,9 +198,9 @@ namespace PI3___Fukushima
 }
 
 /*
-sala id 54
-senha fukushima
+sala id 42
+senha 1234
 
-jogador id 100
-jogador senha 19422f   
+jogador id 83
+jogador senha 15E1B6   
 */

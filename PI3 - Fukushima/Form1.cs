@@ -154,10 +154,9 @@ namespace PI3___Fukushima
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] dados = txtDebug.Text.Split(',');
+            string dados = "23,4D2A4B";
 
             timer.Stop();
-
             frmPartida frmPartida = new frmPartida(dados, txtIdEntrarPartida.Text, "", nJogadores);
             frmPartida.ShowDialog();
         }
