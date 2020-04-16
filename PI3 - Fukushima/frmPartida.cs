@@ -31,6 +31,12 @@ namespace PI3___Fukushima
 
         private void frmPartida_Load(object sender, EventArgs e)
         {
+            //this.Location = this.Owner.
+            //Form1 frm1 = (Form1)Owner;
+            //frm1 = Owner as frmPartida;
+
+            this.Location = this.Owner.Location;
+
             txtStatusPartida.Text = statusPartida;
             lblFeedback.Text = "";
             lblTabuleiro.Text = "";
@@ -48,18 +54,32 @@ namespace PI3___Fukushima
             timer.Elapsed += timerTick;
             timer.AutoReset = true;
             timer.Start();
+
+            Owner.WindowState = FormWindowState.Minimized;
+
+            this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Normal;
+
+            frmTabuleiro frmTabuleiro = new frmTabuleiro(dadosJogador);
+            this.AddOwnedForm(frmTabuleiro);
+            frmTabuleiro.ControlBox = false;
+            frmTabuleiro.Show();
         }
+
+        delegate void timerTickCallback(Object source, ElapsedEventArgs e);
+        
         private void timerTick(Object source, ElapsedEventArgs e) {
-            lblVez.Text = "Vez: " + Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
-        }
-
-        private void btnListarJogadoresPartida_Click(object sender, EventArgs e)
-        {
-            lstListaJogadores.Items.Clear();
-
-            foreach (Jogador jogador in Partida.listarJogadores(idPartida))
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.lblVez.InvokeRequired)
             {
-                lstListaJogadores.Items.Add(jogador.id + ", " + jogador.nome + ", " + jogador.score);
+                timerTickCallback d = new timerTickCallback(timerTick);
+                this.Invoke(d, new object[] { source, e });
+            }
+            else
+            {
+                lblVez.Text = "Vez: " + Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
             }
         }
 
@@ -120,7 +140,8 @@ namespace PI3___Fukushima
                 centro = "F";
             }   
             retorno = Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], centro, (cboFabricasCompra.SelectedItem.ToString() == "Centro")? 0 : Convert.ToInt32(cboFabricasCompra.SelectedItem), Convert.ToInt32(cboAzulejoCompra.SelectedItem), Convert.ToInt32(cboModeloCompra.SelectedItem));
-            verificarErro(retorno); 
+            verificarErro(retorno);
+            
         }  
 
         public bool verificarErro(string retorno)
@@ -140,16 +161,7 @@ namespace PI3___Fukushima
 
         private void btnTabuleiro_Click(object sender, EventArgs e)
         {
-            lblTabuleiro.Text = Jogo.LerTabuleiro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], Convert.ToInt32(dadosJogador[0]));
-            Tabuleiro tabuleiro = new Tabuleiro();
-            tabuleiro.Listar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], tabuleiro);
-
-            foreach (Azulejo imageAzulejo in tabuleiro.modelo.arrayAzulejos)
-            {
-                if (imageAzulejo != null && imageAzulejo.id == 1) {
-                    pcb11.Image = imageAzulejo.imagem.Image;
-                }
-            }
+            lblTabuleiro.Text = Jogo.LerTabuleiro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], Convert.ToInt32(dadosJogador[0]));            
         }
 
         private void btnDebugAtualizaDadosJogador_Click(object sender, EventArgs e)
@@ -176,7 +188,7 @@ namespace PI3___Fukushima
             foreach (string line in lines)
             {
                 if (line.Length > 2) {
-                    if (line.Substring(0, 2) == idPartida.ToString()) {
+                    if (line.Substring(0, line.IndexOf(" ")) == idPartida.ToString()) {
                         cboUsers.Items.Add(line.Substring(line.IndexOf("-") + 2));
                     }
                 }
@@ -186,6 +198,7 @@ namespace PI3___Fukushima
         private void frmPartida_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer.Stop();
+            Owner.WindowState = FormWindowState.Normal;
         }
 
         private void cboUsers_SelectedIndexChanged(object sender, EventArgs e)

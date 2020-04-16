@@ -12,41 +12,42 @@ namespace PI3___Fukushima
     {
         public int pontos { get; set; }
 
-        bool[,] parede = new bool[5, 5];
+        public bool[,] parede = new bool[5, 5];
 
         public Modelo modelo { get; set; }
 
-        private string[] paredeListar, chaoListar;
-        
-
+        public int[] chao = new int[] { -1, -1, -1, -1, -1, -1, -1 };
 
         public void Listar(int idJogador, String senhaJogador, Tabuleiro tabuleiro)
         {
-            String geral;
+            int i, j;
+            String[] geral;
           
             String retorno = Jogo.LerTabuleiro(idJogador, senhaJogador, idJogador);
             retorno = retorno.Replace("\r", "");
             
-            geral = retorno.Substring(0, retorno.IndexOf("p") - 1).Replace("modelo\n", "");
-            
+            geral = retorno.Split('\n');
+                        
+            tabuleiro.modelo = new Modelo();
+            tabuleiro.modelo.arrayAzulejos = new Azulejo[5];
+            i = modelo.listarModelo(geral);
 
-            if (geral != "") {
-                tabuleiro.modelo = new Modelo();
-                tabuleiro.modelo.arrayAzulejos = new Azulejo[5];
-                frmPartida frmPartida = (frmPartida)Application.OpenForms["frmPartida"];
-                modelo.listarModelo(geral);
+            i++;
 
-
-               
-
+            while (geral[i] != "chão")
+            {
+                tabuleiro.parede[Convert.ToInt32(geral[i].Substring(0, 1)) - 1, Convert.ToInt32(geral[i].Substring(2, 1)) - 1] = true;
+                i++;
             }
 
-            
-            //geral = retorno.Substring(retorno.IndexOf("p"), retorno.IndexOf("c") - 1).Replace("parede\n", "");
-            //geral = retorno.Substring(retorno.IndexOf("c")).Replace("chao\n", "");
-            
-            MessageBox.Show("break");
-        }
+            i++;
+            j = i;
 
+            while (geral[i] != "")
+            {
+                tabuleiro.chao[i - j] = Convert.ToInt32(geral[i].Substring(2, 1));
+                i++;
+            }
+        }
     }
 }

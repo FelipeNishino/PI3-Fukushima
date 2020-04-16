@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,58 +13,48 @@ namespace PI3___Fukushima
     {
         public Azulejo[] arrayAzulejos { get; set; }
 
-
-        public void listarModelo(String geral)
+        public int listarModelo(String[] geral)
         {
-            string[] modeloListar;
-            modeloListar = geral.Split('\n');
+            int i = 1;
 
-            for (int i = 0; i < modeloListar.Length; i++)
-            {
+            while (geral[i] != "parede") {
+                Azulejo azulejo = new Azulejo();                
 
-                Azulejo azulejo = new Azulejo();
-                azulejo.imagem = new PictureBox();
+                int linha = Convert.ToInt32(geral[i].Substring(0, 1));
 
-                int linha = Convert.ToInt32(modeloListar[i].Substring(0, 1));
-
-                azulejo.id = Convert.ToInt32(modeloListar[i].Substring(2, 1));
-                azulejo.quantidade = Convert.ToInt32(modeloListar[i].Substring(4, 1));
-
-
-                //modelo.arrayAzulejos[Convert.ToInt32(modeloListar[i].Substring(0, 1)) - 1].id = Convert.ToInt32(modeloListar[i].Substring(2, 1));
-                //modelo.arrayAzulejos[Convert.ToInt32(modeloListar[i].Substring(0, 1)) - 1].quantidade = Convert.ToInt32(modeloListar[i].Substring(4, 1));
-
+                azulejo.id = Convert.ToInt32(geral[i].Substring(2, 1));
+                azulejo.quantidade = Convert.ToInt32(geral[i].Substring(4, 1));
+                
                 switch (azulejo.id)
                 {
                     case 1:
-                        //azulejo.imagem.Load("Resources/Azul.png");
-                        azulejo.imagem.Image = Properties.Resources.Azul;
+                        azulejo.imagem = Properties.Resources.Azul;
                         break;
 
                     case 2:
-                        azulejo.imagem.Image = Properties.Resources.Azul;
+                        azulejo.imagem = Properties.Resources.Amarelo;
                         break;
 
                     case 3:
-                        azulejo.imagem.Image = Properties.Resources.Azul;
+                        azulejo.imagem = Properties.Resources.Vermelho;
                         break;
 
                     case 4:
-                        azulejo.imagem.Image = Properties.Resources.Azul;
+                        azulejo.imagem = Properties.Resources.Preto;
                         break;
 
                     case 5:
-                        azulejo.imagem.Image = Properties.Resources.Azul;
+                        azulejo.imagem = Properties.Resources.Branco;
                         break;
 
                     default:
                         break;
                 }
-
-
-                this.arrayAzulejos[linha] = azulejo;
-
+                this.arrayAzulejos[linha - 1] = azulejo;
+                i++;
             }
+
+            return i;
         }  
     }
 }
