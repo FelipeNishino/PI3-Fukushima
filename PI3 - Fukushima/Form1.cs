@@ -169,6 +169,7 @@ namespace PI3___Fukushima
             timer.Stop();
 
             frmPartida frmPartida = new frmPartida(dadosJogador, txtIdEntrarPartida.Text, txtStatusEntrarPartida.Text, nJogadores);
+            this.AddOwnedForm(frmPartida);
             frmPartida.ShowDialog();
         }
 
