@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lstListaJogadores = new System.Windows.Forms.ListBox();
-            this.btnListarJogadoresPartida = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstAzulejosFabricas = new System.Windows.Forms.ListBox();
             this.btnListarFabricas = new System.Windows.Forms.Button();
@@ -40,6 +37,9 @@
             this.txtIdJogador = new System.Windows.Forms.TextBox();
             this.txtSenhaJogador = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cboUsers = new System.Windows.Forms.ComboBox();
+            this.btnDebugAtualizaDadosJogador = new System.Windows.Forms.Button();
+            this.lblDadosJogador = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -56,82 +56,19 @@
             this.btnComprarAzulejo = new System.Windows.Forms.Button();
             this.lblTabuleiro = new System.Windows.Forms.Label();
             this.btnTabuleiro = new System.Windows.Forms.Button();
-            this.btnDebugAtualizaDadosJogador = new System.Windows.Forms.Button();
-            this.lblDadosJogador = new System.Windows.Forms.Label();
-            this.cboUsers = new System.Windows.Forms.ComboBox();
             this.lblVez = new System.Windows.Forms.Label();
-            this.pcb11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcb11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lstListaJogadores);
-            this.groupBox1.Controls.Add(this.btnListarJogadoresPartida);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 179);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Jogadores";
-            // 
-            // lstListaJogadores
-            // 
-            this.lstListaJogadores.FormattingEnabled = true;
-            this.lstListaJogadores.Location = new System.Drawing.Point(7, 23);
-            this.lstListaJogadores.Name = "lstListaJogadores";
-            this.lstListaJogadores.Size = new System.Drawing.Size(186, 121);
-            this.lstListaJogadores.TabIndex = 4;
-            // 
-            // btnListarJogadoresPartida
-            // 
-            this.btnListarJogadoresPartida.Location = new System.Drawing.Point(6, 150);
-            this.btnListarJogadoresPartida.Name = "btnListarJogadoresPartida";
-            this.btnListarJogadoresPartida.Size = new System.Drawing.Size(188, 23);
-            this.btnListarJogadoresPartida.TabIndex = 1;
-            this.btnListarJogadoresPartida.Text = "Listar";
-            this.btnListarJogadoresPartida.UseVisualStyleBackColor = true;
-            this.btnListarJogadoresPartida.Click += new System.EventHandler(this.btnListarJogadoresPartida_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lstAzulejosFabricas);
             this.groupBox2.Controls.Add(this.btnListarFabricas);
-            this.groupBox2.Location = new System.Drawing.Point(12, 197);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 221);
             this.groupBox2.TabIndex = 1;
@@ -159,14 +96,14 @@
             // txtStatusPartida
             // 
             this.txtStatusPartida.Enabled = false;
-            this.txtStatusPartida.Location = new System.Drawing.Point(233, 447);
+            this.txtStatusPartida.Location = new System.Drawing.Point(18, 448);
             this.txtStatusPartida.Name = "txtStatusPartida";
             this.txtStatusPartida.Size = new System.Drawing.Size(100, 20);
             this.txtStatusPartida.TabIndex = 2;
             // 
             // btnIniciarPartida
             // 
-            this.btnIniciarPartida.Location = new System.Drawing.Point(359, 445);
+            this.btnIniciarPartida.Location = new System.Drawing.Point(137, 446);
             this.btnIniciarPartida.Name = "btnIniciarPartida";
             this.btnIniciarPartida.Size = new System.Drawing.Size(75, 23);
             this.btnIniciarPartida.TabIndex = 3;
@@ -177,7 +114,7 @@
             // lblFeedback
             // 
             this.lblFeedback.AutoSize = true;
-            this.lblFeedback.Location = new System.Drawing.Point(16, 424);
+            this.lblFeedback.Location = new System.Drawing.Point(15, 429);
             this.lblFeedback.Name = "lblFeedback";
             this.lblFeedback.Size = new System.Drawing.Size(55, 13);
             this.lblFeedback.TabIndex = 4;
@@ -208,12 +145,42 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtIdJogador);
             this.groupBox3.Controls.Add(this.txtSenhaJogador);
-            this.groupBox3.Location = new System.Drawing.Point(24, 19);
+            this.groupBox3.Location = new System.Drawing.Point(12, 19);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(176, 160);
+            this.groupBox3.Size = new System.Drawing.Size(176, 154);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Jogador";
+            // 
+            // cboUsers
+            // 
+            this.cboUsers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboUsers.FormattingEnabled = true;
+            this.cboUsers.Location = new System.Drawing.Point(23, 89);
+            this.cboUsers.Name = "cboUsers";
+            this.cboUsers.Size = new System.Drawing.Size(138, 21);
+            this.cboUsers.TabIndex = 13;
+            this.cboUsers.DropDown += new System.EventHandler(this.cboUsers_DropDown);
+            this.cboUsers.SelectedIndexChanged += new System.EventHandler(this.cboUsers_SelectedIndexChanged);
+            // 
+            // btnDebugAtualizaDadosJogador
+            // 
+            this.btnDebugAtualizaDadosJogador.Location = new System.Drawing.Point(23, 122);
+            this.btnDebugAtualizaDadosJogador.Name = "btnDebugAtualizaDadosJogador";
+            this.btnDebugAtualizaDadosJogador.Size = new System.Drawing.Size(138, 23);
+            this.btnDebugAtualizaDadosJogador.TabIndex = 12;
+            this.btnDebugAtualizaDadosJogador.Text = "Atualizar dadosJogador";
+            this.btnDebugAtualizaDadosJogador.UseVisualStyleBackColor = true;
+            this.btnDebugAtualizaDadosJogador.Click += new System.EventHandler(this.btnDebugAtualizaDadosJogador_Click);
+            // 
+            // lblDadosJogador
+            // 
+            this.lblDadosJogador.AutoSize = true;
+            this.lblDadosJogador.Location = new System.Drawing.Point(20, 68);
+            this.lblDadosJogador.Name = "lblDadosJogador";
+            this.lblDadosJogador.Size = new System.Drawing.Size(74, 13);
+            this.lblDadosJogador.TabIndex = 10;
+            this.lblDadosJogador.Text = "dadosJogador";
             // 
             // label2
             // 
@@ -236,9 +203,9 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.groupBox3);
-            this.groupBox5.Location = new System.Drawing.Point(566, 12);
+            this.groupBox5.Location = new System.Drawing.Point(234, 242);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(222, 219);
+            this.groupBox5.Size = new System.Drawing.Size(194, 179);
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Debug";
@@ -265,7 +232,7 @@
             // 
             this.groupBox6.Controls.Add(this.lstAzulejosCentro);
             this.groupBox6.Controls.Add(this.btnListarCentro);
-            this.groupBox6.Location = new System.Drawing.Point(234, 197);
+            this.groupBox6.Location = new System.Drawing.Point(234, 12);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(200, 221);
             this.groupBox6.TabIndex = 15;
@@ -281,7 +248,7 @@
             this.groupBox7.Controls.Add(this.label3);
             this.groupBox7.Controls.Add(this.cboFabricasCompra);
             this.groupBox7.Controls.Add(this.btnComprarAzulejo);
-            this.groupBox7.Location = new System.Drawing.Point(241, 12);
+            this.groupBox7.Location = new System.Drawing.Point(17, 242);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(193, 179);
             this.groupBox7.TabIndex = 0;
@@ -367,7 +334,7 @@
             // lblTabuleiro
             // 
             this.lblTabuleiro.AutoSize = true;
-            this.lblTabuleiro.Location = new System.Drawing.Point(469, 123);
+            this.lblTabuleiro.Location = new System.Drawing.Point(243, 434);
             this.lblTabuleiro.Name = "lblTabuleiro";
             this.lblTabuleiro.Size = new System.Drawing.Size(51, 13);
             this.lblTabuleiro.TabIndex = 16;
@@ -375,7 +342,7 @@
             // 
             // btnTabuleiro
             // 
-            this.btnTabuleiro.Location = new System.Drawing.Point(460, 195);
+            this.btnTabuleiro.Location = new System.Drawing.Point(332, 434);
             this.btnTabuleiro.Name = "btnTabuleiro";
             this.btnTabuleiro.Size = new System.Drawing.Size(75, 23);
             this.btnTabuleiro.TabIndex = 17;
@@ -383,199 +350,23 @@
             this.btnTabuleiro.UseVisualStyleBackColor = true;
             this.btnTabuleiro.Click += new System.EventHandler(this.btnTabuleiro_Click);
             // 
-            // 
-            this.btnDebugAtualizaDadosJogador.Location = new System.Drawing.Point(23, 122);
-            this.btnDebugAtualizaDadosJogador.Name = "btnDebugAtualizaDadosJogador";
-            this.btnDebugAtualizaDadosJogador.Size = new System.Drawing.Size(138, 23);
-            this.btnDebugAtualizaDadosJogador.TabIndex = 12;
-            this.btnDebugAtualizaDadosJogador.Text = "Atualizar dadosJogador";
-            this.btnDebugAtualizaDadosJogador.UseVisualStyleBackColor = true;
-            this.btnDebugAtualizaDadosJogador.Click += new System.EventHandler(this.btnDebugAtualizaDadosJogador_Click);
-            // 
-            // lblDadosJogador
-            // 
-            this.lblDadosJogador.AutoSize = true;
-            this.lblDadosJogador.Location = new System.Drawing.Point(20, 68);
-            this.lblDadosJogador.Name = "lblDadosJogador";
-            this.lblDadosJogador.Size = new System.Drawing.Size(74, 13);
-            this.lblDadosJogador.TabIndex = 10;
-            this.lblDadosJogador.Text = "dadosJogador";
-            // 
-            // cboUsers
-            // 
-            this.cboUsers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboUsers.FormattingEnabled = true;
-            this.cboUsers.Location = new System.Drawing.Point(23, 89);
-            this.cboUsers.Name = "cboUsers";
-            this.cboUsers.Size = new System.Drawing.Size(138, 21);
-            this.cboUsers.TabIndex = 13;
-            this.cboUsers.DropDown += new System.EventHandler(this.cboUsers_DropDown);
-            this.cboUsers.SelectedIndexChanged += new System.EventHandler(this.cboUsers_SelectedIndexChanged);
-            // 
             // lblVez
             // 
             this.lblVez.AutoSize = true;
-            this.lblVez.Location = new System.Drawing.Point(440, 12);
+            this.lblVez.Location = new System.Drawing.Point(93, 429);
             this.lblVez.Name = "lblVez";
             this.lblVez.Size = new System.Drawing.Size(25, 13);
             this.lblVez.TabIndex = 18;
             this.lblVez.Text = "Vez";
-            // pcb11
-            this.pcb11.Location = new System.Drawing.Point(723, 244);
-            this.pcb11.Name = "pcb11";
-            this.pcb11.Size = new System.Drawing.Size(65, 65);
-            this.pcb11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pcb11.TabIndex = 18;
-            this.pcb11.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(723, 315);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(646, 315);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 20;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(646, 402);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 22;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Location = new System.Drawing.Point(723, 402);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 21;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Location = new System.Drawing.Point(571, 403);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 23;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(571, 481);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 26;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Location = new System.Drawing.Point(646, 480);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 25;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Location = new System.Drawing.Point(723, 480);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox8.TabIndex = 24;
-            this.pictureBox8.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Location = new System.Drawing.Point(500, 481);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 27;
-            this.pictureBox9.TabStop = false;
-            // 
-            // pictureBox10
-            // 
-            this.pictureBox10.Location = new System.Drawing.Point(723, 564);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox10.TabIndex = 28;
-            this.pictureBox10.TabStop = false;
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.Location = new System.Drawing.Point(416, 565);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox11.TabIndex = 32;
-            this.pictureBox11.TabStop = false;
-            // 
-            // pictureBox12
-            // 
-            this.pictureBox12.Location = new System.Drawing.Point(500, 565);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox12.TabIndex = 31;
-            this.pictureBox12.TabStop = false;
-            // 
-            // pictureBox13
-            // 
-            this.pictureBox13.Location = new System.Drawing.Point(571, 564);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox13.TabIndex = 30;
-            this.pictureBox13.TabStop = false;
-            // 
-            // pictureBox14
-            // 
-            this.pictureBox14.Location = new System.Drawing.Point(646, 564);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(65, 65);
-            this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox14.TabIndex = 29;
-            this.pictureBox14.TabStop = false;
             // 
             // frmPartida
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(811, 641);
+            this.ClientSize = new System.Drawing.Size(455, 476);
             this.Controls.Add(this.lblVez);
             this.Controls.Add(this.btnIniciarPartida);
             this.Controls.Add(this.txtStatusPartida);
-            this.Controls.Add(this.pictureBox11);
-            this.Controls.Add(this.pictureBox12);
-            this.Controls.Add(this.pictureBox13);
-            this.Controls.Add(this.pictureBox14);
-            this.Controls.Add(this.pictureBox10);
-            this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pcb11);
             this.Controls.Add(this.btnTabuleiro);
             this.Controls.Add(this.lblTabuleiro);
             this.Controls.Add(this.groupBox7);
@@ -583,11 +374,10 @@
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.lblFeedback);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Name = "frmPartida";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPartida_FormClosing);
             this.Load += new System.EventHandler(this.frmPartida_Load);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -595,35 +385,16 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcb11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtStatusPartida;
         private System.Windows.Forms.Button btnIniciarPartida;
-        private System.Windows.Forms.Button btnListarJogadoresPartida;
         private System.Windows.Forms.Button btnListarFabricas;
-        private System.Windows.Forms.ListBox lstListaJogadores;
         private System.Windows.Forms.ListBox lstAzulejosFabricas;
         private System.Windows.Forms.Label lblFeedback;
         private System.Windows.Forms.TextBox txtIdJogador;
@@ -649,20 +420,5 @@
         private System.Windows.Forms.Label lblDadosJogador;
         private System.Windows.Forms.ComboBox cboUsers;
         private System.Windows.Forms.Label lblVez;
-        private System.Windows.Forms.PictureBox pcb11;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.PictureBox pictureBox13;
-        private System.Windows.Forms.PictureBox pictureBox14;
     }
 }

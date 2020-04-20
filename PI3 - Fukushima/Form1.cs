@@ -20,8 +20,7 @@ namespace PI3___Fukushima
         int nJogadores;
 
         public Form1()
-        {
-            
+        {            
             InitializeComponent();
         }
 
@@ -154,10 +153,12 @@ namespace PI3___Fukushima
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string dados = "23,4D2A4B";
+            string[] dados = txtDebug.Text.Split(',');
 
             timer.Stop();
             frmPartida frmPartida = new frmPartida(dados, txtIdEntrarPartida.Text, "", nJogadores);
+            this.AddOwnedForm(frmPartida);
+            
             frmPartida.ShowDialog();
         }
 
@@ -168,6 +169,7 @@ namespace PI3___Fukushima
             timer.Stop();
 
             frmPartida frmPartida = new frmPartida(dadosJogador, txtIdEntrarPartida.Text, txtStatusEntrarPartida.Text, nJogadores);
+            this.AddOwnedForm(frmPartida);
             frmPartida.ShowDialog();
         }
 
