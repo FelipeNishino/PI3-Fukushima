@@ -363,7 +363,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 476);
+            this.ClientSize = new System.Drawing.Size(440, 476);
             this.Controls.Add(this.lblVez);
             this.Controls.Add(this.btnIniciarPartida);
             this.Controls.Add(this.txtStatusPartida);

@@ -18,6 +18,7 @@ namespace PI3___Fukushima
         string[] dadosJogador;
         int idPartida, nFabricas;
         string statusPartida;
+        
 
         public frmPartida(string[] _dadosJogador, string _idPartida, string _statusPartida, int nJogadores) 
         {
@@ -85,18 +86,64 @@ namespace PI3___Fukushima
 
         private void btnListarFabricas_Click(object sender, EventArgs e)
         {
-            string retorno;
-            string[] fabricas;
-            
-            retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
-            retorno = retorno.Replace("\r", "");
-            fabricas = retorno.Split('\n');
+            string[] retorno;
+            //string[] fabricas;
+            //List<Fabrica> fabricas = new List<Fabrica>();
+            //int idInicial;
+
+            retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
             lstAzulejosFabricas.Items.Clear();
 
-            foreach (string fabrica in fabricas) {
-                lstAzulejosFabricas.Items.Add(fabrica);
+
+            int i = Convert.ToInt32(retorno[0].Substring(0, 1));
+            int j = 0;
+
+          
+            List<Fabrica> fabricas = new List<Fabrica>();
+            List<Azulejo> azulejos = new List<Azulejo>();
+
+
+            while (i <= nFabricas && retorno[j] != "")
+            {
+
+                Azulejo azulejo = new Azulejo();
+
+                azulejo.id = Convert.ToInt32(retorno[j].Substring(2, 1));
+                azulejo.quantidade = Convert.ToInt32(retorno[j].Substring(retorno[j].LastIndexOf(",") + 1, 1));
+
+                azulejos.Add(azulejo);
+
+                j++;
+
+                if (retorno[j] != "" && i != Convert.ToInt32(retorno[j].Substring(0, 1)))
+                {
+                    Fabrica fabrica = new Fabrica();
+                    fabrica.id = i;
+                    fabrica.azulejos = azulejos;
+
+                    fabricas.Add(fabrica);
+                    azulejos.Clear();
+                    i = Convert.ToInt32(retorno[j].Substring(0, 1));    
+                }
+                else if(retorno[j] == "")
+                {
+                    Fabrica fabrica = new Fabrica();
+                    fabrica.id = i;
+                    fabrica.azulejos = azulejos;
+
+                    fabricas.Add(fabrica);
+                }
+
             }
+
+            foreach (Fabrica fabrica in fabricas)
+            {
+                foreach (Azulejo azulejo in fabrica.azulejos) {
+                    lstAzulejosFabricas.Items.Add(fabrica.id + "," + azulejo.id +","+ azulejo.quantidade);
+                }
+            }
+
         }
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
