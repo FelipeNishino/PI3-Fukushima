@@ -87,11 +87,10 @@ namespace PI3___Fukushima
         private void btnListarFabricas_Click(object sender, EventArgs e)
         {
             string[] retorno;
-            //string[] fabricas;
-            //List<Fabrica> fabricas = new List<Fabrica>();
-            //int idInicial;
 
             retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
+
+            if (retorno[0] == "") return;
 
             lstAzulejosFabricas.Items.Clear();
 
@@ -121,7 +120,6 @@ namespace PI3___Fukushima
                     Fabrica fabrica = new Fabrica();
                     fabrica.id = i;
                     fabrica.azulejos = azulejos;
-
                     fabricas.Add(fabrica);
                     azulejos.Clear();
                     i = Convert.ToInt32(retorno[j].Substring(0, 1));    
@@ -131,7 +129,6 @@ namespace PI3___Fukushima
                     Fabrica fabrica = new Fabrica();
                     fabrica.id = i;
                     fabrica.azulejos = azulejos;
-
                     fabricas.Add(fabrica);
                 }
 
@@ -154,23 +151,33 @@ namespace PI3___Fukushima
 
         private void btnListarCentro_Click(object sender, EventArgs e)
         {
-            string retorno;
-            string[] azulejosCentro;
-
-            retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
-
-            verificarErro(retorno);
-
+            string[] retorno;
+            string[] itensRetorno;
+            Centro centro = new Centro(); 
+            List<Azulejo> azulejos = new List<Azulejo>();
             
-            retorno = retorno.Replace("\r", "");
+            retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r","").Split('\n');
 
-            azulejosCentro = retorno.Split('\n');
+            //verificarErro(retorno);
 
             lstAzulejosCentro.Items.Clear();
+            for (int i = 0; i < retorno.Length - 1; i++)
+            {
+                Azulejo azulejo = new Azulejo();
+                itensRetorno = retorno[i].Split(',');
 
-            foreach (string azulejo in azulejosCentro) {
-                lstAzulejosCentro.Items.Add(azulejo);
+                azulejo.id = Convert.ToInt32(itensRetorno[0]);
+
+                azulejo.quantidade = Convert.ToInt32(itensRetorno[2]);
+
+                azulejos.Add(azulejo);
+
+
+                lstAzulejosCentro.Items.Add((azulejo.id, itensRetorno[1], azulejo.quantidade, itensRetorno[3]));
             }
+
+            centro.azulejos = azulejos;
+            centro.marca1 = retorno[0].Substring(retorno[0].LastIndexOf(',') + 1, 1) == "1";
         }
 
         private void btnComprarAzulejo_Click(object sender, EventArgs e)
