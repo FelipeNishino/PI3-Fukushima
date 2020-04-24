@@ -8,7 +8,7 @@ using AzulServer;
 
 namespace PI3___Fukushima
 {
-    class Tabuleiro
+    public class Tabuleiro
     {
         public int pontos { get; set; }
 

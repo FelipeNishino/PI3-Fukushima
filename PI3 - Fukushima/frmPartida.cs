@@ -1,14 +1,8 @@
-﻿using System;
+﻿using AzulServer;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Timers;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using AzulServer;
 
 namespace PI3___Fukushima
 {
@@ -18,9 +12,12 @@ namespace PI3___Fukushima
         string[] dadosJogador;
         int idPartida, nFabricas;
         string statusPartida;
-        
+        public Tabuleiro tabuleiro;
+        public List<Fabrica> fabricas;
+        public frmTabuleiro formTabuleiro;
+        private Centro centro;
 
-        public frmPartida(string[] _dadosJogador, string _idPartida, string _statusPartida, int nJogadores) 
+        public frmPartida(string[] _dadosJogador, string _idPartida, string _statusPartida, int nJogadores)
         {
             dadosJogador = _dadosJogador;
             idPartida = Convert.ToInt32(_idPartida);
@@ -28,7 +25,7 @@ namespace PI3___Fukushima
             nFabricas = nJogadores;
 
             InitializeComponent();
-        } 
+        }
 
         private void frmPartida_Load(object sender, EventArgs e)
         {
@@ -61,15 +58,17 @@ namespace PI3___Fukushima
             this.WindowState = FormWindowState.Minimized;
             this.WindowState = FormWindowState.Normal;
 
-            frmTabuleiro frmTabuleiro = new frmTabuleiro(dadosJogador);
-            this.AddOwnedForm(frmTabuleiro);
-            frmTabuleiro.ControlBox = false;
-            frmTabuleiro.Show();
+            tabuleiro = new Tabuleiro();
+            formTabuleiro = new frmTabuleiro(dadosJogador, tabuleiro);
+            this.AddOwnedForm(formTabuleiro);
+            formTabuleiro.Show();
+
         }
 
         delegate void timerTickCallback(Object source, ElapsedEventArgs e);
-        
-        private void timerTick(Object source, ElapsedEventArgs e) {
+
+        private void timerTick(Object source, ElapsedEventArgs e)
+        {
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
@@ -80,67 +79,88 @@ namespace PI3___Fukushima
             }
             else
             {
-                lblVez.Text = "Vez: " + Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
+                String vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
+
+                lblVez.Text = "Vez: " + vez;
+
+                if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0])
+                {
+                    timer.Stop();
+                    formTabuleiro.lerTabuleiro();
+                    botCompra();
+                    timer.Start();
+                }
             }
         }
 
+        delegate void btnListarFabricas_ClickCallback(Object source, ElapsedEventArgs e);
+
         private void btnListarFabricas_Click(object sender, EventArgs e)
         {
-            string[] retorno;
-
-            retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
-
-            if (retorno[0] == "") return;
-
-            lstAzulejosFabricas.Items.Clear();
-
-
-            int i = Convert.ToInt32(retorno[0].Substring(0, 1));
-            int j = 0;
-
-          
-            List<Fabrica> fabricas = new List<Fabrica>();
-            List<Azulejo> azulejos = new List<Azulejo>();
-
-
-            while (i <= nFabricas && retorno[j] != "")
+        // InvokeRequired required compares the thread ID of the
+        // calling thread to the thread ID of the creating thread.
+        // If these threads are different, it returns true.
+            if (this.lblVez.InvokeRequired)
             {
-
-                Azulejo azulejo = new Azulejo();
-
-                azulejo.id = Convert.ToInt32(retorno[j].Substring(2, 1));
-                azulejo.quantidade = Convert.ToInt32(retorno[j].Substring(retorno[j].LastIndexOf(",") + 1, 1));
-
-                azulejos.Add(azulejo);
-
-                j++;
-
-                if (retorno[j] != "" && i != Convert.ToInt32(retorno[j].Substring(0, 1)))
-                {
-                    Fabrica fabrica = new Fabrica();
-                    fabrica.id = i;
-                    fabrica.azulejos = azulejos;
-                    fabricas.Add(fabrica);
-                    azulejos.Clear();
-                    i = Convert.ToInt32(retorno[j].Substring(0, 1));    
-                }
-                else if(retorno[j] == "")
-                {
-                    Fabrica fabrica = new Fabrica();
-                    fabrica.id = i;
-                    fabrica.azulejos = azulejos;
-                    fabricas.Add(fabrica);
-                }
-
+                btnListarFabricas_ClickCallback d = new btnListarFabricas_ClickCallback(timerTick);
+                this.Invoke(d, new object[] { sender, e });
             }
-
-            foreach (Fabrica fabrica in fabricas)
+            else
             {
-                foreach (Azulejo azulejo in fabrica.azulejos) {
-                    lstAzulejosFabricas.Items.Add(fabrica.id + "," + azulejo.id +","+ azulejo.quantidade);
+                string[] retorno;
+                retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
+
+                if (retorno[0] == "") return;
+
+                lstAzulejosFabricas.Items.Clear();
+
+
+                int i = Convert.ToInt32(retorno[0].Substring(0, 1));
+                int j = 0;
+
+
+                fabricas = new List<Fabrica>();
+                List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
+
+                for (int x = 0; x < nFabricas; x++)
+                {
+                    azulejos[x] = new List<Azulejo>();
+                }
+
+
+                while (i <= nFabricas && retorno[j] != "")
+                {
+
+                    Azulejo azulejo = new Azulejo();
+
+                    azulejo.id = Convert.ToInt32(retorno[j].Substring(2, 1));
+                    azulejo.quantidade = Convert.ToInt32(retorno[j].Substring(retorno[j].LastIndexOf(",") + 1, 1));
+
+                    azulejos[i-1].Add(azulejo);
+
+                    j++;
+
+                    lstAzulejosFabricas.Items.Add(i + "," + azulejo.id + "," + azulejo.quantidade);
+
+                    if (retorno[j] != "" && i != Convert.ToInt32(retorno[j].Substring(0, 1)))
+                    {
+                        Fabrica fabrica = new Fabrica();
+                        fabrica.id = i;
+                        fabrica.azulejos = azulejos[i-1];
+                        fabricas.Add(fabrica);
+                        i = Convert.ToInt32(retorno[j].Substring(0, 1));
+                    }
+                    else if (retorno[j] == "")
+                    {
+                        Fabrica fabrica = new Fabrica();
+                        fabrica.id = i;
+                        fabrica.azulejos = azulejos[i-1];
+                        fabricas.Add(fabrica);
+                    }
+
+
                 }
             }
-
         }
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
@@ -153,10 +173,10 @@ namespace PI3___Fukushima
         {
             string[] retorno;
             string[] itensRetorno;
-            Centro centro = new Centro(); 
+            centro = new Centro();
             List<Azulejo> azulejos = new List<Azulejo>();
-            
-            retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r","").Split('\n');
+
+            retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
             //verificarErro(retorno);
 
@@ -189,14 +209,14 @@ namespace PI3___Fukushima
             {
                 centro = "C";
             }
-            else 
+            else
             {
                 centro = "F";
-            }   
-            retorno = Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], centro, (cboFabricasCompra.SelectedItem.ToString() == "Centro")? 0 : Convert.ToInt32(cboFabricasCompra.SelectedItem), Convert.ToInt32(cboAzulejoCompra.SelectedItem), Convert.ToInt32(cboModeloCompra.SelectedItem));
+            }
+            retorno = Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], centro, (cboFabricasCompra.SelectedItem.ToString() == "Centro") ? 0 : Convert.ToInt32(cboFabricasCompra.SelectedItem), Convert.ToInt32(cboAzulejoCompra.SelectedItem), Convert.ToInt32(cboModeloCompra.SelectedItem));
             verificarErro(retorno);
-            
-        }  
+
+        }
 
         public bool verificarErro(string retorno)
         {
@@ -215,7 +235,7 @@ namespace PI3___Fukushima
 
         private void btnTabuleiro_Click(object sender, EventArgs e)
         {
-            lblTabuleiro.Text = Jogo.LerTabuleiro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], Convert.ToInt32(dadosJogador[0]));            
+            lblTabuleiro.Text = Jogo.LerTabuleiro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], Convert.ToInt32(dadosJogador[0]));
         }
 
         private void btnDebugAtualizaDadosJogador_Click(object sender, EventArgs e)
@@ -231,7 +251,7 @@ namespace PI3___Fukushima
                 {
                     file.WriteLine(idPartida.ToString() + " " + "x" + " - " + lblDadosJogador.Text);
                 }
-            }           
+            }
         }
 
         private void cboUsers_DropDown(object sender, EventArgs e)
@@ -241,8 +261,10 @@ namespace PI3___Fukushima
 
             foreach (string line in lines)
             {
-                if (line.Length > 2) {
-                    if (line.Substring(0, line.IndexOf(" ")) == idPartida.ToString()) {
+                if (line.Length > 2)
+                {
+                    if (line.Substring(0, line.IndexOf(" ")) == idPartida.ToString())
+                    {
                         cboUsers.Items.Add(line.Substring(line.IndexOf("-") + 2));
                     }
                 }
@@ -258,8 +280,52 @@ namespace PI3___Fukushima
         private void cboUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtIdJogador.Text = dadosJogador[0] = lblDadosJogador.Text = cboUsers.SelectedItem.ToString().Substring(0, cboUsers.SelectedItem.ToString().IndexOf(","));
-            txtSenhaJogador.Text = dadosJogador[1]  = cboUsers.SelectedItem.ToString().Substring(cboUsers.SelectedItem.ToString().IndexOf(",") + 1);
+            txtSenhaJogador.Text = dadosJogador[1] = cboUsers.SelectedItem.ToString().Substring(cboUsers.SelectedItem.ToString().IndexOf(",") + 1);
             lblDadosJogador.Text = lblDadosJogador.Text.Insert(lblDadosJogador.Text.Length, "," + dadosJogador[1]);
+        }
+
+
+        private void botCompra()
+        {
+            int i = 0;
+            Azulejo azulejo = new Azulejo();
+            azulejo.quantidade = 0;
+
+            tabuleiro = formTabuleiro.retornaTabuleiro();
+
+            btnListarFabricas_Click(null, null);
+            btnListarCentro_Click(null, null);
+
+
+            while (tabuleiro.modelo.arrayAzulejos[i] != null)
+            {
+                i++;
+            }
+            if (fabricas != null)
+            {
+                foreach (Fabrica fabrica in fabricas)
+                {
+                    azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1);
+                    if (azulejo != null)
+                    {
+                        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
+                        break;
+                    }
+                }
+            }
+            else {
+                foreach (Azulejo azulejo1 in centro.azulejos)
+                {
+                    if (azulejo1.quantidade >= azulejo.quantidade && azulejo1.quantidade <= i + 1)
+                    {
+                        azulejo = azulejo1;
+                    }
+                    
+                }
+                Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1);
+            }
+
+            formTabuleiro.lerTabuleiro();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PI3___Fukushima
 {
-    class Fabrica
+    public class Fabrica
     {
         public int id { get; set; }
 

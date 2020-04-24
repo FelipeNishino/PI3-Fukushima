@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace PI3___Fukushima
 {
-    class Azulejo
+    public class Azulejo
     {
         public int id { get; set; }
         public int quantidade { get; set; }

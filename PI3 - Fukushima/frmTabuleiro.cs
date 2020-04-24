@@ -14,21 +14,39 @@ namespace PI3___Fukushima
 {
     public partial class frmTabuleiro : Form
     {
-        string[] dadosJogador;        
-        public frmTabuleiro(string[] _dadosJogador)
+        string[] dadosJogador;
+        public Tabuleiro tabuleiro { get; set; }
+        public frmTabuleiro(string[] _dadosJogador, Tabuleiro _tabuleiro)
         {
+            tabuleiro = _tabuleiro;
             dadosJogador = _dadosJogador;
             InitializeComponent();
         }
 
         private void btnLerTabuleiro_Click(object sender, EventArgs e)
         {
-            List<PictureBox> pictureBoxes = Controls.OfType<PictureBox>().ToList();
-            Tabuleiro tabuleiro = new Tabuleiro();            
+            lerTabuleiro();
+        }
+
+        private void frmTabuleiro_Load(object sender, EventArgs e)
+        {
+            Point startPosition = new Point();
+            startPosition.X = Owner.Location.X + Owner.Width;
+            startPosition.Y = Owner.Location.Y;
+            Location = startPosition;
+        }
+
+        public Tabuleiro retornaTabuleiro() {
+            return tabuleiro;
+        }
+
+        public void lerTabuleiro(){
+             List<PictureBox> pictureBoxes = Controls.OfType<PictureBox>().ToList();
+       
 
             tabuleiro.Listar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], tabuleiro);
 
-            for (int i = 0; i < tabuleiro.modelo.arrayAzulejos.Length; i++) {
+            for (int i = 0; i<tabuleiro.modelo.arrayAzulejos.Length; i++) {
                 for (int j = 1; j <= i + 1; j++) {
                     foreach (PictureBox pbo in pictureBoxes) {
                         if (pbo.Name == "pboModelo" + (i + 1) + j) {
@@ -50,11 +68,11 @@ namespace PI3___Fukushima
                 }
             }
 
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 5; j++) {
+            for (int i = 0; i< 5; i++) {
+                for (int j = 0; j< 5; j++) {
                     foreach (PictureBox pbo in pictureBoxes) {
                         if (pbo.Name == "pboParede" + (i + 1) + (j + 1)) {
-                            if (tabuleiro.parede[i,j]) {
+                            if (tabuleiro.parede[i, j]) {
                                 pbo.Visible = true;
                             }
                             else {
@@ -66,7 +84,7 @@ namespace PI3___Fukushima
                 }
             }
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i< 7; i++)
             {
                 foreach (PictureBox pbo in pictureBoxes)
                 {
@@ -111,15 +129,7 @@ namespace PI3___Fukushima
                     }
                 }
             }
-            tabuleiro.chao = new[] { -1, -1, -1, -1, -1, -1, -1 };
-        }
-
-        private void frmTabuleiro_Load(object sender, EventArgs e)
-        {
-            Point startPosition = new Point();
-            startPosition.X = Owner.Location.X + Owner.Width;
-            startPosition.Y = Owner.Location.Y;
-            Location = startPosition;
+            tabuleiro.chao = new[] { -1, -1, -1, -1, -1, -1, -1 };    
         }
     }
 }

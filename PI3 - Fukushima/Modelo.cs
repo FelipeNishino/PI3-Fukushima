@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace PI3___Fukushima
 {
 
-    class Modelo
+    public class Modelo
     {
         public Azulejo[] arrayAzulejos { get; set; }
 
