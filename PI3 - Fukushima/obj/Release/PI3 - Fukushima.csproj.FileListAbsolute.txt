@@ -1,0 +1,14 @@
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\bin\Release\PI3 - Fukushima.exe.config
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\bin\Release\PI3 - Fukushima.exe
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\bin\Release\PI3 - Fukushima.pdb
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\bin\Release\AzulServer.dll
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\bin\Release\AzulServer.xml
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3 - Fukushima.csprojAssemblyReference.cache
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3___Fukushima.Form1.resources
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3___Fukushima.frmPartida.resources
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3___Fukushima.frmTabuleiro.resources
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3___Fukushima.Properties.Resources.resources
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3 - Fukushima.csproj.GenerateResource.cache
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3 - Fukushima.csproj.CopyComplete
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3 - Fukushima.exe
+D:\Senac\3-semestre\PI3-Fukushima\PI3 - Fukushima\obj\Release\PI3 - Fukushima.pdb

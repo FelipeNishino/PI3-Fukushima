@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Timers;
 using System.Windows.Forms;
-
+using System.Threading;
 namespace PI3___Fukushima
 {
     public partial class frmPartida : Form
@@ -48,7 +48,7 @@ namespace PI3___Fukushima
             }
             cboFabricasCompra.Items.Add("Centro");
 
-            timer = new System.Timers.Timer(2000);
+            timer = new System.Timers.Timer(3000);
             timer.Elapsed += timerTick;
             timer.AutoReset = true;
             timer.Start();
@@ -87,6 +87,8 @@ namespace PI3___Fukushima
                 {
                     timer.Stop();
                     formTabuleiro.lerTabuleiro();
+                    btnListarFabricas_Click(null, null);
+                    btnListarCentro_Click(null, null);
                     botCompra();
                     timer.Start();
                 }
@@ -109,10 +111,11 @@ namespace PI3___Fukushima
             {
                 string[] retorno;
                 retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
+                
+                lstAzulejosFabricas.Items.Clear();
 
                 if (retorno[0] == "") return;
 
-                lstAzulejosFabricas.Items.Clear();
 
 
                 int i = Convert.ToInt32(retorno[0].Substring(0, 1));
@@ -293,10 +296,6 @@ namespace PI3___Fukushima
 
             tabuleiro = formTabuleiro.retornaTabuleiro();
 
-            btnListarFabricas_Click(null, null);
-            btnListarCentro_Click(null, null);
-
-
             while (tabuleiro.modelo.arrayAzulejos[i] != null)
             {
                 i++;
@@ -316,11 +315,11 @@ namespace PI3___Fukushima
             else {
                 foreach (Azulejo azulejo1 in centro.azulejos)
                 {
-                    if (azulejo1.quantidade >= azulejo.quantidade && azulejo1.quantidade <= i + 1)
+                    if (azulejo1.quantidade > azulejo.quantidade && azulejo1.quantidade <= i + 1)
                     {
                         azulejo = azulejo1;
+                        break;
                     }
-                    
                 }
                 Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1);
             }
