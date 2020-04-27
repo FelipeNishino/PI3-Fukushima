@@ -12,11 +12,11 @@ using AzulServer;
 
 namespace PI3___Fukushima
 {
-    public partial class frmTabuleiro : Form
+    public partial class FrmTabuleiro : Form
     {
         string[] dadosJogador;
         public Tabuleiro tabuleiro { get; set; }
-        public frmTabuleiro(string[] _dadosJogador, Tabuleiro _tabuleiro)
+        public FrmTabuleiro(string[] _dadosJogador, Tabuleiro _tabuleiro)
         {
             tabuleiro = _tabuleiro;
             dadosJogador = _dadosJogador;
@@ -43,7 +43,6 @@ namespace PI3___Fukushima
         public void lerTabuleiro(){
              List<PictureBox> pictureBoxes = Controls.OfType<PictureBox>().ToList();
        
-
             tabuleiro.Listar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], tabuleiro);
 
             for (int i = 0; i<tabuleiro.modelo.arrayAzulejos.Length; i++) {

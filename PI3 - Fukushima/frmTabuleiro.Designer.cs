@@ -1,6 +1,6 @@
 ﻿namespace PI3___Fukushima
 {
-    partial class frmTabuleiro
+    partial class FrmTabuleiro
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTabuleiro));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTabuleiro));
             this.pboModelo11 = new System.Windows.Forms.PictureBox();
             this.pboModelo21 = new System.Windows.Forms.PictureBox();
             this.pboModelo22 = new System.Windows.Forms.PictureBox();
@@ -656,7 +656,7 @@
             this.pboChao5.TabIndex = 46;
             this.pboChao5.TabStop = false;
             // 
-            // frmTabuleiro
+            // FrmTabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -713,8 +713,9 @@
             this.Controls.Add(this.pboModelo21);
             this.Controls.Add(this.pboModelo11);
             this.DoubleBuffered = true;
-            this.Name = "frmTabuleiro";
+            this.Name = "FrmTabuleiro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "Tabuleiro - Fukushima";
             this.Load += new System.EventHandler(this.frmTabuleiro_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pboModelo11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboModelo21)).EndInit();
