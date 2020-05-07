@@ -49,5 +49,10 @@ namespace PI3___Fukushima
                 i++;
             }
         }
+
+        public Boolean verificarAzulejoParede(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro)
+        {
+            return tabuleiro.parede[linhaModelo, (linhaModelo + (idAzulejo - 1)) % 5]; ;
+        }
     }
 }
