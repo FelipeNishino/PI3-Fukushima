@@ -41,7 +41,7 @@ namespace PI3___Fukushima {
             timer.Start();
 
             tabuleiro = new Tabuleiro();
-            frmTabuleiro = new FrmTabuleiro(dadosJogador, tabuleiro);
+            frmTabuleiro = new FrmTabuleiro(dadosJogador, tabuleiro, nFabricas);
             
             this.Location = this.Owner.Location;
 
@@ -114,7 +114,7 @@ namespace PI3___Fukushima {
 
                     azulejo.id = Convert.ToInt32(retorno[j].Substring(2, 1));
                     azulejo.quantidade = Convert.ToInt32(retorno[j].Substring(retorno[j].LastIndexOf(",") + 1, 1));
-
+                    azulejo.carregarImagem();
                     azulejos[i-1].Add(azulejo);
 
                     j++;
@@ -135,6 +135,8 @@ namespace PI3___Fukushima {
                         fabricas.Add(fabrica);
                     }
                 }
+
+                frmTabuleiro.lerFabricas(fabricas);
             }
         }
 
@@ -177,6 +179,7 @@ namespace PI3___Fukushima {
             else {
                 centro = "F";
             }
+
             retorno = Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], centro, (cboFabricasCompra.SelectedItem.ToString() == "Centro") ? 0 : Convert.ToInt32(cboFabricasCompra.SelectedItem), Convert.ToInt32(cboAzulejoCompra.SelectedItem), Convert.ToInt32(cboModeloCompra.SelectedItem));
             VerificarErro(retorno);
 
@@ -242,6 +245,8 @@ namespace PI3___Fukushima {
 
         private void BotCompra() {
             int i = 0;
+            int idFabricaComprada = -1;
+
             Azulejo azulejo = new Azulejo {
                 quantidade = 0
             };
@@ -256,6 +261,7 @@ namespace PI3___Fukushima {
                     azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1);
                     if (azulejo != null) {
                         Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
+                        idFabricaComprada = fabrica.id;
                         break;
                     }
                 }
@@ -268,7 +274,9 @@ namespace PI3___Fukushima {
                     }
                 }
                 Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1);
+                idFabricaComprada = 0;
             }
+            frmTabuleiro.limparFabricas(idFabricaComprada);
             frmTabuleiro.lerTabuleiro();
         }
     }

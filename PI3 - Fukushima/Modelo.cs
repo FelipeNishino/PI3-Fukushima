@@ -24,32 +24,8 @@ namespace PI3___Fukushima
 
                 azulejo.id = Convert.ToInt32(geral[i].Substring(2, 1));
                 azulejo.quantidade = Convert.ToInt32(geral[i].Substring(4, 1));
+                azulejo.carregarImagem();
                 
-                switch (azulejo.id)
-                {
-                    case 1:
-                        azulejo.imagem = Properties.Resources.Azul;
-                        break;
-
-                    case 2:
-                        azulejo.imagem = Properties.Resources.Amarelo;
-                        break;
-
-                    case 3:
-                        azulejo.imagem = Properties.Resources.Vermelho;
-                        break;
-
-                    case 4:
-                        azulejo.imagem = Properties.Resources.Preto;
-                        break;
-
-                    case 5:
-                        azulejo.imagem = Properties.Resources.Branco;
-                        break;
-
-                    default:
-                        break;
-                }
                 this.arrayAzulejos[linha - 1] = azulejo;
                 i++;
             }

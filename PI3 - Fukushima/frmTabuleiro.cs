@@ -16,10 +16,13 @@ namespace PI3___Fukushima
     {
         string[] dadosJogador;
         public Tabuleiro tabuleiro { get; set; }
-        public FrmTabuleiro(string[] _dadosJogador, Tabuleiro _tabuleiro)
+
+        public int nFabricas { get; set; }
+        public FrmTabuleiro(string[] _dadosJogador, Tabuleiro _tabuleiro, int _nFabricas)
         {
             tabuleiro = _tabuleiro;
             dadosJogador = _dadosJogador;
+            nFabricas = _nFabricas;
             InitializeComponent();
         }
 
@@ -30,10 +33,24 @@ namespace PI3___Fukushima
 
         private void frmTabuleiro_Load(object sender, EventArgs e)
         {
+            
             Point startPosition = new Point();
             startPosition.X = Owner.Location.X + Owner.Width;
             startPosition.Y = Owner.Location.Y;
             Location = startPosition;
+
+            for (int i = 0; i < nFabricas*4; i++)
+            {
+                PictureBox pbo = new PictureBox();
+                pbo.Name = "pboFabrica" + (i / 4 + 1) + (i % 4 + 1);
+                //pbo.Image = Properties.Resources.pCentro;
+                pbo.SizeMode = PictureBoxSizeMode.StretchImage;
+                pbo.Width = 50;
+                pbo.Height = 50;
+                pbo.Location = new Point(20 + (i % 4) * (pbo.Width + 10), 20 + (i / 4) * (pbo.Height + 10));
+                this.Controls.Add(pbo);
+            }
+            
         }
 
         public Tabuleiro retornaTabuleiro() {
@@ -42,7 +59,10 @@ namespace PI3___Fukushima
 
         public void lerTabuleiro(){
              List<PictureBox> pictureBoxes = Controls.OfType<PictureBox>().ToList();
-       
+
+            Control[] controles = Controls.Find("btnLerTabuleiro", false);
+            controles[0].Text = "qualquercoisa";
+
             tabuleiro.Listar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], tabuleiro);
 
             for (int i = 0; i<tabuleiro.modelo.arrayAzulejos.Length; i++) {
@@ -129,6 +149,48 @@ namespace PI3___Fukushima
                 }
             }
             tabuleiro.chao = new[] { -1, -1, -1, -1, -1, -1, -1 };    
+        }
+
+        public void lerFabricas(List<Fabrica> fabricas) {
+            int i, j;
+            PictureBox pboReferencia = new PictureBox();
+
+            foreach (Fabrica fabrica in fabricas)
+            {
+                i = 0;
+                j = 1;
+                
+                while (i < fabrica.azulejos.Count)
+                {
+                    
+
+                    if (Controls.Find("pboFabrica" + fabrica.id + j, false).Length !=0)
+                    {
+                        pboReferencia = Controls.Find("pboFabrica" + fabrica.id + j, false)[0] as PictureBox;
+                        pboReferencia.Visible = true;
+                        pboReferencia.Image = fabrica.azulejos[i].imagem;
+                    }
+                    
+                    if (fabrica.azulejos[i].quantidade <= 1) i++;
+                    else fabrica.azulejos[i].quantidade--;
+
+
+                    j++;
+                }
+            }
+        }
+
+        public void limparFabricas(int idFabrica) {
+
+            if (idFabrica > 0) { 
+                for (int i = 1; i < 5; i++)
+                {
+                    if (Controls.Find("pboFabrica" + idFabrica + i, false).Length != 0)
+                    {
+                        Controls.Find("pboFabrica" + idFabrica + i, false)[0].Visible = false;
+                    }
+                }
+            }
         }
     }
 }

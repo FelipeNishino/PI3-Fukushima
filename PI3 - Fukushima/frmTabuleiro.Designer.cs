@@ -129,7 +129,7 @@
             // pboModelo11
             // 
             this.pboModelo11.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo11.Location = new System.Drawing.Point(225, 202);
+            this.pboModelo11.Location = new System.Drawing.Point(493, 154);
             this.pboModelo11.Name = "pboModelo11";
             this.pboModelo11.Size = new System.Drawing.Size(47, 48);
             this.pboModelo11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -139,7 +139,7 @@
             // pboModelo21
             // 
             this.pboModelo21.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo21.Location = new System.Drawing.Point(224, 253);
+            this.pboModelo21.Location = new System.Drawing.Point(492, 205);
             this.pboModelo21.Name = "pboModelo21";
             this.pboModelo21.Size = new System.Drawing.Size(47, 48);
             this.pboModelo21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -149,7 +149,7 @@
             // pboModelo22
             // 
             this.pboModelo22.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo22.Location = new System.Drawing.Point(172, 253);
+            this.pboModelo22.Location = new System.Drawing.Point(440, 205);
             this.pboModelo22.Name = "pboModelo22";
             this.pboModelo22.Size = new System.Drawing.Size(47, 48);
             this.pboModelo22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -159,7 +159,7 @@
             // pboModelo31
             // 
             this.pboModelo31.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo31.Location = new System.Drawing.Point(224, 304);
+            this.pboModelo31.Location = new System.Drawing.Point(492, 256);
             this.pboModelo31.Name = "pboModelo31";
             this.pboModelo31.Size = new System.Drawing.Size(47, 48);
             this.pboModelo31.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -169,7 +169,7 @@
             // pboModelo32
             // 
             this.pboModelo32.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo32.Location = new System.Drawing.Point(172, 304);
+            this.pboModelo32.Location = new System.Drawing.Point(440, 256);
             this.pboModelo32.Name = "pboModelo32";
             this.pboModelo32.Size = new System.Drawing.Size(47, 48);
             this.pboModelo32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -179,7 +179,7 @@
             // pboModelo33
             // 
             this.pboModelo33.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo33.Location = new System.Drawing.Point(119, 304);
+            this.pboModelo33.Location = new System.Drawing.Point(387, 256);
             this.pboModelo33.Name = "pboModelo33";
             this.pboModelo33.Size = new System.Drawing.Size(47, 48);
             this.pboModelo33.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -189,7 +189,7 @@
             // pboModelo41
             // 
             this.pboModelo41.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo41.Location = new System.Drawing.Point(224, 354);
+            this.pboModelo41.Location = new System.Drawing.Point(492, 306);
             this.pboModelo41.Name = "pboModelo41";
             this.pboModelo41.Size = new System.Drawing.Size(47, 48);
             this.pboModelo41.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -199,7 +199,7 @@
             // pboModelo42
             // 
             this.pboModelo42.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo42.Location = new System.Drawing.Point(172, 354);
+            this.pboModelo42.Location = new System.Drawing.Point(440, 306);
             this.pboModelo42.Name = "pboModelo42";
             this.pboModelo42.Size = new System.Drawing.Size(47, 48);
             this.pboModelo42.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -209,7 +209,7 @@
             // pboModelo43
             // 
             this.pboModelo43.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo43.Location = new System.Drawing.Point(119, 354);
+            this.pboModelo43.Location = new System.Drawing.Point(387, 306);
             this.pboModelo43.Name = "pboModelo43";
             this.pboModelo43.Size = new System.Drawing.Size(47, 48);
             this.pboModelo43.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -219,7 +219,7 @@
             // pboModelo44
             // 
             this.pboModelo44.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo44.Location = new System.Drawing.Point(67, 354);
+            this.pboModelo44.Location = new System.Drawing.Point(335, 306);
             this.pboModelo44.Name = "pboModelo44";
             this.pboModelo44.Size = new System.Drawing.Size(47, 48);
             this.pboModelo44.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -229,7 +229,7 @@
             // pboModelo51
             // 
             this.pboModelo51.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo51.Location = new System.Drawing.Point(224, 403);
+            this.pboModelo51.Location = new System.Drawing.Point(492, 355);
             this.pboModelo51.Name = "pboModelo51";
             this.pboModelo51.Size = new System.Drawing.Size(47, 48);
             this.pboModelo51.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -239,7 +239,7 @@
             // pboModelo52
             // 
             this.pboModelo52.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo52.Location = new System.Drawing.Point(172, 403);
+            this.pboModelo52.Location = new System.Drawing.Point(440, 355);
             this.pboModelo52.Name = "pboModelo52";
             this.pboModelo52.Size = new System.Drawing.Size(47, 48);
             this.pboModelo52.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -249,7 +249,7 @@
             // pboModelo53
             // 
             this.pboModelo53.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo53.Location = new System.Drawing.Point(120, 403);
+            this.pboModelo53.Location = new System.Drawing.Point(388, 355);
             this.pboModelo53.Name = "pboModelo53";
             this.pboModelo53.Size = new System.Drawing.Size(47, 48);
             this.pboModelo53.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -259,7 +259,7 @@
             // pboModelo54
             // 
             this.pboModelo54.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo54.Location = new System.Drawing.Point(67, 403);
+            this.pboModelo54.Location = new System.Drawing.Point(335, 355);
             this.pboModelo54.Name = "pboModelo54";
             this.pboModelo54.Size = new System.Drawing.Size(47, 48);
             this.pboModelo54.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -269,7 +269,7 @@
             // pboModelo55
             // 
             this.pboModelo55.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo55.Location = new System.Drawing.Point(12, 403);
+            this.pboModelo55.Location = new System.Drawing.Point(280, 355);
             this.pboModelo55.Name = "pboModelo55";
             this.pboModelo55.Size = new System.Drawing.Size(47, 48);
             this.pboModelo55.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -280,7 +280,7 @@
             // 
             this.pboParede11.BackColor = System.Drawing.Color.Transparent;
             this.pboParede11.Image = ((System.Drawing.Image)(resources.GetObject("pboParede11.Image")));
-            this.pboParede11.Location = new System.Drawing.Point(314, 200);
+            this.pboParede11.Location = new System.Drawing.Point(582, 152);
             this.pboParede11.Name = "pboParede11";
             this.pboParede11.Size = new System.Drawing.Size(52, 52);
             this.pboParede11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -292,7 +292,7 @@
             // 
             this.pboParede12.BackColor = System.Drawing.Color.Transparent;
             this.pboParede12.Image = ((System.Drawing.Image)(resources.GetObject("pboParede12.Image")));
-            this.pboParede12.Location = new System.Drawing.Point(366, 200);
+            this.pboParede12.Location = new System.Drawing.Point(634, 152);
             this.pboParede12.Name = "pboParede12";
             this.pboParede12.Size = new System.Drawing.Size(52, 52);
             this.pboParede12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -304,7 +304,7 @@
             // 
             this.pboParede13.BackColor = System.Drawing.Color.Transparent;
             this.pboParede13.Image = ((System.Drawing.Image)(resources.GetObject("pboParede13.Image")));
-            this.pboParede13.Location = new System.Drawing.Point(417, 200);
+            this.pboParede13.Location = new System.Drawing.Point(685, 152);
             this.pboParede13.Name = "pboParede13";
             this.pboParede13.Size = new System.Drawing.Size(52, 52);
             this.pboParede13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -316,7 +316,7 @@
             // 
             this.pboParede14.BackColor = System.Drawing.Color.Transparent;
             this.pboParede14.Image = ((System.Drawing.Image)(resources.GetObject("pboParede14.Image")));
-            this.pboParede14.Location = new System.Drawing.Point(469, 200);
+            this.pboParede14.Location = new System.Drawing.Point(737, 152);
             this.pboParede14.Name = "pboParede14";
             this.pboParede14.Size = new System.Drawing.Size(52, 52);
             this.pboParede14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -328,7 +328,7 @@
             // 
             this.pboParede15.BackColor = System.Drawing.Color.Transparent;
             this.pboParede15.Image = ((System.Drawing.Image)(resources.GetObject("pboParede15.Image")));
-            this.pboParede15.Location = new System.Drawing.Point(520, 200);
+            this.pboParede15.Location = new System.Drawing.Point(788, 152);
             this.pboParede15.Name = "pboParede15";
             this.pboParede15.Size = new System.Drawing.Size(52, 52);
             this.pboParede15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -340,7 +340,7 @@
             // 
             this.pboParede21.BackColor = System.Drawing.Color.Transparent;
             this.pboParede21.Image = ((System.Drawing.Image)(resources.GetObject("pboParede21.Image")));
-            this.pboParede21.Location = new System.Drawing.Point(314, 250);
+            this.pboParede21.Location = new System.Drawing.Point(582, 202);
             this.pboParede21.Name = "pboParede21";
             this.pboParede21.Size = new System.Drawing.Size(52, 52);
             this.pboParede21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -352,7 +352,7 @@
             // 
             this.pboParede22.BackColor = System.Drawing.Color.Transparent;
             this.pboParede22.Image = ((System.Drawing.Image)(resources.GetObject("pboParede22.Image")));
-            this.pboParede22.Location = new System.Drawing.Point(366, 250);
+            this.pboParede22.Location = new System.Drawing.Point(634, 202);
             this.pboParede22.Name = "pboParede22";
             this.pboParede22.Size = new System.Drawing.Size(52, 52);
             this.pboParede22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -364,7 +364,7 @@
             // 
             this.pboParede23.BackColor = System.Drawing.Color.Transparent;
             this.pboParede23.Image = ((System.Drawing.Image)(resources.GetObject("pboParede23.Image")));
-            this.pboParede23.Location = new System.Drawing.Point(417, 250);
+            this.pboParede23.Location = new System.Drawing.Point(685, 202);
             this.pboParede23.Name = "pboParede23";
             this.pboParede23.Size = new System.Drawing.Size(52, 52);
             this.pboParede23.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -376,7 +376,7 @@
             // 
             this.pboParede24.BackColor = System.Drawing.Color.Transparent;
             this.pboParede24.Image = ((System.Drawing.Image)(resources.GetObject("pboParede24.Image")));
-            this.pboParede24.Location = new System.Drawing.Point(468, 250);
+            this.pboParede24.Location = new System.Drawing.Point(736, 202);
             this.pboParede24.Name = "pboParede24";
             this.pboParede24.Size = new System.Drawing.Size(52, 52);
             this.pboParede24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -388,7 +388,7 @@
             // 
             this.pboParede25.BackColor = System.Drawing.Color.Transparent;
             this.pboParede25.Image = ((System.Drawing.Image)(resources.GetObject("pboParede25.Image")));
-            this.pboParede25.Location = new System.Drawing.Point(520, 249);
+            this.pboParede25.Location = new System.Drawing.Point(788, 201);
             this.pboParede25.Name = "pboParede25";
             this.pboParede25.Size = new System.Drawing.Size(52, 52);
             this.pboParede25.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -400,7 +400,7 @@
             // 
             this.pboParede31.BackColor = System.Drawing.Color.Transparent;
             this.pboParede31.Image = ((System.Drawing.Image)(resources.GetObject("pboParede31.Image")));
-            this.pboParede31.Location = new System.Drawing.Point(314, 300);
+            this.pboParede31.Location = new System.Drawing.Point(582, 252);
             this.pboParede31.Name = "pboParede31";
             this.pboParede31.Size = new System.Drawing.Size(52, 52);
             this.pboParede31.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -412,7 +412,7 @@
             // 
             this.pboParede32.BackColor = System.Drawing.Color.Transparent;
             this.pboParede32.Image = ((System.Drawing.Image)(resources.GetObject("pboParede32.Image")));
-            this.pboParede32.Location = new System.Drawing.Point(366, 300);
+            this.pboParede32.Location = new System.Drawing.Point(634, 252);
             this.pboParede32.Name = "pboParede32";
             this.pboParede32.Size = new System.Drawing.Size(52, 52);
             this.pboParede32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -424,7 +424,7 @@
             // 
             this.pboParede33.BackColor = System.Drawing.Color.Transparent;
             this.pboParede33.Image = global::PI3___Fukushima.Properties.Resources.Azul;
-            this.pboParede33.Location = new System.Drawing.Point(417, 300);
+            this.pboParede33.Location = new System.Drawing.Point(685, 252);
             this.pboParede33.Name = "pboParede33";
             this.pboParede33.Size = new System.Drawing.Size(52, 52);
             this.pboParede33.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -436,7 +436,7 @@
             // 
             this.pboParede34.BackColor = System.Drawing.Color.Transparent;
             this.pboParede34.Image = ((System.Drawing.Image)(resources.GetObject("pboParede34.Image")));
-            this.pboParede34.Location = new System.Drawing.Point(469, 300);
+            this.pboParede34.Location = new System.Drawing.Point(737, 252);
             this.pboParede34.Name = "pboParede34";
             this.pboParede34.Size = new System.Drawing.Size(52, 52);
             this.pboParede34.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -448,7 +448,7 @@
             // 
             this.pboParede35.BackColor = System.Drawing.Color.Transparent;
             this.pboParede35.Image = ((System.Drawing.Image)(resources.GetObject("pboParede35.Image")));
-            this.pboParede35.Location = new System.Drawing.Point(520, 300);
+            this.pboParede35.Location = new System.Drawing.Point(788, 252);
             this.pboParede35.Name = "pboParede35";
             this.pboParede35.Size = new System.Drawing.Size(52, 52);
             this.pboParede35.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -460,7 +460,7 @@
             // 
             this.pboParede41.BackColor = System.Drawing.Color.Transparent;
             this.pboParede41.Image = ((System.Drawing.Image)(resources.GetObject("pboParede41.Image")));
-            this.pboParede41.Location = new System.Drawing.Point(314, 350);
+            this.pboParede41.Location = new System.Drawing.Point(582, 302);
             this.pboParede41.Name = "pboParede41";
             this.pboParede41.Size = new System.Drawing.Size(52, 52);
             this.pboParede41.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -472,7 +472,7 @@
             // 
             this.pboParede42.BackColor = System.Drawing.Color.Transparent;
             this.pboParede42.Image = ((System.Drawing.Image)(resources.GetObject("pboParede42.Image")));
-            this.pboParede42.Location = new System.Drawing.Point(366, 350);
+            this.pboParede42.Location = new System.Drawing.Point(634, 302);
             this.pboParede42.Name = "pboParede42";
             this.pboParede42.Size = new System.Drawing.Size(52, 52);
             this.pboParede42.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -484,7 +484,7 @@
             // 
             this.pboParede43.BackColor = System.Drawing.Color.Transparent;
             this.pboParede43.Image = ((System.Drawing.Image)(resources.GetObject("pboParede43.Image")));
-            this.pboParede43.Location = new System.Drawing.Point(417, 350);
+            this.pboParede43.Location = new System.Drawing.Point(685, 302);
             this.pboParede43.Name = "pboParede43";
             this.pboParede43.Size = new System.Drawing.Size(52, 52);
             this.pboParede43.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -496,7 +496,7 @@
             // 
             this.pboParede44.BackColor = System.Drawing.Color.Transparent;
             this.pboParede44.Image = ((System.Drawing.Image)(resources.GetObject("pboParede44.Image")));
-            this.pboParede44.Location = new System.Drawing.Point(469, 350);
+            this.pboParede44.Location = new System.Drawing.Point(737, 302);
             this.pboParede44.Name = "pboParede44";
             this.pboParede44.Size = new System.Drawing.Size(52, 52);
             this.pboParede44.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -508,7 +508,7 @@
             // 
             this.pboParede45.BackColor = System.Drawing.Color.Transparent;
             this.pboParede45.Image = ((System.Drawing.Image)(resources.GetObject("pboParede45.Image")));
-            this.pboParede45.Location = new System.Drawing.Point(520, 350);
+            this.pboParede45.Location = new System.Drawing.Point(788, 302);
             this.pboParede45.Name = "pboParede45";
             this.pboParede45.Size = new System.Drawing.Size(52, 52);
             this.pboParede45.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -520,7 +520,7 @@
             // 
             this.pboParede51.BackColor = System.Drawing.Color.Transparent;
             this.pboParede51.Image = ((System.Drawing.Image)(resources.GetObject("pboParede51.Image")));
-            this.pboParede51.Location = new System.Drawing.Point(314, 399);
+            this.pboParede51.Location = new System.Drawing.Point(582, 351);
             this.pboParede51.Name = "pboParede51";
             this.pboParede51.Size = new System.Drawing.Size(52, 52);
             this.pboParede51.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -532,7 +532,7 @@
             // 
             this.pboParede52.BackColor = System.Drawing.Color.Transparent;
             this.pboParede52.Image = ((System.Drawing.Image)(resources.GetObject("pboParede52.Image")));
-            this.pboParede52.Location = new System.Drawing.Point(366, 399);
+            this.pboParede52.Location = new System.Drawing.Point(634, 351);
             this.pboParede52.Name = "pboParede52";
             this.pboParede52.Size = new System.Drawing.Size(52, 52);
             this.pboParede52.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -544,7 +544,7 @@
             // 
             this.pboParede53.BackColor = System.Drawing.Color.Transparent;
             this.pboParede53.Image = ((System.Drawing.Image)(resources.GetObject("pboParede53.Image")));
-            this.pboParede53.Location = new System.Drawing.Point(417, 399);
+            this.pboParede53.Location = new System.Drawing.Point(685, 351);
             this.pboParede53.Name = "pboParede53";
             this.pboParede53.Size = new System.Drawing.Size(52, 52);
             this.pboParede53.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -556,7 +556,7 @@
             // 
             this.pboParede54.BackColor = System.Drawing.Color.Transparent;
             this.pboParede54.Image = ((System.Drawing.Image)(resources.GetObject("pboParede54.Image")));
-            this.pboParede54.Location = new System.Drawing.Point(468, 399);
+            this.pboParede54.Location = new System.Drawing.Point(736, 351);
             this.pboParede54.Name = "pboParede54";
             this.pboParede54.Size = new System.Drawing.Size(52, 52);
             this.pboParede54.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -568,7 +568,7 @@
             // 
             this.pboParede55.BackColor = System.Drawing.Color.Transparent;
             this.pboParede55.Image = ((System.Drawing.Image)(resources.GetObject("pboParede55.Image")));
-            this.pboParede55.Location = new System.Drawing.Point(520, 399);
+            this.pboParede55.Location = new System.Drawing.Point(788, 351);
             this.pboParede55.Name = "pboParede55";
             this.pboParede55.Size = new System.Drawing.Size(52, 52);
             this.pboParede55.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -578,7 +578,7 @@
             // 
             // btnLerTabuleiro
             // 
-            this.btnLerTabuleiro.Location = new System.Drawing.Point(39, 31);
+            this.btnLerTabuleiro.Location = new System.Drawing.Point(276, 218);
             this.btnLerTabuleiro.Name = "btnLerTabuleiro";
             this.btnLerTabuleiro.Size = new System.Drawing.Size(108, 23);
             this.btnLerTabuleiro.TabIndex = 41;
@@ -589,7 +589,7 @@
             // pboChao1
             // 
             this.pboChao1.BackColor = System.Drawing.Color.Transparent;
-            this.pboChao1.Location = new System.Drawing.Point(21, 501);
+            this.pboChao1.Location = new System.Drawing.Point(289, 453);
             this.pboChao1.Name = "pboChao1";
             this.pboChao1.Size = new System.Drawing.Size(47, 48);
             this.pboChao1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -599,7 +599,7 @@
             // pboChao2
             // 
             this.pboChao2.BackColor = System.Drawing.Color.Transparent;
-            this.pboChao2.Location = new System.Drawing.Point(89, 501);
+            this.pboChao2.Location = new System.Drawing.Point(357, 453);
             this.pboChao2.Name = "pboChao2";
             this.pboChao2.Size = new System.Drawing.Size(47, 48);
             this.pboChao2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -609,7 +609,7 @@
             // pboChao4
             // 
             this.pboChao4.BackColor = System.Drawing.Color.Transparent;
-            this.pboChao4.Location = new System.Drawing.Point(227, 501);
+            this.pboChao4.Location = new System.Drawing.Point(495, 453);
             this.pboChao4.Name = "pboChao4";
             this.pboChao4.Size = new System.Drawing.Size(47, 48);
             this.pboChao4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -619,7 +619,7 @@
             // pboChao3
             // 
             this.pboChao3.BackColor = System.Drawing.Color.Transparent;
-            this.pboChao3.Location = new System.Drawing.Point(158, 501);
+            this.pboChao3.Location = new System.Drawing.Point(426, 453);
             this.pboChao3.Name = "pboChao3";
             this.pboChao3.Size = new System.Drawing.Size(47, 48);
             this.pboChao3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -629,7 +629,7 @@
             // pboChao7
             // 
             this.pboChao7.BackColor = System.Drawing.Color.Transparent;
-            this.pboChao7.Location = new System.Drawing.Point(434, 501);
+            this.pboChao7.Location = new System.Drawing.Point(702, 453);
             this.pboChao7.Name = "pboChao7";
             this.pboChao7.Size = new System.Drawing.Size(47, 48);
             this.pboChao7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -639,7 +639,7 @@
             // pboChao6
             // 
             this.pboChao6.BackColor = System.Drawing.Color.Transparent;
-            this.pboChao6.Location = new System.Drawing.Point(365, 501);
+            this.pboChao6.Location = new System.Drawing.Point(633, 453);
             this.pboChao6.Name = "pboChao6";
             this.pboChao6.Size = new System.Drawing.Size(47, 48);
             this.pboChao6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -649,7 +649,7 @@
             // pboChao5
             // 
             this.pboChao5.BackColor = System.Drawing.Color.Transparent;
-            this.pboChao5.Location = new System.Drawing.Point(296, 501);
+            this.pboChao5.Location = new System.Drawing.Point(564, 453);
             this.pboChao5.Name = "pboChao5";
             this.pboChao5.Size = new System.Drawing.Size(47, 48);
             this.pboChao5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -661,9 +661,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.BackgroundImage = global::PI3___Fukushima.Properties.Resources.boardver1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(584, 561);
+            this.ClientSize = new System.Drawing.Size(863, 618);
             this.Controls.Add(this.pboChao7);
             this.Controls.Add(this.pboChao6);
             this.Controls.Add(this.pboChao5);
