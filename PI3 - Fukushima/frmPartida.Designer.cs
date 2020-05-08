@@ -40,6 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chkBot = new System.Windows.Forms.CheckBox();
             this.lstAzulejosCentro = new System.Windows.Forms.ListBox();
             this.btnListarCentro = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -52,7 +53,10 @@
             this.cboFabricasCompra = new System.Windows.Forms.ComboBox();
             this.btnComprarAzulejo = new System.Windows.Forms.Button();
             this.lblVez = new System.Windows.Forms.Label();
-            this.chkBot = new System.Windows.Forms.CheckBox();
+            this.lblStopWatch = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -177,6 +181,16 @@
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Debug";
+            // 
+            // chkBot
+            // 
+            this.chkBot.AutoSize = true;
+            this.chkBot.Location = new System.Drawing.Point(9, 79);
+            this.chkBot.Name = "chkBot";
+            this.chkBot.Size = new System.Drawing.Size(66, 17);
+            this.chkBot.TabIndex = 14;
+            this.chkBot.Text = "Usar bot";
+            this.chkBot.UseVisualStyleBackColor = true;
             // 
             // lstAzulejosCentro
             // 
@@ -308,21 +322,54 @@
             this.lblVez.TabIndex = 18;
             this.lblVez.Text = "Vez";
             // 
-            // chkBot
+            // lblStopWatch
             // 
-            this.chkBot.AutoSize = true;
-            this.chkBot.Location = new System.Drawing.Point(9, 79);
-            this.chkBot.Name = "chkBot";
-            this.chkBot.Size = new System.Drawing.Size(66, 17);
-            this.chkBot.TabIndex = 14;
-            this.chkBot.Text = "Usar bot";
-            this.chkBot.UseVisualStyleBackColor = true;
+            this.lblStopWatch.AutoSize = true;
+            this.lblStopWatch.Location = new System.Drawing.Point(283, 455);
+            this.lblStopWatch.Name = "lblStopWatch";
+            this.lblStopWatch.Size = new System.Drawing.Size(35, 13);
+            this.lblStopWatch.TabIndex = 19;
+            this.lblStopWatch.Text = "label6";
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(155, 429);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 20;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(255, 429);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.TabIndex = 21;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(347, 429);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 22;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // FrmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(440, 476);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.lblStopWatch);
             this.Controls.Add(this.lblVez);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
@@ -372,5 +419,9 @@
         private System.Windows.Forms.ComboBox cboUsers;
         private System.Windows.Forms.Label lblVez;
         private System.Windows.Forms.CheckBox chkBot;
+        private System.Windows.Forms.Label lblStopWatch;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
