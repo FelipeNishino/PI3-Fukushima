@@ -108,7 +108,7 @@ namespace PI3___Fukushima
             }
             cboFabricasCompra.Items.Add("Centro");
 
-
+            
 
             tabuleiro = new Tabuleiro();
             frmTabuleiro = new FrmTabuleiro(dadosJogador, tabuleiro, nFabricas);
@@ -137,7 +137,7 @@ namespace PI3___Fukushima
             {
                 lstAzulejosFabricas.Items.Clear();
             });
-            if (retorno[0] == "")
+            if (retorno[0] == "" && fabricas != null)
             {
                 fabricas.RemoveRange(0, fabricas.Count);
                 return;
@@ -436,16 +436,16 @@ namespace PI3___Fukushima
 
             frmTabuleiro.limparFabricas(idFabricaComprada);
             frmTabuleiro.lerTabuleiro();
-
+            btnListarFabricas_Click(null, null);
+            btnListarCentro_Click(null, null);
             isBuying = false;
-
         }
 
 
         public bool jogarPadrao(Azulejo azulejo, int idFabricaComprada)
         {
             int i = 0;
-            while (tabuleiro.modelo.linhas[i].azulejo.id != -1 && i < 5)
+            while (tabuleiro.modelo.linhas[i].azulejo.id != -1 && i < 4)
             {
                 i++;
             }
