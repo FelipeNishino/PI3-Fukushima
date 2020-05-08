@@ -18,6 +18,12 @@ namespace PI3___Fukushima
         public Tabuleiro tabuleiro { get; set; }
 
         public int nFabricas { get; set; }
+
+        private enum Visibility
+        {
+            show,
+            hide
+        }
         public FrmTabuleiro(string[] _dadosJogador, Tabuleiro _tabuleiro, int _nFabricas)
         {
             tabuleiro = _tabuleiro;
@@ -33,13 +39,13 @@ namespace PI3___Fukushima
 
         private void frmTabuleiro_Load(object sender, EventArgs e)
         {
-            
+
             Point startPosition = new Point();
             startPosition.X = Owner.Location.X + Owner.Width;
             startPosition.Y = Owner.Location.Y;
             Location = startPosition;
 
-            for (int i = 0; i < nFabricas*4; i++)
+            for (int i = 0; i < nFabricas * 4; i++)
             {
                 PictureBox pbo = new PictureBox();
                 pbo.Name = "pboFabrica" + (i / 4 + 1) + (i % 4 + 1);
@@ -50,105 +56,165 @@ namespace PI3___Fukushima
                 pbo.Location = new Point(20 + (i % 4) * (pbo.Width + 10), 20 + (i / 4) * (pbo.Height + 10));
                 this.Controls.Add(pbo);
             }
-            
+
         }
 
-        public Tabuleiro retornaTabuleiro() {
+        public Tabuleiro retornaTabuleiro()
+        {
             return tabuleiro;
         }
-
-        public void lerTabuleiro(){
-             List<PictureBox> pictureBoxes = Controls.OfType<PictureBox>().ToList();
+        private void pboSetImg(PictureBox pbo, Image img)
+        {
+            pbo.Image = img;
+        }
+        private void changeVisibility(Control control, Visibility visibility)
+        {
+            switch (visibility)
+            {
+                case Visibility.show:
+                    control.Visible = true;
+                    break;
+                case Visibility.hide:
+                    control.Visible = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void lerTabuleiro()
+        {
+            List<PictureBox> pictureBoxes = Controls.OfType<PictureBox>().ToList();
 
             tabuleiro.Listar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], tabuleiro);
 
-            for (int i = 0; i < tabuleiro.modelo.linhas.Length; i++) {
-                for (int j = 1; j <= i + 1; j++) {
-                    foreach (PictureBox pbo in pictureBoxes) {
-                        if (pbo.Name == "pboModelo" + (i + 1) + j) {
-                            if (tabuleiro.modelo.linhas[i].azulejo != null) {
-                                if (j <= tabuleiro.modelo.linhas[i].azulejo.quantidade) {
-                                    pbo.Image = tabuleiro.modelo.linhas[i].azulejo.imagem;
-                                    pbo.Visible = true;
-                                }
-                                else {
-                                    pbo.Visible = false;
-                                }
-                            }
-                            else {
-                                pbo.Visible = false;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
+            PictureBox pbo = new PictureBox();
 
-            for (int i = 0; i< 5; i++) {
-                for (int j = 0; j< 5; j++) {
-                    foreach (PictureBox pbo in pictureBoxes) {
-                        if (pbo.Name == "pboParede" + (i + 1) + (j + 1)) {
-                            if (tabuleiro.parede[i, j]) {
-                                pbo.Visible = true;
-                            }
-                            else {
-                                pbo.Visible = false;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
 
-            for (int i = 0; i< 7; i++)
+            for (int i = 0; i < tabuleiro.modelo.linhas.Length; i++)
             {
-                foreach (PictureBox pbo in pictureBoxes)
+                for (int j = 1; j <= i + 1; j++)
                 {
-                    if (pbo.Name == "pboChao" + (i + 1))
+                    pbo = Controls.Find("pboModelo" + (i + 1) + j, false)[0] as PictureBox;
+                    if (tabuleiro.modelo.linhas[i].azulejo != null)
                     {
-                        switch (tabuleiro.chao[i])
+                        if (j <= tabuleiro.modelo.linhas[i].azulejo.quantidade)
                         {
-                            case 0:
-                                pbo.Image = Properties.Resources.pCentro;
-                                pbo.Visible = true;
-                                break;
-
-                            case 1:
-                                pbo.Image = Properties.Resources.Azul;
-                                pbo.Visible = true;
-                                break;
-
-                            case 2:
-                                pbo.Image = Properties.Resources.Amarelo;
-                                pbo.Visible = true;
-                                break;
-
-                            case 3:
-                                pbo.Image = Properties.Resources.Vermelho;
-                                pbo.Visible = true;
-                                break;
-
-                            case 4:
-                                pbo.Image = Properties.Resources.Preto;
-                                pbo.Visible = true;
-                                break;
-
-                            case 5:
-                                pbo.Image = Properties.Resources.Branco;
-                                pbo.Visible = true;
-                                break;
-
-                            default:
-                                pbo.Visible = false;
-                                break;
+                            pbo.Invoke((MethodInvoker)delegate
+                            {
+                                pboSetImg(pbo, tabuleiro.modelo.linhas[i].azulejo.imagem);
+                                changeVisibility(pbo, Visibility.show);
+                            });
+                        }
+                        else
+                        {
+                            pbo.Invoke((MethodInvoker)delegate
+                            {
+                                changeVisibility(pbo, Visibility.hide);
+                            });
                         }
                     }
+                    else
+                    {
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            changeVisibility(pbo, Visibility.hide);
+                        });
+                    }
+                    break;
+
+
                 }
             }
-            tabuleiro.chao = new[] { -1, -1, -1, -1, -1, -1, -1 };    
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    pbo = Controls.Find("pboParede" + (i + 1) + (j + 1), false)[0] as PictureBox;
+
+                    if (tabuleiro.parede[i, j])
+                    {
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            changeVisibility(pbo, Visibility.show);
+                        });
+                    }
+                    else
+                    {
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            changeVisibility(pbo, Visibility.hide);
+                        });
+                    }
+                    break;
+
+
+                }
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                pbo = Controls.Find("pboChao" + (i + 1), false)[0] as PictureBox;
+                pbo.Invoke((MethodInvoker)delegate
+                {
+                    changeVisibility(pbo, Visibility.show);
+                });
+                switch (tabuleiro.chao[i])
+                {
+                    case 0:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.pCentro);
+                        });
+                        break;
+
+                    case 1:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Azul);
+                        });
+                        break;
+
+                    case 2:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Amarelo);
+                        });
+                        break;
+
+                    case 3:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Vermelho);
+                        });
+                        break;
+
+                    case 4:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Preto);
+                        });
+                        break;
+
+                    case 5:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Branco);
+                        });
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+
+            }
+            tabuleiro.chao = new[] { -1, -1, -1, -1, -1, -1, -1 };
         }
 
-        public void lerFabricas(List<Fabrica> fabricas) {
+        public void lerFabricas(List<Fabrica> fabricas)
+        {
             int i, j;
             PictureBox pboReferencia = new PictureBox();
 
@@ -156,18 +222,21 @@ namespace PI3___Fukushima
             {
                 i = 0;
                 j = 1;
-                
+
                 while (i < fabrica.azulejos.Count)
                 {
-                    
 
-                    if (Controls.Find("pboFabrica" + fabrica.id + j, false).Length !=0)
+
+                    if (Controls.Find("pboFabrica" + fabrica.id + j, false).Length != 0)
                     {
                         pboReferencia = Controls.Find("pboFabrica" + fabrica.id + j, false)[0] as PictureBox;
-                        pboReferencia.Visible = true;
-                        pboReferencia.Image = fabrica.azulejos[i].imagem;
+                        pboReferencia.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pboReferencia, fabrica.azulejos[i].imagem);
+                            changeVisibility(pboReferencia, Visibility.show);
+                        });
                     }
-                    
+
                     if (fabrica.azulejos[i].quantidade <= 1) i++;
                     else fabrica.azulejos[i].quantidade--;
 
@@ -177,14 +246,20 @@ namespace PI3___Fukushima
             }
         }
 
-        public void limparFabricas(int idFabrica) {
-
-            if (idFabrica > 0) { 
+        public void limparFabricas(int idFabrica)
+        {
+            PictureBox pbo;
+            if (idFabrica > 0)
+            {
                 for (int i = 1; i < 5; i++)
                 {
                     if (Controls.Find("pboFabrica" + idFabrica + i, false).Length != 0)
                     {
-                        Controls.Find("pboFabrica" + idFabrica + i, false)[0].Visible = false;
+                        pbo = Controls.Find("pboFabrica" + idFabrica + i, false)[0] as PictureBox;
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            changeVisibility(pbo, Visibility.hide);
+                        });
                     }
                 }
             }
