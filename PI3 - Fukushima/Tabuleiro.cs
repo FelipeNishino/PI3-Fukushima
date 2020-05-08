@@ -30,6 +30,13 @@ namespace PI3___Fukushima
                         
             tabuleiro.modelo = new Modelo();
             tabuleiro.modelo.linhas = new linha[5];
+
+
+            for (int k = 0; k < 5; k++)
+            {
+                tabuleiro.modelo.linhas[k] = new linha(-1, null);
+            }
+
             i = modelo.listarModelo(geral);
 
             i++;
@@ -50,7 +57,7 @@ namespace PI3___Fukushima
             }
         }
 
-        public Boolean verificarAzulejoParede(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro) {
+        public bool verificarAzulejoParede(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro) {
 
             return tabuleiro.parede[linhaModelo, (linhaModelo + (idAzulejo - 1)) % 5]; ;
         }
