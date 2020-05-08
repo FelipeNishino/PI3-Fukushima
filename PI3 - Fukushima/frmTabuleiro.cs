@@ -60,18 +60,15 @@ namespace PI3___Fukushima
         public void lerTabuleiro(){
              List<PictureBox> pictureBoxes = Controls.OfType<PictureBox>().ToList();
 
-            Control[] controles = Controls.Find("btnLerTabuleiro", false);
-            controles[0].Text = "qualquercoisa";
-
             tabuleiro.Listar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], tabuleiro);
 
-            for (int i = 0; i<tabuleiro.modelo.arrayAzulejos.Length; i++) {
+            for (int i = 0; i < tabuleiro.modelo.linhas.Length; i++) {
                 for (int j = 1; j <= i + 1; j++) {
                     foreach (PictureBox pbo in pictureBoxes) {
                         if (pbo.Name == "pboModelo" + (i + 1) + j) {
-                            if (tabuleiro.modelo.arrayAzulejos[i] != null) {
-                                if (j <= tabuleiro.modelo.arrayAzulejos[i].quantidade) {
-                                    pbo.Image = tabuleiro.modelo.arrayAzulejos[i].imagem;
+                            if (tabuleiro.modelo.linhas[i].azulejo != null) {
+                                if (j <= tabuleiro.modelo.linhas[i].azulejo.quantidade) {
+                                    pbo.Image = tabuleiro.modelo.linhas[i].azulejo.imagem;
                                     pbo.Visible = true;
                                 }
                                 else {

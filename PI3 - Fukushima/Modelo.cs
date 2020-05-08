@@ -8,10 +8,18 @@ using System.Windows.Forms;
 
 namespace PI3___Fukushima
 {
+    public struct linha
+    {
+        public int posicao;
+        public Azulejo azulejo;
+    }
+
 
     public class Modelo
     {
-        public Azulejo[] arrayAzulejos { get; set; }
+        //public Azulejo[] arrayAzulejos { get; set; }
+
+        public linha[] linhas { get; set; }
 
         public int listarModelo(String[] geral)
         {
@@ -26,7 +34,8 @@ namespace PI3___Fukushima
                 azulejo.quantidade = Convert.ToInt32(geral[i].Substring(4, 1));
                 azulejo.carregarImagem();
                 
-                this.arrayAzulejos[linha - 1] = azulejo;
+                this.linhas[linha - 1].azulejo = azulejo;
+                this.linhas[linha - 1].posicao = linha - 1;
                 i++;
             }
 

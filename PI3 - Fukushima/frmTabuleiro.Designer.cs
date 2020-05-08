@@ -578,7 +578,7 @@
             // 
             // btnLerTabuleiro
             // 
-            this.btnLerTabuleiro.Location = new System.Drawing.Point(276, 218);
+            this.btnLerTabuleiro.Location = new System.Drawing.Point(737, 32);
             this.btnLerTabuleiro.Name = "btnLerTabuleiro";
             this.btnLerTabuleiro.Size = new System.Drawing.Size(108, 23);
             this.btnLerTabuleiro.TabIndex = 41;

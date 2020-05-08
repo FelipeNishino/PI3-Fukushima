@@ -95,7 +95,10 @@ namespace PI3___Fukushima {
                 
                 lstAzulejosFabricas.Items.Clear();
 
-                if (retorno[0] == "") return;
+                if (retorno[0] == "") {
+                    //fabricas.RemoveRange(0, fabricas.Count);
+                    return;
+                } 
 
 
                 int i = Convert.ToInt32(retorno[0].Substring(0, 1));
@@ -244,40 +247,131 @@ namespace PI3___Fukushima {
         }
 
         private void BotCompra() {
-            int i = 0;
             int idFabricaComprada = -1;
+            linha linhaComprada = new linha();
+            String local = "";
+            bool comprou = false;
 
             Azulejo azulejo = new Azulejo {
+                id = 0,
                 quantidade = 0
             };
 
             tabuleiro = frmTabuleiro.retornaTabuleiro();
 
-            while (tabuleiro.modelo.arrayAzulejos[i] != null) {
-                i++;
-            }
-            if (fabricas != null) {
-                foreach (Fabrica fabrica in fabricas) {
-                    azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1);
-                    if (azulejo != null) {
-                        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
-                        idFabricaComprada = fabrica.id;
-                        break;
+            linha[] linhasPreenchidas = Array.FindAll(tabuleiro.modelo.linhas, linha => linha.azulejo != null || linha.azulejo.quantidade != 0);
+
+            if (linhasPreenchidas.Length > 0)
+            {
+                foreach (linha linha in linhasPreenchidas)
+                {
+                    if (linha.azulejo.quantidade < linha.posicao + 1 && !tabuleiro.verificarAzulejoParede(linha.azulejo.id, linha.posicao, tabuleiro))
+                    {
+                        if (fabricas != null)
+                        {
+                            foreach (Fabrica fabrica in fabricas)
+                            {
+                                azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
+                                if (azulejo != null) {
+                                    local = "F";
+                                    idFabricaComprada = fabrica.id;
+                                    linhaComprada.azulejo = azulejo;
+                                    linhaComprada.posicao = linha.posicao;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            azulejo = centro.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
+                            if (azulejo != null)
+                            {
+                                local = "C";
+                                linhaComprada.azulejo = azulejo;
+                                linhaComprada.posicao = linha.posicao;
+                            }
+                        }
                     }
                 }
+
+                Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao);
             }
-            else {
-                foreach (Azulejo azulejo1 in centro.azulejos) {
-                    if (azulejo1.quantidade > azulejo.quantidade && azulejo1.quantidade <= i + 1) {
-                        azulejo = azulejo1;
-                        break;
+
+            if (!comprou) {
+                if (!jogarPadrao(azulejo, idFabricaComprada)) {
+                    int menorQuantidade = 5;
+                    if (fabricas != null)
+                    {
+                        foreach (Fabrica fabrica in fabricas)
+                        {
+                            foreach (Azulejo azulejo1 in fabrica.azulejos)
+                            {
+                                if (azulejo1.quantidade < menorQuantidade) {
+                                    menorQuantidade = azulejo1.quantidade;
+                                    azulejo.id = azulejo1.id;
+                                    idFabricaComprada = fabrica.id;
+                                }
+                            }
+                        }
+                        local = "F";
                     }
+                    else
+                    {
+                        foreach (Azulejo azulejo1 in centro.azulejos)
+                        {
+                            if (azulejo1.quantidade < menorQuantidade)
+                            {
+                                menorQuantidade = azulejo1.quantidade;
+                                azulejo.id = azulejo1.id;
+                            }
+                        }
+                        local = "C";
+                    }
+
+                    Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, 0, linhaComprada.azulejo.id, linhaComprada.posicao);
                 }
-                Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1);
-                idFabricaComprada = 0;
             }
+
+
             frmTabuleiro.limparFabricas(idFabricaComprada);
             frmTabuleiro.lerTabuleiro();
+        }
+
+
+        public bool jogarPadrao(Azulejo azulejo, int idFabricaComprada) {
+            int i = 0;
+            while (tabuleiro.modelo.linhas[i].azulejo != null)
+            {
+                i++;
+            }
+            if (fabricas != null)
+            {
+                foreach (Fabrica fabrica in fabricas)
+                {
+                    azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1 && !tabuleiro.verificarAzulejoParede(azulejoFind.id, i, tabuleiro));
+                    if (azulejo != null)
+                    {
+                        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
+                        idFabricaComprada = fabrica.id;
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Azulejo azulejo1 in centro.azulejos)
+                {
+                    if ((azulejo1.quantidade > azulejo.quantidade && azulejo1.quantidade <= i + 1) || azulejo1.quantidade > i + 1)
+                    {
+                        azulejo = azulejo1;
+                        idFabricaComprada = 0;  
+                        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

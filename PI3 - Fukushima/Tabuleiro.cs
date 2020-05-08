@@ -29,7 +29,7 @@ namespace PI3___Fukushima
             geral = retorno.Split('\n');
                         
             tabuleiro.modelo = new Modelo();
-            tabuleiro.modelo.arrayAzulejos = new Azulejo[5];
+            tabuleiro.modelo.linhas = new linha[5];
             i = modelo.listarModelo(geral);
 
             i++;
@@ -48,6 +48,11 @@ namespace PI3___Fukushima
                 tabuleiro.chao[i - j] = Convert.ToInt32(geral[i].Substring(2, 1));
                 i++;
             }
+        }
+
+        public Boolean verificarAzulejoParede(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro) {
+
+            return tabuleiro.parede[linhaModelo, (linhaModelo + (idAzulejo - 1)) % 5]; ;
         }
     }
 }
