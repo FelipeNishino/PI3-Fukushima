@@ -95,7 +95,7 @@ namespace PI3___Fukushima
                 for (int j = 1; j <= i + 1; j++)
                 {
                     pbo = Controls.Find("pboModelo" + (i + 1) + j, false)[0] as PictureBox;
-                    if (tabuleiro.modelo.linhas[i].azulejo != null)
+                    if (tabuleiro.modelo.linhas[i].azulejo.id != -1)
                     {
                         if (j <= tabuleiro.modelo.linhas[i].azulejo.quantidade)
                         {
@@ -120,9 +120,6 @@ namespace PI3___Fukushima
                             changeVisibility(pbo, Visibility.hide);
                         });
                     }
-                    break;
-
-
                 }
             }
 
@@ -146,9 +143,6 @@ namespace PI3___Fukushima
                             changeVisibility(pbo, Visibility.hide);
                         });
                     }
-                    break;
-
-
                 }
             }
 

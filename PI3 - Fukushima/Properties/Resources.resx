@@ -127,9 +127,6 @@
   <data name="Preto" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Preto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="P06wHU3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\P06wHU3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Vermelho" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Vermelho.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -150,5 +147,14 @@
   </data>
   <data name="pCentro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pCentro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chao" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="parede" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\parede.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="modelo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\modelo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

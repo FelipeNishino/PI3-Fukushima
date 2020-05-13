@@ -137,12 +137,12 @@ namespace PI3___Fukushima
             {
                 lstAzulejosFabricas.Items.Clear();
             });
+
             if (retorno[0] == "" && fabricas != null)
             {
                 fabricas.RemoveRange(0, fabricas.Count);
                 return;
             }
-
 
             int i = Convert.ToInt32(retorno[0].Substring(0, 1));
             int j = 0;
@@ -402,19 +402,22 @@ namespace PI3___Fukushima
                     int menorQuantidade = 5;
                     if (fabricas != null)
                     {
-                        foreach (Fabrica fabrica in fabricas)
+                        if(fabricas.Count != 0)
                         {
-                            foreach (Azulejo azulejo1 in fabrica.azulejos)
+                            foreach (Fabrica fabrica in fabricas)
                             {
-                                if (azulejo1.quantidade < menorQuantidade)
+                                foreach (Azulejo azulejo1 in fabrica.azulejos)
                                 {
-                                    menorQuantidade = azulejo1.quantidade;
-                                    azulejo.id = azulejo1.id;
-                                    idFabricaComprada = fabrica.id;
+                                    if (azulejo1.quantidade < menorQuantidade)
+                                    {
+                                        menorQuantidade = azulejo1.quantidade;
+                                        azulejo.id = azulejo1.id;
+                                        idFabricaComprada = fabrica.id;
+                                    }
                                 }
                             }
+                            local = "F";
                         }
-                        local = "F";
                     }
                     else
                     {
@@ -449,16 +452,19 @@ namespace PI3___Fukushima
             {
                 i++;
             }
-            if (fabricas.Count != 0)
+            if (fabricas != null)
             {
-                foreach (Fabrica fabrica in fabricas)
+                if (fabricas.Count != 0)
                 {
-                    azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1 && !tabuleiro.verificarAzulejoParede(azulejoFind.id, i, tabuleiro));
-                    if (azulejo != null)
+                    foreach (Fabrica fabrica in fabricas)
                     {
-                        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
-                        idFabricaComprada = fabrica.id;
-                        return true;
+                        azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1 && !tabuleiro.verificarAzulejoParede(azulejoFind.id, i, tabuleiro));
+                        if (azulejo != null)
+                        {
+                            Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
+                            idFabricaComprada = fabrica.id;
+                            return true;
+                        }
                     }
                 }
             }
