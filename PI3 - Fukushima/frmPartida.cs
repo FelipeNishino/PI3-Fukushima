@@ -466,7 +466,7 @@ namespace PI3___Fukushima
             {
                 foreach (Azulejo azulejo1 in centro.azulejos)
                 {
-                    if ((azulejo1.quantidade > azulejo.quantidade && azulejo1.quantidade <= i + 1) || azulejo1.quantidade > i + 1)
+                    if ((azulejo1.quantidade > azulejo.quantidade && azulejo1.quantidade <= i + 1) || azulejo1.quantidade > i + 1 && !tabuleiro.verificarAzulejoParede(azulejo1.id, i, tabuleiro))
                     {
                         azulejo = azulejo1;
                         idFabricaComprada = 0;

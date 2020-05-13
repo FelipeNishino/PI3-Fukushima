@@ -50,7 +50,7 @@ namespace PI3___Fukushima
             i++;
             j = i;
 
-            while (geral[i] != "")
+            while (geral[i] != "" && i < tabuleiro.chao.Length)
             {
                 tabuleiro.chao[i - j] = Convert.ToInt32(geral[i].Substring(2, 1));
                 i++;
