@@ -87,6 +87,10 @@ namespace PI3___Fukushima
                         keepRunning = false;
                         Invoke(finaliza);
                     }
+                    else
+                    {
+                        frmTabuleiro.lerTabuleiro();
+                    }
 
                     Invoke((MethodInvoker)delegate
                     {
@@ -97,7 +101,6 @@ namespace PI3___Fukushima
                     if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0] && chkBot.Checked && keepRunning)
                     {
                         isBuying = true;
-                        frmTabuleiro.lerTabuleiro();
                         btnListarFabricas_Click(null, null);
                         btnListarCentro_Click(null, null);
                         BotCompra();
@@ -413,11 +416,11 @@ namespace PI3___Fukushima
             {
                 if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1))){
                     sleepTime = 6000;
+                    comprou = true;
                 }
             }
 
-
-            if (linhasPreenchidas.Length > 0)
+            if (linhasPreenchidas.Length > 0 && !comprou)
             {
                 foreach (linha linha in linhasPreenchidas)
                 {
@@ -501,13 +504,8 @@ namespace PI3___Fukushima
                     }
                 }
             }
-
-
-            frmTabuleiro.limparFabricas(idFabricaComprada);
-            frmTabuleiro.lerTabuleiro();
-            btnListarFabricas_Click(null, null);
-            btnListarCentro_Click(null, null);
             isBuying = false;
+            frmTabuleiro.limparFabricas();
         }
 
 
@@ -549,7 +547,6 @@ namespace PI3___Fukushima
                     }
                 }
             }
-
             return false;
         }
     }
