@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Threading;
+using System.CodeDom;
+
 namespace PI3___Fukushima
 {
     public partial class FrmPartida : Form
     {
         string[] dadosJogador;
-        int idPartida, nFabricas;
+        int idPartida, nFabricas, tickCounter, sleepTime;
         public Tabuleiro tabuleiro;
         public List<Fabrica> fabricas;
         public FrmTabuleiro frmTabuleiro;
@@ -24,6 +26,8 @@ namespace PI3___Fukushima
             dadosJogador = _dadosJogador;
             idPartida = Convert.ToInt32(_idPartida);
             nFabricas = nJogadores;
+            tickCounter = 0;
+            sleepTime = 1000;
 
             InitializeComponent();
 
@@ -42,7 +46,7 @@ namespace PI3___Fukushima
 
         private void WorkerThreadTick(object sender, ProgressChangedEventArgs e)
         {
-
+            tickCounter++;
         }
         private void WorkerThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -52,8 +56,7 @@ namespace PI3___Fukushima
             }
             else
             {
-                lblStopWatch.Text = "isBuying false";
-                isBuying = false;
+                lblStopWatch.Text = "Jogo encerrado!";
             }
         }
 
@@ -61,22 +64,39 @@ namespace PI3___Fukushima
         {
             DateTime startTime = DateTime.Now;
             String vez;
+
             keepRunning = true;
+            Invoke((MethodInvoker)delegate
+            {
+                lblStopWatch.Text = "Timer ativado";
+                lblTick.Text = "Timer ticks: " + tickCounter;
+            });
 
             while (keepRunning)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(sleepTime);
+                sleepTime = 3000;
                 string timeElapsedInstring = (DateTime.Now - startTime).ToString(@"hh\:mm\:ss");
 
+                Action finaliza = () => final();
                 if (!isBuying)
                 {
                     vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
-
-                    Action atualizaVez = () => lblVez.Text = "Vez: " + vez;
-                    lblVez.Invoke(atualizaVez);
-
-                    if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0] && chkBot.Checked)
+                    if (vez.Substring(0,1) == "E")
                     {
+                        keepRunning = false;
+                        Invoke(finaliza);
+                    }
+
+                    Invoke((MethodInvoker)delegate
+                    {
+                        lblVez.Text = "Vez: " + vez;
+                        lblTick.Text = "Timer ticks: " + tickCounter;
+                    });
+
+                    if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0] && chkBot.Checked && keepRunning)
+                    {
+                        sleepTime = 10000;
                         isBuying = true;
                         frmTabuleiro.lerTabuleiro();
                         btnListarFabricas_Click(null, null);
@@ -108,8 +128,6 @@ namespace PI3___Fukushima
             }
             cboFabricasCompra.Items.Add("Centro");
 
-            
-
             tabuleiro = new Tabuleiro();
             frmTabuleiro = new FrmTabuleiro(dadosJogador, tabuleiro, nFabricas);
 
@@ -126,7 +144,13 @@ namespace PI3___Fukushima
 
         }
 
-
+        private void final()
+        {
+            btnComprarAzulejo.Enabled = false;
+            btnListarCentro.Enabled = false;
+            btnListarFabricas.Enabled = false;
+            MessageBox.Show("Jogo Encerrado!", "Azul - Fukushima");
+        }
         private void btnListarFabricas_Click(object sender, EventArgs e)
         {
 
@@ -325,6 +349,7 @@ namespace PI3___Fukushima
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            workerThread.RunWorkerAsync();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -399,7 +424,7 @@ namespace PI3___Fukushima
             {
                 if (!jogarPadrao(azulejo, idFabricaComprada))
                 {
-                    int menorQuantidade = 5;
+                    int menorQuantidade = 6;
                     if(fabricas.Count != 0)
                     {
                         foreach (Fabrica fabrica in fabricas)
@@ -409,7 +434,7 @@ namespace PI3___Fukushima
                                 if (azulejo1.quantidade < menorQuantidade)
                                 {
                                     menorQuantidade = azulejo1.quantidade;
-                                    azulejo.id = azulejo1.id;
+                                    linhaComprada.azulejo.id = azulejo1.id;
                                     idFabricaComprada = fabrica.id;
                                 }
                             }
@@ -420,16 +445,17 @@ namespace PI3___Fukushima
                     {
                         foreach (Azulejo azulejo1 in centro.azulejos)
                         {
-                            if (azulejo1.quantidade < menorQuantidade)
+                            if (azulejo1.quantidade < menorQuantidade && azulejo1.quantidade != 0)
                             {
                                 menorQuantidade = azulejo1.quantidade;
                                  linhaComprada.azulejo.id = azulejo1.id;
                             }
                         }
                         local = "C";
+                        idFabricaComprada = 0;
                     }
-
-                    Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, 0, linhaComprada.azulejo.id, linhaComprada.posicao + 1);
+                       
+                    Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1);
                 }
             }
 
@@ -467,7 +493,7 @@ namespace PI3___Fukushima
             {
                 foreach (Azulejo azulejo1 in centro.azulejos)
                 {
-                    if ((azulejo1.quantidade > azulejo.quantidade && azulejo1.quantidade <= i + 1) || azulejo1.quantidade > i + 1 && !tabuleiro.verificarAzulejoParede(azulejo1.id, i, tabuleiro))
+                    if (((azulejo1.quantidade > azulejo.quantidade && azulejo1.quantidade <= i + 1) || azulejo1.quantidade > i + 1 ) && !tabuleiro.verificarAzulejoParede(azulejo1.id, i, tabuleiro))
                     {
                         azulejo = azulejo1;
                         idFabricaComprada = 0;

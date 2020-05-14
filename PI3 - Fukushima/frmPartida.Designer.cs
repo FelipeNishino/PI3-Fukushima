@@ -57,6 +57,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lblTick = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -325,7 +326,7 @@
             // lblStopWatch
             // 
             this.lblStopWatch.AutoSize = true;
-            this.lblStopWatch.Location = new System.Drawing.Point(283, 455);
+            this.lblStopWatch.Location = new System.Drawing.Point(158, 455);
             this.lblStopWatch.Name = "lblStopWatch";
             this.lblStopWatch.Size = new System.Drawing.Size(35, 13);
             this.lblStopWatch.TabIndex = 19;
@@ -361,11 +362,21 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lblTick
+            // 
+            this.lblTick.AutoSize = true;
+            this.lblTick.Location = new System.Drawing.Point(295, 455);
+            this.lblTick.Name = "lblTick";
+            this.lblTick.Size = new System.Drawing.Size(35, 13);
+            this.lblTick.TabIndex = 23;
+            this.lblTick.Text = "label6";
+            // 
             // FrmPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(440, 476);
+            this.Controls.Add(this.lblTick);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
@@ -423,5 +434,6 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lblTick;
     }
 }
