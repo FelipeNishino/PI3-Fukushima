@@ -138,17 +138,17 @@ namespace PI3___Fukushima
                 lstAzulejosFabricas.Items.Clear();
             });
 
+            fabricas = new List<Fabrica>();
+            List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
+
             if (retorno[0] == "" && fabricas != null)
             {
                 fabricas.RemoveRange(0, fabricas.Count);
                 return;
             }
-
             int i = Convert.ToInt32(retorno[0].Substring(0, 1));
             int j = 0;
 
-            fabricas = new List<Fabrica>();
-            List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
 
             for (int x = 0; x < nFabricas; x++)
             {
@@ -400,24 +400,21 @@ namespace PI3___Fukushima
                 if (!jogarPadrao(azulejo, idFabricaComprada))
                 {
                     int menorQuantidade = 5;
-                    if (fabricas != null)
+                    if(fabricas.Count != 0)
                     {
-                        if(fabricas.Count != 0)
+                        foreach (Fabrica fabrica in fabricas)
                         {
-                            foreach (Fabrica fabrica in fabricas)
+                            foreach (Azulejo azulejo1 in fabrica.azulejos)
                             {
-                                foreach (Azulejo azulejo1 in fabrica.azulejos)
+                                if (azulejo1.quantidade < menorQuantidade)
                                 {
-                                    if (azulejo1.quantidade < menorQuantidade)
-                                    {
-                                        menorQuantidade = azulejo1.quantidade;
-                                        azulejo.id = azulejo1.id;
-                                        idFabricaComprada = fabrica.id;
-                                    }
+                                    menorQuantidade = azulejo1.quantidade;
+                                    azulejo.id = azulejo1.id;
+                                    idFabricaComprada = fabrica.id;
                                 }
                             }
-                            local = "F";
                         }
+                        local = "F";
                     }
                     else
                     {
@@ -426,7 +423,7 @@ namespace PI3___Fukushima
                             if (azulejo1.quantidade < menorQuantidade)
                             {
                                 menorQuantidade = azulejo1.quantidade;
-                                azulejo.id = azulejo1.id;
+                                 linhaComprada.azulejo.id = azulejo1.id;
                             }
                         }
                         local = "C";
@@ -452,19 +449,17 @@ namespace PI3___Fukushima
             {
                 i++;
             }
-            if (fabricas != null)
+
+            if (fabricas.Count != 0)
             {
-                if (fabricas.Count != 0)
+                foreach (Fabrica fabrica in fabricas)
                 {
-                    foreach (Fabrica fabrica in fabricas)
+                    azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1 && !tabuleiro.verificarAzulejoParede(azulejoFind.id, i, tabuleiro));
+                    if (azulejo != null)
                     {
-                        azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1 && !tabuleiro.verificarAzulejoParede(azulejoFind.id, i, tabuleiro));
-                        if (azulejo != null)
-                        {
-                            Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
-                            idFabricaComprada = fabrica.id;
-                            return true;
-                        }
+                        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
+                        idFabricaComprada = fabrica.id;
+                        return true;
                     }
                 }
             }
