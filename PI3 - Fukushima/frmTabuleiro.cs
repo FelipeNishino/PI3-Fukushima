@@ -53,10 +53,9 @@ namespace PI3___Fukushima
                 pbo.SizeMode = PictureBoxSizeMode.StretchImage;
                 pbo.Width = 50;
                 pbo.Height = 50;
-                pbo.Location = new Point(20 + (i % 4) * (pbo.Width + 10), 20 + (i / 4) * (pbo.Height + 10));
+                pbo.Location = new Point(20 + (i % 4) * (pbo.Width + 10), 25 + (i / 4) * (pbo.Height + 10));
                 this.Controls.Add(pbo);
             }
-
         }
 
         public Tabuleiro retornaTabuleiro()
@@ -80,6 +79,19 @@ namespace PI3___Fukushima
                 default:
                     break;
             }
+        }
+
+        public void setCentro(int index, int quantidade)
+        {
+            Label lblCentro = new Label();
+
+            lblCentro = Controls.Find("lblCentro" + (index + 1), false)[0] as Label;
+
+            Invoke((MethodInvoker)delegate
+            {
+                lblCentro.Text = quantidade.ToString();
+            });
+
         }
         public void lerTabuleiro()
         {
@@ -262,6 +274,16 @@ namespace PI3___Fukushima
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pboModelo55_Click(object sender, EventArgs e)
         {
 
         }

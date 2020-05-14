@@ -246,8 +246,9 @@ namespace PI3___Fukushima
 
                 azulejos.Add(azulejo);
 
+                frmTabuleiro.setCentro(i, azulejo.quantidade);
 
-                lstAzulejosCentro.Invoke((MethodInvoker)delegate
+                Invoke((MethodInvoker)delegate
                 {
                     lstAzulejosCentro.Items.Add((azulejo.id, itensRetorno[1], azulejo.quantidade, itensRetorno[3]));
                 });

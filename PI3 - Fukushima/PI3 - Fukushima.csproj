@@ -134,8 +134,9 @@
     <None Include="Resources\Azul.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\modelo.png" />
+    <None Include="Resources\chao1.png" />
     <None Include="Resources\chao.png" />
+    <None Include="Resources\modelo.png" />
     <None Include="Resources\parede.png" />
     <None Include="Resources\pCentro.png" />
     <None Include="Resources\1.png" />
