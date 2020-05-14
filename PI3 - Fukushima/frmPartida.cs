@@ -96,7 +96,6 @@ namespace PI3___Fukushima
 
                     if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0] && chkBot.Checked && keepRunning)
                     {
-                        sleepTime = 10000;
                         isBuying = true;
                         frmTabuleiro.lerTabuleiro();
                         btnListarFabricas_Click(null, null);
@@ -412,7 +411,9 @@ namespace PI3___Fukushima
             }
             if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro))
             {
-                Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1);
+                if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1))){
+                    sleepTime = 6000;
+                }
             }
 
 
@@ -454,7 +455,9 @@ namespace PI3___Fukushima
 
                 if (comprou)
                 {
-                    Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1);
+                    if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
+                        sleepTime = 6000;
+                    }
                 }
             }
 
@@ -462,7 +465,7 @@ namespace PI3___Fukushima
             {
                 if (!jogarPadrao(azulejo, idFabricaComprada))
                 {
-                    int menorQuantidade = 6;
+                    int menorQuantidade = 10;
                     if(fabricas.Count != 0)
                     {
                         foreach (Fabrica fabrica in fabricas)
@@ -492,8 +495,10 @@ namespace PI3___Fukushima
                         local = "C";
                         idFabricaComprada = 0;
                     }
-                       
-                    Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1);
+
+                    if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
+                        sleepTime = 6000;
+                    }
                 }
             }
 
@@ -521,7 +526,9 @@ namespace PI3___Fukushima
                     azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.quantidade <= i + 1 && !tabuleiro.verificarAzulejoParede(azulejoFind.id, i, tabuleiro));
                     if (azulejo != null)
                     {
-                        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1);
+                        if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1))){
+                            sleepTime = 6000;
+                        }
                         idFabricaComprada = fabrica.id;
                         return true;
                     }
@@ -535,7 +542,9 @@ namespace PI3___Fukushima
                     {
                         azulejo = azulejo1;
                         idFabricaComprada = 0;
-                        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1);
+                        if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1))){
+                            sleepTime = 6000;
+                        }
                         return true;
                     }
                 }
