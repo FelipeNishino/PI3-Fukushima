@@ -378,6 +378,44 @@ namespace PI3___Fukushima
 
             linha[] linhasPreenchidas = Array.FindAll(tabuleiro.modelo.linhas, linha => linha.azulejo.id != -1 || linha.azulejo.quantidade != -1);
 
+            Azulejo azulejoComprar = new Azulejo();
+
+            if (fabricas.Count != 0) { 
+                foreach (Fabrica fabrica1 in fabricas)
+                {
+                    foreach (Azulejo azulejo1 in fabrica1.azulejos)
+                    {
+                        if (azulejo1.quantidade > azulejoComprar.quantidade) {
+                            azulejoComprar = azulejo1;
+                            idFabricaComprada = fabrica1.id;
+                        }
+                    }
+                }
+                local = "F";
+            }
+            else
+            {
+                foreach (Azulejo azulejo1 in centro.azulejos)
+                {
+                    if (azulejo1.quantidade > azulejoComprar.quantidade)
+                    {
+                        azulejoComprar = azulejo1;
+                        idFabricaComprada = 0;
+                    }
+                }
+                local = "C";
+            }
+            int j = 4;
+            while (tabuleiro.modelo.linhas[j].azulejo.id != -1 && j + 1 > azulejoComprar.quantidade)
+            {
+                j--;
+            }
+            if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro))
+            {
+                Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1);
+            }
+
+
             if (linhasPreenchidas.Length > 0)
             {
                 foreach (linha linha in linhasPreenchidas)
