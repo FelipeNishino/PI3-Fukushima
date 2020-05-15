@@ -82,8 +82,7 @@ namespace PI3___Fukushima
             if (lstSala.Items.Count > 0) { 
                 btnIniciarPartida.Enabled = true;
                 button1.Enabled = true;
-            } 
-            
+            }
         }
 
         private void cboPartidas_SelectedIndexChanged(object sender, EventArgs e)

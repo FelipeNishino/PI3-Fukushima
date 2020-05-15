@@ -752,7 +752,7 @@
             // pboModelo32
             // 
             this.pboModelo32.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo32.Location = new System.Drawing.Point(498, 222);
+            this.pboModelo32.Location = new System.Drawing.Point(442, 337);
             this.pboModelo32.Name = "pboModelo32";
             this.pboModelo32.Size = new System.Drawing.Size(47, 48);
             this.pboModelo32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -792,7 +792,7 @@
             // pboModelo11
             // 
             this.pboModelo11.BackColor = System.Drawing.Color.Transparent;
-            this.pboModelo11.Location = new System.Drawing.Point(442, 337);
+            this.pboModelo11.Location = new System.Drawing.Point(498, 223);
             this.pboModelo11.Name = "pboModelo11";
             this.pboModelo11.Size = new System.Drawing.Size(47, 48);
             this.pboModelo11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

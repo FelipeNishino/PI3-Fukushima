@@ -252,17 +252,16 @@ namespace PI3___Fukushima
             }
         }
 
-        public void limparFabricas()
+        public void limparFabricas(int idFabrica)
         {
             PictureBox pbo;
-
-            for (int i = 1; i <= nFabricas; i++)
+            if (idFabrica > 0)
             {
-                for (int j = 1; j < 5; j++)
+                for (int i = 1; i < 5; i++)
                 {
-                    if (Controls.Find("pboFabrica" + i + j, false).Length != 0)
+                    if (Controls.Find("pboFabrica" + idFabrica + i, false).Length != 0)
                     {
-                        pbo = Controls.Find("pboFabrica" + i + j, false)[0] as PictureBox;
+                        pbo = Controls.Find("pboFabrica" + idFabrica + i, false)[0] as PictureBox;
                         pbo.Invoke((MethodInvoker)delegate
                         {
                             changeVisibility(pbo, Visibility.hide);
@@ -270,7 +269,6 @@ namespace PI3___Fukushima
                     }
                 }
             }
-            
         }
 
         private void label2_Click(object sender, EventArgs e)

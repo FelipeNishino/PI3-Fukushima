@@ -11,6 +11,7 @@ namespace PI3___Fukushima
     public partial class FrmPartida : Form
     {
         string[] dadosJogador;
+        string lastPlay;
         int idPartida, nFabricas, tickCounter, sleepTime;
         public Tabuleiro tabuleiro;
         public List<Fabrica> fabricas;
@@ -63,7 +64,7 @@ namespace PI3___Fukushima
         private void WorkerThread_DoWork(object sender, DoWorkEventArgs e)
         {
             DateTime startTime = DateTime.Now;
-            String vez;
+            string vez, historico;
 
             keepRunning = true;
             Invoke((MethodInvoker)delegate
@@ -82,6 +83,19 @@ namespace PI3___Fukushima
                 if (!isBuying)
                 {
                     vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
+                    historico = Jogo.LerHistorico(idPartida);
+                    
+                    if (historico != "")
+                    {
+                        historico = historico.Substring(0, historico.IndexOf("\r"));
+                        if (historico != lastPlay)
+                        {
+                            lastPlay = historico;                        
+                            frmTabuleiro.limparFabricas(Convert.ToInt32(lastPlay.Substring(lastPlay.IndexOf(",") + 3, 1)));
+                            btnListarCentro.PerformClick();
+                        }
+                    }
+
                     if (vez.Substring(0,1) == "E")
                     {
                         keepRunning = false;
@@ -101,8 +115,8 @@ namespace PI3___Fukushima
                     if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0] && chkBot.Checked && keepRunning)
                     {
                         isBuying = true;
-                        btnListarFabricas_Click(null, null);
-                        btnListarCentro_Click(null, null);
+                        btnListarFabricas.PerformClick();
+                        btnListarCentro.PerformClick();
                         BotCompra();
                     }
                 }
@@ -159,7 +173,7 @@ namespace PI3___Fukushima
             string[] retorno;
             retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
-            lstAzulejosFabricas.Invoke((MethodInvoker)delegate
+            Invoke((MethodInvoker)delegate
             {
                 lstAzulejosFabricas.Items.Clear();
             });
@@ -274,7 +288,6 @@ namespace PI3___Fukushima
 
             retorno = Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], centro, (cboFabricasCompra.SelectedItem.ToString() == "Centro") ? 0 : Convert.ToInt32(cboFabricasCompra.SelectedItem), Convert.ToInt32(cboAzulejoCompra.SelectedItem), Convert.ToInt32(cboModeloCompra.SelectedItem));
             VerificarErro(retorno);
-
         }
 
         public bool VerificarErro(string retorno)
@@ -416,6 +429,7 @@ namespace PI3___Fukushima
             if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro))
             {
                 if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1))){
+                    lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
                     sleepTime = 6000;
                     comprou = true;
                 }
@@ -460,6 +474,7 @@ namespace PI3___Fukushima
                 if (comprou)
                 {
                     if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
+                        lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + linhaComprada.azulejo.id + "," + (linhaComprada.posicao + 1);
                         sleepTime = 6000;
                     }
                 }
@@ -501,12 +516,13 @@ namespace PI3___Fukushima
                     }
 
                     if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
+                        lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + linhaComprada.azulejo.id + "," + (linhaComprada.posicao + 1);
                         sleepTime = 6000;
                     }
                 }
             }
             isBuying = false;
-            frmTabuleiro.limparFabricas();
+            frmTabuleiro.limparFabricas(idFabricaComprada);
         }
 
 
@@ -526,6 +542,7 @@ namespace PI3___Fukushima
                     if (azulejo != null)
                     {
                         if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1))){
+                            lastPlay = dadosJogador[0] + ",F," + fabrica.id + "," + azulejo.id + "," + (i + 1);
                             sleepTime = 6000;
                         }
                         idFabricaComprada = fabrica.id;
@@ -542,6 +559,7 @@ namespace PI3___Fukushima
                         azulejo = azulejo1;
                         idFabricaComprada = 0;
                         if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1))){
+                            lastPlay = dadosJogador[0] + ",C," + 0 + "," + azulejo.id + "," + (i + 1);
                             sleepTime = 6000;
                         }
                         return true;
