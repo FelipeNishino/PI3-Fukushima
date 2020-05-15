@@ -101,7 +101,6 @@ namespace PI3___Fukushima
 
             PictureBox pbo = new PictureBox();
 
-
             for (int i = 0; i < tabuleiro.modelo.linhas.Length; i++)
             {
                 for (int j = 1; j <= i + 1; j++)
@@ -232,7 +231,6 @@ namespace PI3___Fukushima
                 while (i < fabrica.azulejos.Count)
                 {
 
-
                     if (Controls.Find("pboFabrica" + fabrica.id + j, false).Length != 0)
                     {
                         pboReferencia = Controls.Find("pboFabrica" + fabrica.id + j, false)[0] as PictureBox;
@@ -246,10 +244,71 @@ namespace PI3___Fukushima
                     if (fabrica.azulejos[i].quantidade <= 1) i++;
                     else fabrica.azulejos[i].quantidade--;
 
-
                     j++;
                 }
             }
+        }
+
+        public void limparCentro()
+        {
+            PictureBox pbo = new PictureBox();
+            for (int i = 0; i < 7; i++)
+            {
+                pbo = Controls.Find("pboChao" + (i + 1), false)[0] as PictureBox;
+                pbo.Invoke((MethodInvoker)delegate
+                {
+                    changeVisibility(pbo, Visibility.show);
+                });
+                switch (tabuleiro.chao[i])
+                {
+                    case 0:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.pCentro);
+                        });
+                        break;
+
+                    case 1:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Azul);
+                        });
+                        break;
+
+                    case 2:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Amarelo);
+                        });
+                        break;
+
+                    case 3:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Vermelho);
+                        });
+                        break;
+
+                    case 4:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Preto);
+                        });
+                        break;
+
+                    case 5:
+                        pbo.Invoke((MethodInvoker)delegate
+                        {
+                            pboSetImg(pbo, Properties.Resources.Branco);
+                        });
+                        break;
+
+                    default:
+
+                        break;
+                }
+            }
+            tabuleiro.chao = new[] { -1, -1, -1, -1, -1, -1, -1 };
         }
 
         public void limparFabricas(int idFabrica)

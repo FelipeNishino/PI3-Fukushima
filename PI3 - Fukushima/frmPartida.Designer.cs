@@ -252,6 +252,7 @@
             this.cboModeloCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboModeloCompra.FormattingEnabled = true;
             this.cboModeloCompra.Items.AddRange(new object[] {
+            "0",
             "1",
             "2",
             "3",

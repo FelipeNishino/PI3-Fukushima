@@ -12,7 +12,7 @@ namespace PI3___Fukushima
     {
         string[] dadosJogador;
         string lastPlay;
-        int idPartida, nFabricas, tickCounter, sleepTime;
+        int idPartida, nFabricas, tickCounter, sleepTime, round;
         public Tabuleiro tabuleiro;
         public List<Fabrica> fabricas;
         public FrmTabuleiro frmTabuleiro;
@@ -28,6 +28,7 @@ namespace PI3___Fukushima
             idPartida = Convert.ToInt32(_idPartida);
             nFabricas = nJogadores;
             tickCounter = 0;
+            round = 0;
             sleepTime = 1000;
 
             InitializeComponent();
@@ -64,7 +65,7 @@ namespace PI3___Fukushima
         private void WorkerThread_DoWork(object sender, DoWorkEventArgs e)
         {
             DateTime startTime = DateTime.Now;
-            string vez, historico;
+            string vez, historico, retorno;
 
             keepRunning = true;
             Invoke((MethodInvoker)delegate
@@ -76,23 +77,62 @@ namespace PI3___Fukushima
             while (keepRunning)
             {
                 Thread.Sleep(sleepTime);
-                sleepTime = 3000;
+                sleepTime = 2000;
                 string timeElapsedInstring = (DateTime.Now - startTime).ToString(@"hh\:mm\:ss");
 
                 Action finaliza = () => final();
                 if (!isBuying)
                 {
                     vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
-                    historico = Jogo.LerHistorico(idPartida);
-                    
-                    if (historico != "")
+                    retorno = Jogo.LerNarracao(idPartida);
+
+                    if (round > ((retorno.Length - retorno.Replace("Fábricas preenchidas!\r\n", "").Length) / "Fábricas preenchidas!\r\n".Length))
                     {
-                        historico = historico.Substring(0, historico.IndexOf("\r"));
+                        round++;
+                        frmTabuleiro.limparCentro();
+                    }
+
+                    if (retorno.Contains("comprou"))
+                    {
+                        retorno = retorno.Substring(0, retorno.IndexOf("\r"));
+
+                        historico = retorno.Substring(0, retorno.IndexOf(" ")) + ",";
+
+                        if(retorno.Contains("centro"))
+                        {
+                            historico += "C,";
+                            historico += retorno.Substring(retorno.IndexOf("centro") + "centro ".Length, 1) + ",";
+                        }
+                        else
+                        {
+                            historico += "F,";
+                            historico += retorno.Substring(retorno.IndexOf("fábrica") + "fábrica ".Length, 1) + ",";
+                        }
+
+                        // Isso aqui tá feio hein
+                        if (retorno.Contains("Azul")) historico += 1 + ",";
+                        else if (retorno.Contains("Amarelo")) historico += 2 + ",";
+                        else if (retorno.Contains("Vermelho")) historico += 3 + ",";
+                        else if (retorno.Contains("Preto")) historico += 4 + ",";
+                        else if (retorno.Contains("Branco")) historico += 5 + ",";
+
+                        if (retorno.Contains("mas"))
+                        {
+                            historico += retorno.Substring(retorno.IndexOf("chão com isso foram ") + "chão com isso foram ".Length, 1);
+                        }
+                        else
+                        {
+                            historico += retorno.Substring(retorno.IndexOf("linha") + "linha ".Length, 1);
+                        }
+
+
                         if (historico != lastPlay)
                         {
                             lastPlay = historico;                        
                             frmTabuleiro.limparFabricas(Convert.ToInt32(lastPlay.Substring(lastPlay.IndexOf(",") + 3, 1)));
-                            btnListarCentro.PerformClick();
+
+                            btnListarCentro_Click(null, null);
+
                         }
                     }
 
@@ -115,8 +155,8 @@ namespace PI3___Fukushima
                     if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0] && chkBot.Checked && keepRunning)
                     {
                         isBuying = true;
-                        btnListarFabricas.PerformClick();
-                        btnListarCentro.PerformClick();
+                        btnListarFabricas_Click(null, null);
+                        btnListarCentro_Click(null, null);
                         BotCompra();
                     }
                 }
@@ -157,7 +197,6 @@ namespace PI3___Fukushima
 
             frmTabuleiro.Show();
             workerThread.RunWorkerAsync();
-
         }
 
         private void final()
@@ -396,44 +435,44 @@ namespace PI3___Fukushima
 
             Azulejo azulejoComprar = new Azulejo();
 
-            if (fabricas.Count != 0) { 
-                foreach (Fabrica fabrica1 in fabricas)
-                {
-                    foreach (Azulejo azulejo1 in fabrica1.azulejos)
-                    {
-                        if (azulejo1.quantidade > azulejoComprar.quantidade) {
-                            azulejoComprar = azulejo1;
-                            idFabricaComprada = fabrica1.id;
-                        }
-                    }
-                }
-                local = "F";
-            }
-            else
-            {
-                foreach (Azulejo azulejo1 in centro.azulejos)
-                {
-                    if (azulejo1.quantidade > azulejoComprar.quantidade)
-                    {
-                        azulejoComprar = azulejo1;
-                        idFabricaComprada = 0;
-                    }
-                }
-                local = "C";
-            }
-            int j = 4;
-            while (tabuleiro.modelo.linhas[j].azulejo.id != -1 && j + 1 > azulejoComprar.quantidade)
-            {
-                j--;
-            }
-            if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro))
-            {
-                if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1))){
-                    lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
-                    sleepTime = 6000;
-                    comprou = true;
-                }
-            }
+            //if (fabricas.Count != 0) { 
+            //    foreach (Fabrica fabrica1 in fabricas)
+            //    {
+            //        foreach (Azulejo azulejo1 in fabrica1.azulejos)
+            //        {
+            //            if (azulejo1.quantidade > azulejoComprar.quantidade) {
+            //                azulejoComprar = azulejo1;
+            //                idFabricaComprada = fabrica1.id;
+            //            }
+            //        }
+            //    }
+            //    local = "F";
+            //}
+            //else
+            //{
+            //    foreach (Azulejo azulejo1 in centro.azulejos)
+            //    {
+            //        if (azulejo1.quantidade > azulejoComprar.quantidade)
+            //        {
+            //            azulejoComprar = azulejo1;
+            //            idFabricaComprada = 0;
+            //        }
+            //    }
+            //    local = "C";
+            //}
+            //int j = 4;
+            //while (tabuleiro.modelo.linhas[j].azulejo.id != -1 && j + 1 > azulejoComprar.quantidade)
+            //{
+            //    j--;
+            //}
+            //if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro))
+            //{
+            //    if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1))){
+            //        lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
+            //        sleepTime = 6000;
+            //        comprou = true;
+            //    }
+            //}
 
             if (linhasPreenchidas.Length > 0 && !comprou)
             {
@@ -475,7 +514,7 @@ namespace PI3___Fukushima
                 {
                     if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
                         lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + linhaComprada.azulejo.id + "," + (linhaComprada.posicao + 1);
-                        sleepTime = 6000;
+                        sleepTime = 3000;
                     }
                 }
             }
@@ -517,12 +556,13 @@ namespace PI3___Fukushima
 
                     if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
                         lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + linhaComprada.azulejo.id + "," + (linhaComprada.posicao + 1);
-                        sleepTime = 6000;
+                        sleepTime = 3000;
                     }
                 }
             }
             isBuying = false;
             frmTabuleiro.limparFabricas(idFabricaComprada);
+            btnListarCentro_Click(null, null);
         }
 
 
@@ -543,7 +583,7 @@ namespace PI3___Fukushima
                     {
                         if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "F", fabrica.id, azulejo.id, i + 1))){
                             lastPlay = dadosJogador[0] + ",F," + fabrica.id + "," + azulejo.id + "," + (i + 1);
-                            sleepTime = 6000;
+                            sleepTime = 3000;
                         }
                         idFabricaComprada = fabrica.id;
                         return true;
@@ -560,7 +600,7 @@ namespace PI3___Fukushima
                         idFabricaComprada = 0;
                         if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], "C", 0, azulejo.id, i + 1))){
                             lastPlay = dadosJogador[0] + ",C," + 0 + "," + azulejo.id + "," + (i + 1);
-                            sleepTime = 6000;
+                            sleepTime = 3000;
                         }
                         return true;
                     }
