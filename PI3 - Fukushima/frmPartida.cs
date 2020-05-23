@@ -219,7 +219,7 @@ namespace PI3___Fukushima
 
             fabricas = new List<Fabrica>();
             List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
-
+            
             if (retorno[0] == "" && fabricas != null)
             {
                 fabricas.RemoveRange(0, fabricas.Count);
@@ -266,10 +266,10 @@ namespace PI3___Fukushima
                     fabrica.azulejos = azulejos[i - 1];
                     fabricas.Add(fabrica);
                 }
-            }
-
+            } 
+            
             frmTabuleiro.lerFabricas(fabricas);
-
+        
         }
 
         private void btnListarCentro_Click(object sender, EventArgs e)
@@ -435,44 +435,48 @@ namespace PI3___Fukushima
 
             Azulejo azulejoComprar = new Azulejo();
 
-            //if (fabricas.Count != 0) { 
-            //    foreach (Fabrica fabrica1 in fabricas)
-            //    {
-            //        foreach (Azulejo azulejo1 in fabrica1.azulejos)
-            //        {
-            //            if (azulejo1.quantidade > azulejoComprar.quantidade) {
-            //                azulejoComprar = azulejo1;
-            //                idFabricaComprada = fabrica1.id;
-            //            }
-            //        }
-            //    }
-            //    local = "F";
-            //}
-            //else
-            //{
-            //    foreach (Azulejo azulejo1 in centro.azulejos)
-            //    {
-            //        if (azulejo1.quantidade > azulejoComprar.quantidade)
-            //        {
-            //            azulejoComprar = azulejo1;
-            //            idFabricaComprada = 0;
-            //        }
-            //    }
-            //    local = "C";
-            //}
-            //int j = 4;
-            //while (tabuleiro.modelo.linhas[j].azulejo.id != -1 && j + 1 > azulejoComprar.quantidade)
-            //{
-            //    j--;
-            //}
-            //if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro))
-            //{
-            //    if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1))){
-            //        lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
-            //        sleepTime = 6000;
-            //        comprou = true;
-            //    }
-            //}
+            if (fabricas.Count != 0)
+            {
+                foreach (Fabrica fabrica1 in fabricas)
+                {
+                    foreach (Azulejo azulejo1 in fabrica1.azulejos)
+                    {
+                        if (azulejo1.quantidade > azulejoComprar.quantidade)
+                        {
+                            azulejoComprar = azulejo1;
+                            idFabricaComprada = fabrica1.id;
+                        }
+                    }
+                }
+                local = "F";
+            }
+            else
+            {
+                foreach (Azulejo azulejo1 in centro.azulejos)
+                {
+                    if (azulejo1.quantidade > azulejoComprar.quantidade)
+                    {
+                        azulejoComprar = azulejo1;
+                        idFabricaComprada = 0;
+                    }
+                }
+                local = "C";
+            }
+            int j = 4;
+            while (tabuleiro.modelo.linhas[j].azulejo.id != azulejoComprar.id && j + 1 > azulejoComprar.quantidade)
+            {
+                j--;
+            }
+            
+            if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro) && tabuleiro.modelo.linhas[j].azulejo.quantidade < j + 1)
+            {
+                if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1)))
+                {
+                    lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
+                    sleepTime = 2000;
+                    comprou = true;
+                }
+            }
 
             if (linhasPreenchidas.Length > 0 && !comprou)
             {

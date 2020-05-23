@@ -220,29 +220,31 @@ namespace PI3___Fukushima
 
         public void lerFabricas(List<Fabrica> fabricas)
         {
-            int i, j;
+            int i, j, quantidade;
             PictureBox pboReferencia = new PictureBox();
-
-            foreach (Fabrica fabrica in fabricas)
+            List<Fabrica> fabricasDesenhar = new List<Fabrica>(fabricas);
+            //List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
+            //fabricas.CopyTo(fabricasDesenhar);
+            foreach (Fabrica fabrica1 in fabricasDesenhar)
             {
                 i = 0;
                 j = 1;
-
-                while (i < fabrica.azulejos.Count)
+                quantidade = fabrica1.azulejos[i].quantidade;
+                while (i < fabrica1.azulejos.Count)
                 {
 
-                    if (Controls.Find("pboFabrica" + fabrica.id + j, false).Length != 0)
+                    if (Controls.Find("pboFabrica" + fabrica1.id + j, false).Length != 0)
                     {
-                        pboReferencia = Controls.Find("pboFabrica" + fabrica.id + j, false)[0] as PictureBox;
+                        pboReferencia = Controls.Find("pboFabrica" + fabrica1.id + j, false)[0] as PictureBox;
                         pboReferencia.Invoke((MethodInvoker)delegate
                         {
-                            pboSetImg(pboReferencia, fabrica.azulejos[i].imagem);
+                            pboSetImg(pboReferencia, fabrica1.azulejos[i].imagem);
                             changeVisibility(pboReferencia, Visibility.show);
                         });
                     }
 
-                    if (fabrica.azulejos[i].quantidade <= 1) i++;
-                    else fabrica.azulejos[i].quantidade--;
+                    if (quantidade <= 1) i++;
+                    else quantidade--;
 
                     j++;
                 }
