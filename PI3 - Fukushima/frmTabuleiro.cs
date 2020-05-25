@@ -51,9 +51,9 @@ namespace PI3___Fukushima
                 pbo.Name = "pboFabrica" + (i / 4 + 1) + (i % 4 + 1);
                 //pbo.Image = Properties.Resources.pCentro;
                 pbo.SizeMode = PictureBoxSizeMode.StretchImage;
-                pbo.Width = 50;
-                pbo.Height = 50;
-                pbo.Location = new Point(20 + (i % 4) * (pbo.Width + 10), 25 + (i / 4) * (pbo.Height + 10));
+                pbo.Width = 40;
+                pbo.Height = 40;
+                pbo.Location = new Point(45 + (i % 4) * (pbo.Width + 10), 50 + (i / 4) * (pbo.Height + 10));
                 this.Controls.Add(pbo);
             }
         }
@@ -229,10 +229,10 @@ namespace PI3___Fukushima
             {
                 i = 0;
                 j = 1;
+
                 quantidade = fabrica1.azulejos[i].quantidade;
                 while (i < fabrica1.azulejos.Count)
                 {
-
                     if (Controls.Find("pboFabrica" + fabrica1.id + j, false).Length != 0)
                     {
                         pboReferencia = Controls.Find("pboFabrica" + fabrica1.id + j, false)[0] as PictureBox;
@@ -243,7 +243,12 @@ namespace PI3___Fukushima
                         });
                     }
 
-                    if (quantidade <= 1) i++;
+                    if (quantidade <= 1) {
+                        i++;
+                        if (i < fabrica1.azulejos.Count) { 
+                            quantidade = fabrica1.azulejos[i].quantidade;
+                        }
+                    } 
                     else quantidade--;
 
                     j++;

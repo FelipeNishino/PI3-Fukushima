@@ -128,7 +128,9 @@ namespace PI3___Fukushima
 
                         if (historico != lastPlay)
                         {
+
                             lastPlay = historico;                        
+
                             frmTabuleiro.limparFabricas(Convert.ToInt32(lastPlay.Substring(lastPlay.IndexOf(",") + 3, 1)));
 
                             btnListarCentro_Click(null, null);
@@ -470,8 +472,9 @@ namespace PI3___Fukushima
             
             if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro) && tabuleiro.modelo.linhas[j].azulejo.quantidade < j + 1)
             {
-                if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1)))
-                {
+                //if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1)))
+                if (tabuleiro.modelo.linhas[j].azulejo.id != azulejoComprar.id) {
+                    Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1);
                     lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
                     sleepTime = 2000;
                     comprou = true;
@@ -548,7 +551,7 @@ namespace PI3___Fukushima
                     {
                         foreach (Azulejo azulejo1 in centro.azulejos)
                         {
-                            if (azulejo1.quantidade < menorQuantidade && azulejo1.quantidade != 0)
+                            if (azulejo1.quantidade <= menorQuantidade && azulejo1.quantidade != 0)
                             {
                                 menorQuantidade = azulejo1.quantidade;
                                  linhaComprada.azulejo.id = azulejo1.id;
