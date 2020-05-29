@@ -8,7 +8,7 @@ using AzulServer;
 
 namespace PI3___Fukushima
 {
-    class Tabuleiro
+    public class Tabuleiro
     {
         public int pontos { get; set; }
 
@@ -29,7 +29,14 @@ namespace PI3___Fukushima
             geral = retorno.Split('\n');
                         
             tabuleiro.modelo = new Modelo();
-            tabuleiro.modelo.arrayAzulejos = new Azulejo[5];
+            tabuleiro.modelo.linhas = new linha[5];
+
+
+            for (int k = 0; k < 5; k++)
+            {
+                tabuleiro.modelo.linhas[k] = new linha(-1, null);
+            }
+
             i = modelo.listarModelo(geral);
 
             i++;
@@ -43,11 +50,15 @@ namespace PI3___Fukushima
             i++;
             j = i;
 
-            while (geral[i] != "")
+            while (geral[i] != "" && i - j < tabuleiro.chao.Length)
             {
                 tabuleiro.chao[i - j] = Convert.ToInt32(geral[i].Substring(2, 1));
                 i++;
             }
+        }
+
+        public bool verificarAzulejoParede(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro) {
+            return tabuleiro.parede[linhaModelo, (linhaModelo + (idAzulejo - 1)) % 5]; ;
         }
     }
 }
