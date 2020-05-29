@@ -36,26 +36,129 @@ namespace PI3___Fukushima
         {
             lerTabuleiro();
         }
+        private double Mod(double a, double b)
+        {
+            double m = a % b;
+            if (m < 0)
+            {
+                // m += (b < 0) ? -b : b; // avoid this form: it is UB when b == INT_MIN
+                m = (b < 0) ? m - b : m + b;
+            }
+            return m;
+        }
+        private int powInt(int x, int y) {
+            for (int i = 1; i <= y; i++)
+            {
+                x *= x;
+            }
 
+            return x;
+        }
         private void frmTabuleiro_Load(object sender, EventArgs e)
         {
+            Point[] coords5Fabricas = new Point[] 
+            { 
+                new Point(210, 52), new Point(355, 170), new Point(318, 342), new Point(94, 342), new Point(55, 170)                      
+            };
 
-            Point startPosition = new Point();
-            startPosition.X = Owner.Location.X + Owner.Width;
-            startPosition.Y = Owner.Location.Y;
-            Location = startPosition;
-
-            for (int i = 0; i < nFabricas * 4; i++)
+            Point[] coords7Fabricas = new Point[]
             {
-                PictureBox pbo = new PictureBox();
-                pbo.Name = "pboFabrica" + (i / 4 + 1) + (i % 4 + 1);
-                //pbo.Image = Properties.Resources.pCentro;
-                pbo.SizeMode = PictureBoxSizeMode.StretchImage;
-                pbo.Width = 40;
-                pbo.Height = 40;
-                pbo.Location = new Point(45 + (i % 4) * (pbo.Width + 10), 50 + (i / 4) * (pbo.Height + 10));
-                this.Controls.Add(pbo);
-            }
+                new Point(210, 52), new Point(344, 110), new Point(360, 248), new Point(278, 364), new Point(134, 364), new Point(50, 248), new Point(66, 110)
+            };
+
+            Point[] coords9Fabricas = new Point[]
+            {
+                 new Point(210, 52),new Point(310, 82),new Point(366, 180),new Point(347, 280),new Point(264, 364),new Point(148, 364),new Point(63, 280),new Point(45, 180),new Point(110, 82)
+            };
+
+            lblCentro1.Text = "0";
+            lblCentro2.Text = "0";
+            lblCentro3.Text = "0";
+            lblCentro4.Text = "0";
+            lblCentro5.Text = "0";
+
+            //double angle, radAngle, radius = 100;
+            Location = new Point
+            {
+                X = Owner.Location.X + Owner.Width,
+                Y = Owner.Location.Y
+            };           
+            
+            for (int i = 0; i < nFabricas; i++)
+            {
+                PictureBox pboFabrica = new PictureBox();
+                //angle = Mod(90 - (i * (360 / 4)), 360);
+                //radAngle = angle * Math.PI / 180;
+                pboFabrica.Image = Properties.Resources.Fabrica;
+                pboFabrica.SizeMode = PictureBoxSizeMode.StretchImage;
+                pboFabrica.BackColor = Color.Transparent;
+                pboFabrica.Width = 100;
+                pboFabrica.Height = 100;
+
+                switch (nFabricas)
+                {
+                    case 5:
+                        pboFabrica.Location = new Point
+                        {
+                            X = coords5Fabricas[i].X,
+                            Y = coords5Fabricas[i].Y
+                        };
+                        break;
+                    case 7:
+                        pboFabrica.Location = new Point
+                        {
+                            X = coords7Fabricas[i].X,
+                            Y = coords7Fabricas[i].Y
+                        };
+                        break;
+                    case 9:
+                        pboFabrica.Location = new Point
+                        {
+                            X = coords9Fabricas[i].X,
+                            Y = coords9Fabricas[i].Y
+                        };
+                        break;
+                    default:
+                        pboFabrica.Location = new Point
+                        {
+                            X = coords5Fabricas[i].X,
+                            Y = coords5Fabricas[i].Y
+                        };
+                        break;
+                }
+
+                //pboFabrica.Location = new Point
+                //{
+                //    X = 257 - Convert.ToInt32(Math.Cos(angle) * 110 + 105),
+                //    Y = 257 - Convert.ToInt32(Math.Sin(angle) * 110 + 105)
+                //};
+
+                //Point coord = new Point();
+
+                //if (Math.Cos(radAngle) >= 0) coord.X = 257 + Convert.ToInt32(Math.Cos(radAngle) * 110);
+                //else coord.X = 257 - Convert.ToInt32(Math.Cos(radAngle) * 110 + Math.Cos(radAngle) * 105);
+
+                //if (Math.Sin(radAngle) >= 0) coord.Y = 257 - Convert.ToInt32(Math.Sin(radAngle) * 110);
+                //else coord.Y = 257 + Convert.ToInt32(Math.Sin(radAngle) * 110 + Math.Sin(angle) * 105);
+
+                //pboFabrica.Location = coord;
+
+                this.Controls.Add(pboFabrica);
+
+                for (int j = 0; j < 4; j++)
+                {
+                    PictureBox pbo = new PictureBox();
+                    pbo.Name = "pboFabrica" + (i + 1) + (j + 1);
+                    //pbo.Image = Properties.Resources.pCentro;
+                    pbo.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pbo.Visible = false;
+                    pbo.Width = 40;
+                    pbo.Height = 40;
+                    pbo.Location = new Point(pboFabrica.Location.X + 6 + j % 2 * (pbo.Width + 8), pboFabrica.Location.Y + 6 + j / 2 * (pbo.Height + 8));
+                    this.Controls.Add(pbo);
+                    pbo.BringToFront();
+                }
+            }                        
         }
 
         public Tabuleiro retornaTabuleiro()
@@ -337,17 +440,17 @@ namespace PI3___Fukushima
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void label2_Click_1(object sender, EventArgs e)
         {
 
         }
 
         private void pboModelo55_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pboCentro3_Click(object sender, EventArgs e)
         {
 
         }

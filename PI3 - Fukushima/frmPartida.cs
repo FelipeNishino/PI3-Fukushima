@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
 using System.CodeDom;
@@ -101,7 +102,7 @@ namespace PI3___Fukushima
                         if(retorno.Contains("centro"))
                         {
                             historico += "C,";
-                            historico += retorno.Substring(retorno.IndexOf("centro") + "centro ".Length, 1) + ",";
+                            historico += "0,";              
                         }
                         else
                         {
@@ -128,13 +129,11 @@ namespace PI3___Fukushima
 
                         if (historico != lastPlay)
                         {
-
                             lastPlay = historico;                        
 
                             frmTabuleiro.limparFabricas(Convert.ToInt32(lastPlay.Substring(lastPlay.IndexOf(",") + 3, 1)));
 
                             btnListarCentro_Click(null, null);
-
                         }
                     }
 
@@ -208,6 +207,7 @@ namespace PI3___Fukushima
             btnListarFabricas.Enabled = false;
             MessageBox.Show("Jogo Encerrado!", "Azul - Fukushima");
         }
+
         private void btnListarFabricas_Click(object sender, EventArgs e)
         {
 
@@ -397,7 +397,7 @@ namespace PI3___Fukushima
 
         private void FrmPartida_LocationChanged(object sender, EventArgs e)
         {
-            frmTabuleiro.Location = new System.Drawing.Point
+            frmTabuleiro.Location = new Point
             {
                 X = this.Location.X + this.Width,
                 Y = this.Location.Y
@@ -571,7 +571,6 @@ namespace PI3___Fukushima
             frmTabuleiro.limparFabricas(idFabricaComprada);
             btnListarCentro_Click(null, null);
         }
-
 
         public bool jogarPadrao(Azulejo azulejo, int idFabricaComprada)
         {

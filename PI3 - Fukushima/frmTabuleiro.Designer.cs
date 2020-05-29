@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTabuleiro));
             this.btnLerTabuleiro = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblCentro1 = new System.Windows.Forms.Label();
             this.lblCentro2 = new System.Windows.Forms.Label();
             this.lblCentro3 = new System.Windows.Forms.Label();
@@ -152,21 +151,12 @@
             this.btnLerTabuleiro.UseVisualStyleBackColor = true;
             this.btnLerTabuleiro.Click += new System.EventHandler(this.btnLerTabuleiro_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 49;
-            this.label1.Text = "Fabricas";
-            // 
             // lblCentro1
             // 
             this.lblCentro1.AutoSize = true;
             this.lblCentro1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblCentro1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCentro1.Location = new System.Drawing.Point(444, 99);
+            this.lblCentro1.Location = new System.Drawing.Point(264, 201);
             this.lblCentro1.Name = "lblCentro1";
             this.lblCentro1.Size = new System.Drawing.Size(15, 15);
             this.lblCentro1.TabIndex = 62;
@@ -179,7 +169,7 @@
             this.lblCentro2.AutoSize = true;
             this.lblCentro2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblCentro2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCentro2.Location = new System.Drawing.Point(445, 155);
+            this.lblCentro2.Location = new System.Drawing.Point(327, 252);
             this.lblCentro2.Name = "lblCentro2";
             this.lblCentro2.Size = new System.Drawing.Size(15, 15);
             this.lblCentro2.TabIndex = 63;
@@ -191,7 +181,7 @@
             this.lblCentro3.AutoSize = true;
             this.lblCentro3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblCentro3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCentro3.Location = new System.Drawing.Point(445, 211);
+            this.lblCentro3.Location = new System.Drawing.Point(309, 323);
             this.lblCentro3.Name = "lblCentro3";
             this.lblCentro3.Size = new System.Drawing.Size(15, 15);
             this.lblCentro3.TabIndex = 64;
@@ -203,7 +193,7 @@
             this.lblCentro4.AutoSize = true;
             this.lblCentro4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblCentro4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCentro4.Location = new System.Drawing.Point(445, 267);
+            this.lblCentro4.Location = new System.Drawing.Point(219, 323);
             this.lblCentro4.Name = "lblCentro4";
             this.lblCentro4.Size = new System.Drawing.Size(15, 15);
             this.lblCentro4.TabIndex = 65;
@@ -215,7 +205,7 @@
             this.lblCentro5.AutoSize = true;
             this.lblCentro5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblCentro5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCentro5.Location = new System.Drawing.Point(444, 323);
+            this.lblCentro5.Location = new System.Drawing.Point(200, 253);
             this.lblCentro5.Name = "lblCentro5";
             this.lblCentro5.Size = new System.Drawing.Size(15, 15);
             this.lblCentro5.TabIndex = 66;
@@ -225,9 +215,9 @@
             // pboCentro5
             // 
             this.pboCentro5.Image = global::PI3___Fukushima.Properties.Resources.Branco;
-            this.pboCentro5.Location = new System.Drawing.Point(409, 288);
+            this.pboCentro5.Location = new System.Drawing.Point(168, 220);
             this.pboCentro5.Name = "pboCentro5";
-            this.pboCentro5.Size = new System.Drawing.Size(50, 50);
+            this.pboCentro5.Size = new System.Drawing.Size(47, 47);
             this.pboCentro5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboCentro5.TabIndex = 61;
             this.pboCentro5.TabStop = false;
@@ -235,9 +225,9 @@
             // pboCentro4
             // 
             this.pboCentro4.Image = global::PI3___Fukushima.Properties.Resources.Preto;
-            this.pboCentro4.Location = new System.Drawing.Point(410, 232);
+            this.pboCentro4.Location = new System.Drawing.Point(187, 290);
             this.pboCentro4.Name = "pboCentro4";
-            this.pboCentro4.Size = new System.Drawing.Size(50, 50);
+            this.pboCentro4.Size = new System.Drawing.Size(47, 47);
             this.pboCentro4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboCentro4.TabIndex = 59;
             this.pboCentro4.TabStop = false;
@@ -245,19 +235,20 @@
             // pboCentro3
             // 
             this.pboCentro3.Image = global::PI3___Fukushima.Properties.Resources.Vermelho;
-            this.pboCentro3.Location = new System.Drawing.Point(410, 176);
+            this.pboCentro3.Location = new System.Drawing.Point(277, 291);
             this.pboCentro3.Name = "pboCentro3";
-            this.pboCentro3.Size = new System.Drawing.Size(50, 50);
+            this.pboCentro3.Size = new System.Drawing.Size(47, 47);
             this.pboCentro3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboCentro3.TabIndex = 58;
             this.pboCentro3.TabStop = false;
+            this.pboCentro3.Click += new System.EventHandler(this.pboCentro3_Click);
             // 
             // pboCentro1
             // 
             this.pboCentro1.Image = global::PI3___Fukushima.Properties.Resources.Azul;
-            this.pboCentro1.Location = new System.Drawing.Point(410, 64);
+            this.pboCentro1.Location = new System.Drawing.Point(232, 169);
             this.pboCentro1.Name = "pboCentro1";
-            this.pboCentro1.Size = new System.Drawing.Size(50, 50);
+            this.pboCentro1.Size = new System.Drawing.Size(47, 47);
             this.pboCentro1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboCentro1.TabIndex = 57;
             this.pboCentro1.TabStop = false;
@@ -265,9 +256,9 @@
             // pboCentro2
             // 
             this.pboCentro2.Image = global::PI3___Fukushima.Properties.Resources.Amarelo;
-            this.pboCentro2.Location = new System.Drawing.Point(410, 120);
+            this.pboCentro2.Location = new System.Drawing.Point(295, 220);
             this.pboCentro2.Name = "pboCentro2";
-            this.pboCentro2.Size = new System.Drawing.Size(50, 50);
+            this.pboCentro2.Size = new System.Drawing.Size(47, 47);
             this.pboCentro2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboCentro2.TabIndex = 56;
             this.pboCentro2.TabStop = false;
@@ -811,7 +802,6 @@
             this.Controls.Add(this.pboCentro3);
             this.Controls.Add(this.pboCentro1);
             this.Controls.Add(this.pboCentro2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.pboChao7);
             this.Controls.Add(this.pboChao6);
             this.Controls.Add(this.pboChao5);
@@ -971,7 +961,6 @@
         private System.Windows.Forms.PictureBox pboChao7;
         private System.Windows.Forms.PictureBox pboChao6;
         private System.Windows.Forms.PictureBox pboChao5;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pboCentro2;
         private System.Windows.Forms.PictureBox pboCentro1;
         private System.Windows.Forms.PictureBox pboCentro3;
@@ -982,5 +971,6 @@
         private System.Windows.Forms.Label lblCentro3;
         private System.Windows.Forms.Label lblCentro4;
         private System.Windows.Forms.Label lblCentro5;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
