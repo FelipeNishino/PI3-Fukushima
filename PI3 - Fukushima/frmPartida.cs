@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
 using System.CodeDom;
+using System.Diagnostics;
 
 namespace PI3___Fukushima
 {
@@ -98,7 +99,7 @@ namespace PI3___Fukushima
                     {
                         if (vez.Substring(0, vez.IndexOf(",")) == dadosJogador[0])
                         {
-                            queuedRead = 2;
+                            queuedRead += 2;
                         }
 
 
@@ -152,15 +153,16 @@ namespace PI3___Fukushima
 
                                     btnListarCentro_Click(null, null);
                                 }
-
                             }
                         }
+                        Debug.Print("antes do if: " + queuedRead);
                         if (queuedRead > 0)
                         {
+                            Debug.Print("entrou");
                             frmTabuleiro.lerTabuleiro();
                             queuedRead--;
                         }
-
+                        Debug.Print("Depois do if: " + queuedRead);
                         Invoke((MethodInvoker)delegate
                         {
                             lblVez.Text = "Vez: " + vez;
@@ -496,7 +498,7 @@ namespace PI3___Fukushima
             if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro) && tabuleiro.modelo.linhas[j].azulejo.quantidade < j + 1)
             {
                 //if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1)))
-                if (tabuleiro.modelo.linhas[j].azulejo.id == azulejoComprar.id) {
+                if (tabuleiro.modelo.linhas[j].azulejo.id == azulejoComprar.id || tabuleiro.modelo.linhas[j].azulejo.id == -1) {
                     Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1);
                     lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
                     sleepTime = 2000;
