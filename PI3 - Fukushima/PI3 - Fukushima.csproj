@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Azulejo.cs" />
     <Compile Include="Centro.cs" />
+    <Compile Include="Compra.cs" />
     <Compile Include="Fabrica.cs" />
     <Compile Include="FrmLobby.cs">
       <SubType>Form</SubType>
@@ -71,6 +72,7 @@
     <Compile Include="FrmTabuleiro.Designer.cs">
       <DependentUpon>FrmTabuleiro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Jogada.cs" />
     <Compile Include="Jogador.cs" />
     <Compile Include="Modelo.cs" />
     <Compile Include="Partida.cs" />
