@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Azulejo.cs" />
     <Compile Include="Centro.cs" />
+    <Compile Include="Estrategia.cs" />
     <Compile Include="Fabrica.cs" />
     <Compile Include="FrmLobby.cs">
       <SubType>Form</SubType>
