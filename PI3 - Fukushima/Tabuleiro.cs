@@ -31,7 +31,6 @@ namespace PI3___Fukushima
             tabuleiro.modelo = new Modelo();
             tabuleiro.modelo.linhas = new linha[5];
 
-
             for (int k = 0; k < 5; k++)
             {
                 tabuleiro.modelo.linhas[k] = new linha(-1, null);

@@ -15,6 +15,7 @@ namespace PI3___Fukushima
     public partial class FrmTabuleiro : Form
     {
         string[] dadosJogador;
+        int idPartida;
         public Tabuleiro tabuleiro { get; set; }
 
         public int nFabricas { get; set; }
@@ -24,11 +25,12 @@ namespace PI3___Fukushima
             show,
             hide
         }
-        public FrmTabuleiro(string[] _dadosJogador, Tabuleiro _tabuleiro, int _nFabricas)
+        public FrmTabuleiro(string[] _dadosJogador, Tabuleiro _tabuleiro, int _nFabricas, int _idPartida)
         {
             tabuleiro = _tabuleiro;
             dadosJogador = _dadosJogador;
             nFabricas = _nFabricas;
+            idPartida = _idPartida;
             InitializeComponent();
         }
 
@@ -56,6 +58,11 @@ namespace PI3___Fukushima
         }
         private void frmTabuleiro_Load(object sender, EventArgs e)
         {
+            lblPlayer1.Text = "";
+            //lblPlayer1.Text = Jogo.ListarJogadores(idPartida);
+
+            setPlacar();
+
             Point[] coords5Fabricas = new Point[] 
             { 
                 new Point(210, 52), new Point(355, 170), new Point(318, 342), new Point(94, 342), new Point(55, 170)                      
@@ -82,8 +89,19 @@ namespace PI3___Fukushima
             {
                 X = Owner.Location.X + Owner.Width,
                 Y = Owner.Location.Y
-            };           
-            
+            };
+
+            //for (int i = 0; i < ((nFabricas - 1) / 2) - 1; i++)
+            //{
+            //    Label lblNome = new Label();
+            //    Label lblPonto = new Label();                               
+            //}
+
+            //foreach (Jogador jogador in Partida.listarJogadores(idPartida))
+            //{
+            //    lstSala.Items.Add(jogador.id + ", " + jogador.nome + ", " + jogador.score);
+            //}
+
             for (int i = 0; i < nFabricas; i++)
             {
                 PictureBox pboFabrica = new PictureBox();
@@ -184,6 +202,26 @@ namespace PI3___Fukushima
             }
         }
 
+        public void setPlacar()
+        {
+            List<Jogador> jogadores = Partida.listarJogadores(idPartida);
+
+            lblPlayer1.Invoke((MethodInvoker)delegate{
+                lblPlayer1.Text = "";
+            });
+
+            for (int i = 0; i < jogadores.Count; i++)
+            {
+                lblPlayer1.Invoke((MethodInvoker)delegate
+                {
+                    lblPlayer1.Text += jogadores[i].nome;
+                    lblPlayer1.Text += "(" + jogadores[i].id + "): ";
+                    lblPlayer1.Text += jogadores[i].score + " ponto" + (jogadores[i].score != 1 ? "s" : "");
+                    lblPlayer1.Text += "\n";
+                });
+            }
+        }
+
         public void setCentro(int index, int quantidade)
         {
             Label lblCentro = new Label();
@@ -264,8 +302,8 @@ namespace PI3___Fukushima
             {
                 pbo = Controls.Find("pboChao" + (i + 1), false)[0] as PictureBox;
                 pbo.Invoke((MethodInvoker)delegate
-                {
-                    changeVisibility(pbo, Visibility.show);
+                {                    
+                    changeVisibility(pbo, tabuleiro.chao[i] > 0 ? Visibility.show : Visibility.hide);
                 });
                 switch (tabuleiro.chao[i])
                 {

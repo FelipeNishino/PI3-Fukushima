@@ -55,6 +55,7 @@
             this.lblTimer = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cboDebug = new System.Windows.Forms.ComboBox();
+            this.chkBot = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -215,7 +216,7 @@
             // 
             // btnCriarPartida
             // 
-            this.btnCriarPartida.Location = new System.Drawing.Point(119, 96);
+            this.btnCriarPartida.Location = new System.Drawing.Point(109, 96);
             this.btnCriarPartida.Name = "btnCriarPartida";
             this.btnCriarPartida.Size = new System.Drawing.Size(75, 23);
             this.btnCriarPartida.TabIndex = 0;
@@ -226,7 +227,7 @@
             // lblVersaoDll
             // 
             this.lblVersaoDll.AutoSize = true;
-            this.lblVersaoDll.Location = new System.Drawing.Point(12, 362);
+            this.lblVersaoDll.Location = new System.Drawing.Point(12, 157);
             this.lblVersaoDll.Name = "lblVersaoDll";
             this.lblVersaoDll.Size = new System.Drawing.Size(40, 13);
             this.lblVersaoDll.TabIndex = 3;
@@ -262,12 +263,13 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.chkBot);
             this.groupBox4.Controls.Add(this.btnListarJogadores);
             this.groupBox4.Controls.Add(this.btnIniciarPartida);
             this.groupBox4.Controls.Add(this.lstSala);
             this.groupBox4.Location = new System.Drawing.Point(12, 202);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(204, 155);
+            this.groupBox4.Size = new System.Drawing.Size(204, 176);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Sala";
@@ -305,11 +307,12 @@
             // 
             this.groupBox5.Controls.Add(this.cboDebug);
             this.groupBox5.Controls.Add(this.lblTimer);
+            this.groupBox5.Controls.Add(this.lblVersaoDll);
             this.groupBox5.Controls.Add(this.lblFeedback);
             this.groupBox5.Controls.Add(this.button1);
             this.groupBox5.Location = new System.Drawing.Point(222, 202);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(200, 151);
+            this.groupBox5.Size = new System.Drawing.Size(200, 176);
             this.groupBox5.TabIndex = 14;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Debug";
@@ -324,6 +327,16 @@
             this.cboDebug.DropDown += new System.EventHandler(this.cboDebug_DropDown);
             this.cboDebug.SelectedIndexChanged += new System.EventHandler(this.cboDebug_SelectedIndexChanged);
             // 
+            // chkBot
+            // 
+            this.chkBot.AutoSize = true;
+            this.chkBot.Location = new System.Drawing.Point(10, 150);
+            this.chkBot.Name = "chkBot";
+            this.chkBot.Size = new System.Drawing.Size(72, 17);
+            this.chkBot.TabIndex = 13;
+            this.chkBot.Text = "Usar bot?";
+            this.chkBot.UseVisualStyleBackColor = true;
+            // 
             // FrmLobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,7 +344,6 @@
             this.ClientSize = new System.Drawing.Size(431, 381);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.lblVersaoDll);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -344,10 +356,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -380,6 +392,7 @@
         private System.Windows.Forms.Button btnListarJogadores;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ComboBox cboDebug;
+        private System.Windows.Forms.CheckBox chkBot;
     }
 }
 

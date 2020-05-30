@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
 using System.CodeDom;
+using System.Diagnostics;
 
 namespace PI3___Fukushima
 {
@@ -22,8 +23,9 @@ namespace PI3___Fukushima
 
         bool keepRunning = false;
         bool isBuying = false;
+        bool bot = true;
 
-        public FrmPartida(string[] _dadosJogador, string _idPartida, int nJogadores)
+        public FrmPartida(string[] _dadosJogador, string _idPartida, int nJogadores, bool _bot)
         {
             dadosJogador = _dadosJogador;
             idPartida = Convert.ToInt32(_idPartida);
@@ -31,11 +33,11 @@ namespace PI3___Fukushima
             tickCounter = 0;
             round = 0;
             sleepTime = 1000;
+            bot = _bot;
 
             InitializeComponent();
 
             InstantiateWorkerThread();
-
         }
         private void InstantiateWorkerThread()
         {
@@ -59,7 +61,7 @@ namespace PI3___Fukushima
             }
             else
             {
-                lblStopWatch.Text = "Jogo encerrado!";
+                lblStopWatch.Text = "Jogo pausado/encerrado!";
             }
         }
 
@@ -67,6 +69,7 @@ namespace PI3___Fukushima
         {
             DateTime startTime = DateTime.Now;
             string vez, historico, retorno;
+            int queuedRead = 1;
 
             keepRunning = true;
             Invoke((MethodInvoker)delegate
@@ -87,71 +90,85 @@ namespace PI3___Fukushima
                     vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
                     retorno = Jogo.LerNarracao(idPartida);
 
-                    if (round > ((retorno.Length - retorno.Replace("Fábricas preenchidas!\r\n", "").Length) / "Fábricas preenchidas!\r\n".Length))
-                    {
-                        round++;
-                        frmTabuleiro.limparCentro();
-                    }
-
-                    if (retorno.Contains("comprou"))
-                    {
-                        retorno = retorno.Substring(0, retorno.IndexOf("\r"));
-
-                        historico = retorno.Substring(0, retorno.IndexOf(" ")) + ",";
-
-                        if(retorno.Contains("centro"))
-                        {
-                            historico += "C,";
-                            historico += "0,";              
-                        }
-                        else
-                        {
-                            historico += "F,";
-                            historico += retorno.Substring(retorno.IndexOf("fábrica") + "fábrica ".Length, 1) + ",";
-                        }
-
-                        // Isso aqui tá feio hein
-                        if (retorno.Contains("Azul")) historico += 1 + ",";
-                        else if (retorno.Contains("Amarelo")) historico += 2 + ",";
-                        else if (retorno.Contains("Vermelho")) historico += 3 + ",";
-                        else if (retorno.Contains("Preto")) historico += 4 + ",";
-                        else if (retorno.Contains("Branco")) historico += 5 + ",";
-
-                        if (retorno.Contains("mas"))
-                        {
-                            historico += retorno.Substring(retorno.IndexOf("chão com isso foram ") + "chão com isso foram ".Length, 1);
-                        }
-                        else
-                        {
-                            historico += retorno.Substring(retorno.IndexOf("linha") + "linha ".Length, 1);
-                        }
-
-
-                        if (historico != lastPlay)
-                        {
-                            lastPlay = historico;                        
-
-                            frmTabuleiro.limparFabricas(Convert.ToInt32(lastPlay.Substring(lastPlay.IndexOf(",") + 3, 1)));
-
-                            btnListarCentro_Click(null, null);
-                        }
-                    }
-
-                    if (vez.Substring(0,1) == "E")
+                    if (vez.Substring(0, 1) == "E")
                     {
                         keepRunning = false;
                         Invoke(finaliza);
                     }
                     else
                     {
-                        frmTabuleiro.lerTabuleiro();
-                    }
+                        if (vez.Substring(0, vez.IndexOf(",")) == dadosJogador[0])
+                        {
+                            queuedRead += 2;
+                        }
 
-                    Invoke((MethodInvoker)delegate
-                    {
-                        lblVez.Text = "Vez: " + vez;
-                        lblTick.Text = "Timer ticks: " + tickCounter;
-                    });
+
+                        if (round < ((retorno.Length - retorno.Replace("Fábricas preenchidas!\r\n", "").Length) / "Fábricas preenchidas!\r\n".Length))
+                        {
+                            round++;
+                            frmTabuleiro.limparCentro();                            
+                            frmTabuleiro.setPlacar();
+                            queuedRead++;
+                        }
+
+                        if (retorno.Contains("comprou"))
+                        {
+                            retorno = retorno.Substring(0, retorno.IndexOf("\r"));
+
+                            if (!retorno.Contains("preenchidas"))
+                            {
+                                historico = retorno.Substring(0, retorno.IndexOf(" ")) + ",";
+                                if (retorno.Contains("centro"))
+                                {
+                                    historico += "C,";
+                                    historico += "0,";
+                                }
+                                else
+                                {
+                                    historico += "F,";
+                                    historico += retorno.Substring(retorno.IndexOf("fábrica") + "fábrica ".Length, 1) + ",";
+                                }
+
+                                // Isso aqui tá feio hein
+                                if (retorno.Contains("Azul")) historico += 1 + ",";
+                                else if (retorno.Contains("Amarelo")) historico += 2 + ",";
+                                else if (retorno.Contains("Vermelho")) historico += 3 + ",";
+                                else if (retorno.Contains("Preto")) historico += 4 + ",";
+                                else if (retorno.Contains("Branco")) historico += 5 + ",";
+
+                                if (retorno.Contains("mas"))
+                                {
+                                    historico += retorno.Substring(retorno.IndexOf("chão com isso foram ") + "chão com isso foram ".Length, 1);
+                                }
+                                else
+                                {
+                                    historico += retorno.Substring(retorno.IndexOf("linha") + "linha ".Length, 1);
+                                }
+
+                                if (historico != lastPlay)
+                                {                                    
+                                    lastPlay = historico;
+
+                                    frmTabuleiro.limparFabricas(Convert.ToInt32(lastPlay.Substring(lastPlay.IndexOf(",") + 3, 1)));
+
+                                    btnListarCentro_Click(null, null);
+                                }
+                            }
+                        }
+                        Debug.Print("antes do if: " + queuedRead);
+                        if (queuedRead > 0)
+                        {
+                            Debug.Print("entrou");
+                            frmTabuleiro.lerTabuleiro();
+                            queuedRead--;
+                        }
+                        Debug.Print("Depois do if: " + queuedRead);
+                        Invoke((MethodInvoker)delegate
+                        {
+                            lblVez.Text = "Vez: " + vez;
+                            lblTick.Text = "Timer ticks: " + tickCounter;
+                        });
+                    }
 
                     if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0] && chkBot.Checked && keepRunning)
                     {
@@ -172,9 +189,9 @@ namespace PI3___Fukushima
                 }
             }
         }
+
         private void FrmPartida_Load(object sender, EventArgs e)
         {
-            lblFeedback.Text = "";
             lblDadosJogador.Text = dadosJogador[0] + "," + dadosJogador[1];
 
             nFabricas = 2 * nFabricas + 1;
@@ -185,8 +202,17 @@ namespace PI3___Fukushima
             }
             cboFabricasCompra.Items.Add("Centro");
 
+            if (bot)
+            {
+                chkBot.Checked = true;
+            }
+            else
+            {
+                chkBot.Checked = false;
+            }
+
             tabuleiro = new Tabuleiro();
-            frmTabuleiro = new FrmTabuleiro(dadosJogador, tabuleiro, nFabricas);
+            frmTabuleiro = new FrmTabuleiro(dadosJogador, tabuleiro, nFabricas, idPartida);
 
             this.Location = this.Owner.Location;
 
@@ -203,8 +229,6 @@ namespace PI3___Fukushima
         private void final()
         {
             btnComprarAzulejo.Enabled = false;
-            btnListarCentro.Enabled = false;
-            btnListarFabricas.Enabled = false;
             MessageBox.Show("Jogo Encerrado!", "Azul - Fukushima");
         }
 
@@ -213,11 +237,6 @@ namespace PI3___Fukushima
 
             string[] retorno;
             retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
-
-            Invoke((MethodInvoker)delegate
-            {
-                lstAzulejosFabricas.Items.Clear();
-            });
 
             fabricas = new List<Fabrica>();
             List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
@@ -248,11 +267,6 @@ namespace PI3___Fukushima
 
                 j++;
 
-                lstAzulejosFabricas.Invoke((MethodInvoker)delegate
-                {
-                    lstAzulejosFabricas.Items.Add(i + "," + azulejo.id + "," + azulejo.quantidade);
-                });
-
                 if (retorno[j] != "" && i != Convert.ToInt32(retorno[j].Substring(0, 1)))
                 {
                     Fabrica fabrica = new Fabrica();
@@ -271,7 +285,6 @@ namespace PI3___Fukushima
             } 
             
             frmTabuleiro.lerFabricas(fabricas);
-        
         }
 
         private void btnListarCentro_Click(object sender, EventArgs e)
@@ -285,11 +298,6 @@ namespace PI3___Fukushima
 
             //verificarErro(retorno);
 
-            lstAzulejosCentro.Invoke((MethodInvoker)delegate
-            {
-                lstAzulejosCentro.Items.Clear();
-            });
-
             for (int i = 0; i < retorno.Length - 1; i++)
             {
                 Azulejo azulejo = new Azulejo();
@@ -302,11 +310,6 @@ namespace PI3___Fukushima
                 azulejos.Add(azulejo);
 
                 frmTabuleiro.setCentro(i, azulejo.quantidade);
-
-                Invoke((MethodInvoker)delegate
-                {
-                    lstAzulejosCentro.Items.Add((azulejo.id, itensRetorno[1], azulejo.quantidade, itensRetorno[3]));
-                });
             }
 
             centro.azulejos = azulejos;
@@ -333,10 +336,6 @@ namespace PI3___Fukushima
 
         public bool VerificarErro(string retorno)
         {
-            lblFeedback.Invoke((MethodInvoker)delegate
-            {
-                lblFeedback.Text = retorno;
-            });
             if (retorno.Length > 4)
             {
                 if (retorno.Substring(0, 4) == "ERRO")
@@ -409,6 +408,31 @@ namespace PI3___Fukushima
             workerThread.RunWorkerAsync();
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkBot_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboModeloCompra_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnStop_Click(object sender, EventArgs e)
         {
             keepRunning = false;
@@ -416,6 +440,7 @@ namespace PI3___Fukushima
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            workerThread.CancelAsync();
         }
         private void BotCompra()
         {
@@ -473,7 +498,7 @@ namespace PI3___Fukushima
             if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro) && tabuleiro.modelo.linhas[j].azulejo.quantidade < j + 1)
             {
                 //if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1)))
-                if (tabuleiro.modelo.linhas[j].azulejo.id != azulejoComprar.id) {
+                if (tabuleiro.modelo.linhas[j].azulejo.id == azulejoComprar.id || tabuleiro.modelo.linhas[j].azulejo.id == -1) {
                     Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1);
                     lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
                     sleepTime = 2000;

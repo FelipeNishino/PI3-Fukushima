@@ -87,6 +87,8 @@
             this.pboModelo22 = new System.Windows.Forms.PictureBox();
             this.pboModelo21 = new System.Windows.Forms.PictureBox();
             this.pboModelo11 = new System.Windows.Forms.PictureBox();
+            this.lblPlayer1 = new System.Windows.Forms.Label();
+            this.lstNarracao = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pboCentro5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboCentro4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboCentro3)).BeginInit();
@@ -143,12 +145,13 @@
             // 
             // btnLerTabuleiro
             // 
-            this.btnLerTabuleiro.Location = new System.Drawing.Point(483, 4);
+            this.btnLerTabuleiro.Location = new System.Drawing.Point(831, 490);
             this.btnLerTabuleiro.Name = "btnLerTabuleiro";
             this.btnLerTabuleiro.Size = new System.Drawing.Size(108, 23);
             this.btnLerTabuleiro.TabIndex = 41;
             this.btnLerTabuleiro.Text = "Ler Tabuleiro";
             this.btnLerTabuleiro.UseVisualStyleBackColor = true;
+            this.btnLerTabuleiro.Visible = false;
             this.btnLerTabuleiro.Click += new System.EventHandler(this.btnLerTabuleiro_Click);
             // 
             // lblCentro1
@@ -784,6 +787,24 @@
             this.pboModelo11.TabIndex = 1;
             this.pboModelo11.TabStop = false;
             // 
+            // lblPlayer1
+            // 
+            this.lblPlayer1.AutoSize = true;
+            this.lblPlayer1.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlayer1.Location = new System.Drawing.Point(517, 86);
+            this.lblPlayer1.Name = "lblPlayer1";
+            this.lblPlayer1.Size = new System.Drawing.Size(85, 13);
+            this.lblPlayer1.TabIndex = 67;
+            this.lblPlayer1.Text = "nomeDoJogador";
+            // 
+            // lstNarracao
+            // 
+            this.lstNarracao.FormattingEnabled = true;
+            this.lstNarracao.Location = new System.Drawing.Point(733, 84);
+            this.lstNarracao.Name = "lstNarracao";
+            this.lstNarracao.Size = new System.Drawing.Size(130, 69);
+            this.lstNarracao.TabIndex = 69;
+            // 
             // FrmTabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -792,6 +813,8 @@
             this.BackgroundImage = global::PI3___Fukushima.Properties.Resources.tabuleiro;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(944, 521);
+            this.Controls.Add(this.lstNarracao);
+            this.Controls.Add(this.lblPlayer1);
             this.Controls.Add(this.lblCentro5);
             this.Controls.Add(this.lblCentro4);
             this.Controls.Add(this.lblCentro3);
@@ -972,5 +995,7 @@
         private System.Windows.Forms.Label lblCentro4;
         private System.Windows.Forms.Label lblCentro5;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label lblPlayer1;
+        private System.Windows.Forms.ListBox lstNarracao;
     }
 }
