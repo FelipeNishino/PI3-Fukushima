@@ -282,8 +282,7 @@ namespace PI3___Fukushima
                     fabrica.azulejos = azulejos[i - 1];
                     fabricas.Add(fabrica);
                 }
-            } 
-            
+            }             
             frmTabuleiro.lerFabricas(fabricas);
         }
 
@@ -459,6 +458,7 @@ namespace PI3___Fukushima
             tabuleiro = frmTabuleiro.retornaTabuleiro();
 
             linha[] linhasPreenchidas = Array.FindAll(tabuleiro.modelo.linhas, linha => linha.azulejo.id != -1 || linha.azulejo.quantidade != -1);
+            
 
             Azulejo azulejoComprar = new Azulejo();
 
