@@ -134,7 +134,7 @@ namespace PI3___Fukushima
 
             if ((nJogadores = lstSala.Items.Count) < 2) nJogadores = 2;
 
-            FrmPartida frmPartida = new FrmPartida(dados, txtEntrarId.Text, nJogadores);
+            FrmPartida frmPartida = new FrmPartida(dados, txtEntrarId.Text, nJogadores, chkBot.Checked);
             this.AddOwnedForm(frmPartida);
             
             frmPartida.ShowDialog();
@@ -150,7 +150,7 @@ namespace PI3___Fukushima
 
             if ((nJogadores = lstSala.Items.Count) < 2) nJogadores = 2;
 
-            FrmPartida frmPartida = new FrmPartida(dadosJogador, txtEntrarId.Text, nJogadores);
+            FrmPartida frmPartida = new FrmPartida(dadosJogador, txtEntrarId.Text, nJogadores, chkBot.Checked);
             this.AddOwnedForm(frmPartida);
             frmPartida.ShowDialog();
         }
