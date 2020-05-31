@@ -12,10 +12,10 @@ namespace PI3___Fukushima
         {
             //
         }
-        public static Compra MaiorModelo(List<Fabrica> fabricas, centro, Tabuleiro tabuleiro, Jogador jogador)
+        public static Compra MaiorModelo(/*List<Fabrica> fabricas, centro, Tabuleiro tabuleiro, Jogador jogador*/)
         {
             ////Pega o azulejo com a maior quantidade da frabica ou do centro e joga na linha do modelo vazia
-            //Compra compra = new Compra();
+            Compra compra = new Compra();
             //compra.id = 0;
             //compra.IdFabrica = 0;
             //compra.Local = "";
@@ -79,8 +79,8 @@ namespace PI3___Fukushima
             //        comprou = true;
             //    }
             //}
-            
-            //return compra;
+
+            return compra;
         }
         public static void MenorModelo()
         {

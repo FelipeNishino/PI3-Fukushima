@@ -232,7 +232,7 @@ namespace PI3___Fukushima
             {
                 lblCentro.Text = quantidade.ToString();
             });
-
+            
         }
         public void lerTabuleiro()
         {

@@ -14,12 +14,18 @@ namespace PI3___Fukushima
     {
         string[] dadosJogador;
         string lastPlay;
-        int idPartida, nFabricas, tickCounter, sleepTime, round;
+        int idPartida, nFabricas, tickCounter, sleepTime, round, menorQuantidadeFabrica, menorQuantidadeCentro, maiorQuantidadeFabrica, maiorQuantidadeCentro;
         public Tabuleiro tabuleiro;
         public List<Fabrica> fabricas;
         public FrmTabuleiro frmTabuleiro;
         private Centro centro;
         BackgroundWorker workerThread = null;
+        List<Jogada> jogadas;
+        private enum Local
+        {
+            Fabrica,
+            Centro
+        }
 
         bool keepRunning = false;
         bool isBuying = false;
@@ -38,6 +44,45 @@ namespace PI3___Fukushima
             InitializeComponent();
 
             InstantiateWorkerThread();
+        }
+
+        private void FrmPartida_Load(object sender, EventArgs e)
+        {
+            lblDadosJogador.Text = dadosJogador[0] + "," + dadosJogador[1];
+            resetFlags(Local.Fabrica);
+            resetFlags(Local.Centro);
+
+            nFabricas = 2 * nFabricas + 1;
+
+            for (int i = 1; i <= nFabricas; i++)
+            {
+                cboFabricasCompra.Items.Add(i.ToString());
+            }
+            cboFabricasCompra.Items.Add("Centro");
+
+            if (bot)
+            {
+                chkBot.Checked = true;
+            }
+            else
+            {
+                chkBot.Checked = false;
+            }
+            jogadas = new List<Jogada>();
+
+            tabuleiro = new Tabuleiro();
+            frmTabuleiro = new FrmTabuleiro(dadosJogador, tabuleiro, nFabricas, idPartida);
+
+            this.Location = this.Owner.Location;
+
+            Owner.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Normal;
+
+            this.AddOwnedForm(frmTabuleiro);
+
+            frmTabuleiro.Show();
+            workerThread.RunWorkerAsync();
         }
         private void InstantiateWorkerThread()
         {
@@ -122,11 +167,13 @@ namespace PI3___Fukushima
                                 {
                                     historico += "C,";
                                     historico += "0,";
+                                    resetFlags(Local.Centro);
                                 }
                                 else
                                 {
                                     historico += "F,";
                                     historico += retorno.Substring(retorno.IndexOf("fábrica") + "fábrica ".Length, 1) + ",";
+                                    resetFlags(Local.Fabrica);
                                 }
 
                                 // Isso aqui tá feio hein
@@ -190,57 +237,60 @@ namespace PI3___Fukushima
             }
         }
 
-        private void FrmPartida_Load(object sender, EventArgs e)
-        {
-            lblDadosJogador.Text = dadosJogador[0] + "," + dadosJogador[1];
-
-            nFabricas = 2 * nFabricas + 1;
-
-            for (int i = 1; i <= nFabricas; i++)
-            {
-                cboFabricasCompra.Items.Add(i.ToString());
-            }
-            cboFabricasCompra.Items.Add("Centro");
-
-            if (bot)
-            {
-                chkBot.Checked = true;
-            }
-            else
-            {
-                chkBot.Checked = false;
-            }
-
-            tabuleiro = new Tabuleiro();
-            frmTabuleiro = new FrmTabuleiro(dadosJogador, tabuleiro, nFabricas, idPartida);
-
-            this.Location = this.Owner.Location;
-
-            Owner.WindowState = FormWindowState.Minimized;
-            this.WindowState = FormWindowState.Minimized;
-            this.WindowState = FormWindowState.Normal;
-
-            this.AddOwnedForm(frmTabuleiro);
-
-            frmTabuleiro.Show();
-            workerThread.RunWorkerAsync();
-        }
-
         private void final()
         {
             btnComprarAzulejo.Enabled = false;
             MessageBox.Show("Jogo Encerrado!", "Azul - Fukushima");
         }
 
+        private void resetFlags(Local local)
+        {
+            switch (local)
+            {
+                case Local.Fabrica:
+                    menorQuantidadeFabrica = 0;
+                    maiorQuantidadeFabrica = 5;
+                    break;
+                case Local.Centro:
+                    menorQuantidadeCentro = 0;
+                    maiorQuantidadeCentro = 30;
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void limparJogadas(Local local)
+        {
+            List<Jogada> jogadasRemovidas = new List<Jogada>();
+
+            switch (local)
+            {
+                case Local.Fabrica:
+                    jogadasRemovidas = jogadas.FindAll(jogada => jogada.IdFabrica != 0);
+                    break;
+                case Local.Centro:
+                    jogadasRemovidas = jogadas.FindAll(jogada => jogada.IdFabrica == 0);
+                    break;
+                default:
+                    break;
+            }
+
+            for (int i = 0; i < jogadasRemovidas.Count; i++)
+            {
+                jogadas.Remove(jogadasRemovidas[i]);
+            }
+        }
+
         private void btnListarFabricas_Click(object sender, EventArgs e)
         {
-
             string[] retorno;
             retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
             fabricas = new List<Fabrica>();
             List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
-            
+
+            if (jogadas != null) limparJogadas(Local.Fabrica); 
+
             if (retorno[0] == "" && fabricas != null)
             {
                 fabricas.RemoveRange(0, fabricas.Count);
@@ -257,13 +307,18 @@ namespace PI3___Fukushima
 
             while (i <= nFabricas && retorno[j] != "")
             {
-
+                Jogada novaJogada = new Jogada();
                 Azulejo azulejo = new Azulejo();
+                
+                novaJogada.IdFabrica = i;
 
-                azulejo.id = Convert.ToInt32(retorno[j].Substring(2, 1));
-                azulejo.quantidade = Convert.ToInt32(retorno[j].Substring(retorno[j].LastIndexOf(",") + 1, 1));
+                novaJogada.id = azulejo.id = Convert.ToInt32(retorno[j].Substring(2, 1));
+                novaJogada.quantidade = azulejo.quantidade = Convert.ToInt32(retorno[j].Substring(retorno[j].LastIndexOf(",") + 1, 1));
                 azulejo.carregarImagem();
                 azulejos[i - 1].Add(azulejo);
+
+                if (maiorQuantidadeFabrica < azulejo.quantidade) maiorQuantidadeFabrica = azulejo.quantidade;
+                if (menorQuantidadeFabrica > azulejo.quantidade) menorQuantidadeFabrica = azulejo.quantidade;
 
                 j++;
 
@@ -282,6 +337,7 @@ namespace PI3___Fukushima
                     fabrica.azulejos = azulejos[i - 1];
                     fabricas.Add(fabrica);
                 }
+                jogadas.Add(novaJogada);
             }             
             frmTabuleiro.lerFabricas(fabricas);
         }
@@ -292,22 +348,27 @@ namespace PI3___Fukushima
             string[] itensRetorno;
             centro = new Centro();
             List<Azulejo> azulejos = new List<Azulejo>();
+            Jogada novaJogada = new Jogada();
 
             retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
             //verificarErro(retorno);
+            if (jogadas != null) limparJogadas(Local.Centro);
 
             for (int i = 0; i < retorno.Length - 1; i++)
             {
                 Azulejo azulejo = new Azulejo();
                 itensRetorno = retorno[i].Split(',');
 
-                azulejo.id = Convert.ToInt32(itensRetorno[0]);
+                novaJogada.id = azulejo.id = Convert.ToInt32(itensRetorno[0]);
+                novaJogada.quantidade = azulejo.quantidade = Convert.ToInt32(itensRetorno[2]);
+                novaJogada.IdFabrica = 0;
 
-                azulejo.quantidade = Convert.ToInt32(itensRetorno[2]);
+                if (maiorQuantidadeCentro < azulejo.quantidade) maiorQuantidadeCentro = azulejo.quantidade;
+                if (menorQuantidadeCentro > azulejo.quantidade) menorQuantidadeCentro = azulejo.quantidade;
 
                 azulejos.Add(azulejo);
-
+                jogadas.Add(novaJogada);
                 frmTabuleiro.setCentro(i, azulejo.quantidade);
             }
 
@@ -427,11 +488,6 @@ namespace PI3___Fukushima
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnStop_Click(object sender, EventArgs e)
         {
             keepRunning = false;
@@ -458,7 +514,6 @@ namespace PI3___Fukushima
             tabuleiro = frmTabuleiro.retornaTabuleiro();
 
             linha[] linhasPreenchidas = Array.FindAll(tabuleiro.modelo.linhas, linha => linha.azulejo.id != -1 || linha.azulejo.quantidade != -1);
-            
 
             Azulejo azulejoComprar = new Azulejo();
 
