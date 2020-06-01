@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PI3___Fukushima
 {
@@ -86,43 +87,49 @@ namespace PI3___Fukushima
         {
             //tem
         }
-        public static Compra PreencheComFabrica(linha[] linhasPreenchidas)
+        public static Compra PreencheComFabrica(List<Jogada> jogadas, linha[] linhasPreenchidas, Tabuleiro tabuleiro)
         {
             Compra compra = new Compra();
+            List<Jogada> jogadasBoas = new List<Jogada>();
 
-            //foreach (linha linha in linhasPreenchidas)
-            //{
-            //    if (linha.azulejo.quantidade < linha.posicao + 1 && !tabuleiro.verificarAzulejoParede(linha.azulejo.id, linha.posicao, tabuleiro))
-            //    {
-            //        if (fabricas != null)
-            //        {
-            //            foreach (Fabrica fabrica in fabricas)
-            //            {
-            //                azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
-            //                if (azulejo != null)
-            //                {
-            //                    local = "F";
-            //                    idFabricaComprada = fabrica.id;
-            //                    linhaComprada.azulejo = azulejo;
-            //                    linhaComprada.posicao = linha.posicao;
-            //                    comprou = true;
-            //                    break;
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            azulejo = centro.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
-            //            if (azulejo != null)
-            //            {
-            //                local = "C";
-            //                linhaComprada.azulejo = azulejo;
-            //                linhaComprada.posicao = linha.posicao;
-            //                comprou = true;
-            //            }
-            //        }
-            //    }
-            //}
+            foreach (linha linha in linhasPreenchidas)
+            {
+                jogadasBoas.A
+            }
+
+            foreach (linha linha in linhasPreenchidas)
+            {
+                if (linha.azulejo.quantidade < linha.posicao + 1 && !tabuleiro.verificarAzulejoParede(linha.azulejo.id, linha.posicao, tabuleiro))
+                {
+                    if (fabricas != null)
+                    {
+                        foreach (Fabrica fabrica in fabricas)
+                        {
+                            azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
+                            if (azulejo != null)
+                            {
+                                local = "F";
+                                idFabricaComprada = fabrica.id;
+                                linhaComprada.azulejo = azulejo;
+                                linhaComprada.posicao = linha.posicao;
+                                comprou = true;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        azulejo = centro.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
+                        if (azulejo != null)
+                        {
+                            local = "C";
+                            linhaComprada.azulejo = azulejo;
+                            linhaComprada.posicao = linha.posicao;
+                            comprou = true;
+                        }
+                    }
+                }
+            }
 
             return compra;
         }
