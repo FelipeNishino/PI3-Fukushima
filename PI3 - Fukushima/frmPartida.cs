@@ -21,6 +21,8 @@ namespace PI3___Fukushima
         private Centro centro;
         BackgroundWorker workerThread = null;
         List<Jogada> jogadas;
+        List<Jogada> jogadaBoas;
+
         private enum Local
         {
             Fabrica,
@@ -51,6 +53,7 @@ namespace PI3___Fukushima
             lblDadosJogador.Text = dadosJogador[0] + "," + dadosJogador[1];
             resetFlags(Local.Fabrica);
             resetFlags(Local.Centro);
+            jogadaBoas = new List<Jogada>();
 
             nFabricas = 2 * nFabricas + 1;
 
@@ -514,6 +517,20 @@ namespace PI3___Fukushima
             tabuleiro = frmTabuleiro.retornaTabuleiro();
 
             linha[] linhasPreenchidas = Array.FindAll(tabuleiro.modelo.linhas, linha => linha.azulejo.id != -1 || linha.azulejo.quantidade != -1);
+            linha[] linhasVazias = new linha[5];
+
+            //pega todas as linhas que não estao preenchidas
+            for (int i = 0; i < 5; i++)
+            {
+                linha linhaAux = new linha();
+
+                linhaAux = Array.Find(linhasPreenchidas, linha => linha.posicao == i+1);
+
+                if (linhaAux.azulejo == null)
+                {
+                    linhasVazias[i].posicao = i;
+                }
+            }
 
             Azulejo azulejoComprar = new Azulejo();
 
