@@ -59,5 +59,9 @@ namespace PI3___Fukushima
         public bool verificarAzulejoParede(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro) {
             return tabuleiro.parede[linhaModelo, (linhaModelo + (idAzulejo - 1)) % 5]; ;
         }
+
+        public bool verificaModelo() {
+            return true;
+        }
     }
 }
