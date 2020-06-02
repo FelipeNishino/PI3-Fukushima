@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.CodeDom;
 using System.Diagnostics;
+using System.Linq;
 
 namespace PI3___Fukushima
 {
@@ -21,7 +22,7 @@ namespace PI3___Fukushima
         private Centro centro;
         BackgroundWorker workerThread = null;
         List<Jogada> jogadas;
-        List<Jogada> jogadaBoas;
+        List<Jogada> jogadasBoas;
 
         private enum Local
         {
@@ -53,7 +54,7 @@ namespace PI3___Fukushima
             lblDadosJogador.Text = dadosJogador[0] + "," + dadosJogador[1];
             resetFlags(Local.Fabrica);
             resetFlags(Local.Centro);
-            jogadaBoas = new List<Jogada>();
+            jogadasBoas = new List<Jogada>();
 
             nFabricas = 2 * nFabricas + 1;
 
@@ -504,6 +505,7 @@ namespace PI3___Fukushima
         {
             int idFabricaComprada = -1;
             linha linhaComprada = new linha(-1, null);
+            List<Compra> compras = new List<Compra>();
 
             String local = "";
             bool comprou = false;
@@ -532,140 +534,154 @@ namespace PI3___Fukushima
                 }
             }
 
-            Azulejo azulejoComprar = new Azulejo();
-
-            if (fabricas.Count != 0)
+            if (linhasPreenchidas.Length > 0)
             {
-                foreach (Fabrica fabrica1 in fabricas)
-                {
-                    foreach (Azulejo azulejo1 in fabrica1.azulejos)
-                    {
-                        if (azulejo1.quantidade > azulejoComprar.quantidade)
-                        {
-                            azulejoComprar = azulejo1;
-                            idFabricaComprada = fabrica1.id;
-                        }
-                    }
-                }
-                local = "F";
+                compras.Concat(Estrategia.PreencheComFabrica(jogadas, linhasPreenchidas, tabuleiro));
             }
             else
             {
-                foreach (Azulejo azulejo1 in centro.azulejos)
-                {
-                    if (azulejo1.quantidade > azulejoComprar.quantidade)
-                    {
-                        azulejoComprar = azulejo1;
-                        idFabricaComprada = 0;
-                    }
-                }
-                local = "C";
-            }
-            int j = 4;
-            while (tabuleiro.modelo.linhas[j].azulejo.id != azulejoComprar.id && j + 1 > azulejoComprar.quantidade)
-            {
-                j--;
-            }
-            
-            if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro) && tabuleiro.modelo.linhas[j].azulejo.quantidade < j + 1)
-            {
-                //if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1)))
-                if (tabuleiro.modelo.linhas[j].azulejo.id == azulejoComprar.id || tabuleiro.modelo.linhas[j].azulejo.id == -1) {
-                    Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1);
-                    lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
-                    sleepTime = 2000;
-                    comprou = true;
-                }
+                compras.Concat(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
             }
 
-            if (linhasPreenchidas.Length > 0 && !comprou)
-            {
-                foreach (linha linha in linhasPreenchidas)
-                {
-                    if (linha.azulejo.quantidade < linha.posicao + 1 && !tabuleiro.verificarAzulejoParede(linha.azulejo.id, linha.posicao, tabuleiro))
-                    {
-                        if (fabricas != null)
-                        {
-                            foreach (Fabrica fabrica in fabricas)
-                            {
-                                azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
-                                if (azulejo != null)
-                                {
-                                    local = "F";
-                                    idFabricaComprada = fabrica.id;
-                                    linhaComprada.azulejo = azulejo;
-                                    linhaComprada.posicao = linha.posicao;
-                                    comprou = true;
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            azulejo = centro.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
-                            if (azulejo != null)
-                            {
-                                local = "C";
-                                linhaComprada.azulejo = azulejo;
-                                linhaComprada.posicao = linha.posicao;
-                                comprou = true;
-                            }
-                        }
-                    }
-                }
+            Random rand = new Random();
+            int k = rand.Next(1, compras.Count);
 
-                if (comprou)
-                {
-                    if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
-                        lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + linhaComprada.azulejo.id + "," + (linhaComprada.posicao + 1);
-                        sleepTime = 3000;
-                    }
-                }
-            }
+            Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].id, compras[k].LinhaModelo);
 
-            if (!comprou)
-            {
-                if (!jogarPadrao(azulejo, idFabricaComprada))
-                {
-                    int menorQuantidade = 10;
-                    if(fabricas.Count != 0)
-                    {
-                        foreach (Fabrica fabrica in fabricas)
-                        {
-                            foreach (Azulejo azulejo1 in fabrica.azulejos)
-                            {
-                                if (azulejo1.quantidade < menorQuantidade)
-                                {
-                                    menorQuantidade = azulejo1.quantidade;
-                                    linhaComprada.azulejo.id = azulejo1.id;
-                                    idFabricaComprada = fabrica.id;
-                                }
-                            }
-                        }
-                        local = "F";
-                    }
-                    else
-                    {
-                        foreach (Azulejo azulejo1 in centro.azulejos)
-                        {
-                            if (azulejo1.quantidade <= menorQuantidade && azulejo1.quantidade != 0)
-                            {
-                                menorQuantidade = azulejo1.quantidade;
-                                 linhaComprada.azulejo.id = azulejo1.id;
-                            }
-                        }
-                        local = "C";
-                        idFabricaComprada = 0;
-                    }
+            //Azulejo azulejoComprar = new Azulejo();
 
-                    if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
-                        lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + linhaComprada.azulejo.id + "," + (linhaComprada.posicao + 1);
-                        sleepTime = 3000;
-                    }
-                }
-            }
+            //if (fabricas.Count != 0)
+            //{
+            //    foreach (Fabrica fabrica1 in fabricas)
+            //    {
+            //        foreach (Azulejo azulejo1 in fabrica1.azulejos)
+            //        {
+            //            if (azulejo1.quantidade > azulejoComprar.quantidade)
+            //            {
+            //                azulejoComprar = azulejo1;
+            //                idFabricaComprada = fabrica1.id;
+            //            }
+            //        }
+            //    }
+            //    local = "F";
+            //}
+            //else
+            //{
+            //    foreach (Azulejo azulejo1 in centro.azulejos)
+            //    {
+            //        if (azulejo1.quantidade > azulejoComprar.quantidade)
+            //        {
+            //            azulejoComprar = azulejo1;
+            //            idFabricaComprada = 0;
+            //        }
+            //    }
+            //    local = "C";
+            //}
+            //int j = 4;
+            //while (tabuleiro.modelo.linhas[j].azulejo.id != azulejoComprar.id && j + 1 > azulejoComprar.quantidade)
+            //{
+            //    j--;
+            //}
+
+            //if (!tabuleiro.verificarAzulejoParede(azulejoComprar.id, j, tabuleiro) && tabuleiro.modelo.linhas[j].azulejo.quantidade < j + 1)
+            //{
+            //    //if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1)))
+            //    if (tabuleiro.modelo.linhas[j].azulejo.id == azulejoComprar.id || tabuleiro.modelo.linhas[j].azulejo.id == -1) {
+            //        Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, azulejoComprar.id, j + 1);
+            //        lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + azulejoComprar.id + "," + (j + 1);
+            //        sleepTime = 2000;
+            //        comprou = true;
+            //    }
+            //}
+
+            //if (linhasPreenchidas.Length > 0 && !comprou)
+            //{
+            //    foreach (linha linha in linhasPreenchidas)
+            //    {
+            //        if (linha.azulejo.quantidade < linha.posicao + 1 && !tabuleiro.verificarAzulejoParede(linha.azulejo.id, linha.posicao, tabuleiro))
+            //        {
+            //            if (fabricas != null)
+            //            {
+            //                foreach (Fabrica fabrica in fabricas)
+            //                {
+            //                    azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
+            //                    if (azulejo != null)
+            //                    {
+            //                        local = "F";
+            //                        idFabricaComprada = fabrica.id;
+            //                        linhaComprada.azulejo = azulejo;
+            //                        linhaComprada.posicao = linha.posicao;
+            //                        comprou = true;
+            //                        break;
+            //                    }
+            //                }
+            //            }
+            //            else
+            //            {
+            //                azulejo = centro.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
+            //                if (azulejo != null)
+            //                {
+            //                    local = "C";
+            //                    linhaComprada.azulejo = azulejo;
+            //                    linhaComprada.posicao = linha.posicao;
+            //                    comprou = true;
+            //                }
+            //            }
+            //        }
+            //    }
+
+            //    if (comprou)
+            //    {
+            //        if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
+            //            lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + linhaComprada.azulejo.id + "," + (linhaComprada.posicao + 1);
+            //            sleepTime = 3000;
+            //        }
+            //    }
+            //}
+
+            //if (!comprou)
+            //{
+            //    if (!jogarPadrao(azulejo, idFabricaComprada))
+            //    {
+            //        int menorQuantidade = 10;
+            //        if(fabricas.Count != 0)
+            //        {
+            //            foreach (Fabrica fabrica in fabricas)
+            //            {
+            //                foreach (Azulejo azulejo1 in fabrica.azulejos)
+            //                {
+            //                    if (azulejo1.quantidade < menorQuantidade)
+            //                    {
+            //                        menorQuantidade = azulejo1.quantidade;
+            //                        linhaComprada.azulejo.id = azulejo1.id;
+            //                        idFabricaComprada = fabrica.id;
+            //                    }
+            //                }
+            //            }
+            //            local = "F";
+            //        }
+            //        else
+            //        {
+            //            foreach (Azulejo azulejo1 in centro.azulejos)
+            //            {
+            //                if (azulejo1.quantidade <= menorQuantidade && azulejo1.quantidade != 0)
+            //                {
+            //                    menorQuantidade = azulejo1.quantidade;
+            //                     linhaComprada.azulejo.id = azulejo1.id;
+            //                }
+            //            }
+            //            local = "C";
+            //            idFabricaComprada = 0;
+            //        }
+
+            //        if (!VerificarErro(Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], local, idFabricaComprada, linhaComprada.azulejo.id, linhaComprada.posicao + 1))){
+            //            lastPlay = dadosJogador[0] + "," + local + "," + idFabricaComprada + "," + linhaComprada.azulejo.id + "," + (linhaComprada.posicao + 1);
+            //            sleepTime = 3000;
+            //        }
+            //    }
+            //}
             isBuying = false;
-            frmTabuleiro.limparFabricas(idFabricaComprada);
+            frmTabuleiro.limparFabricas(compras[k].IdFabrica);
             btnListarCentro_Click(null, null);
         }
 

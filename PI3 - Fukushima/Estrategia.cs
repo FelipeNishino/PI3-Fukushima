@@ -32,6 +32,7 @@ namespace PI3___Fukushima
             {
                 Compra compra = new Compra();
                 compra.id = jogadasMaiorQuantidade[i].id;
+                compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
                 compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
                 compra.Local = (compra.id == 0)? "C" : "F";
                 compra.LinhaModelo = linhaVazia.posicao;
@@ -44,51 +45,29 @@ namespace PI3___Fukushima
         {
             //tem
         }
-        public static Compra PreencheComFabrica(List<Jogada> jogadas, linha[] linhasPreenchidas, Tabuleiro tabuleiro)
+        public static List<Compra> PreencheComFabrica(List<Jogada> jogadas, linha[] linhasPreenchidas, Tabuleiro tabuleiro)
         {
-            Compra compra = new Compra();
             List<Jogada> jogadasBoas = new List<Jogada>();
+            List<Compra> compras = new List<Compra>();
 
             foreach (linha linha in linhasPreenchidas)
             {
-                jogadasBoas.A
-            }
-
-            foreach (linha linha in linhasPreenchidas)
-            {
-                if (linha.azulejo.quantidade < linha.posicao + 1 && !tabuleiro.verificarAzulejoParede(linha.azulejo.id, linha.posicao, tabuleiro))
+                jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade < linha.posicao && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id && !tabuleiro.verificarAzulejoParede(jogada.id, linha.posicao, tabuleiro));
+                foreach (Jogada jogadaBoa in jogadasBoas)
                 {
-                    if (fabricas != null)
+                    Compra compra = new Compra
                     {
-                        foreach (Fabrica fabrica in fabricas)
-                        {
-                            azulejo = fabrica.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
-                            if (azulejo != null)
-                            {
-                                local = "F";
-                                idFabricaComprada = fabrica.id;
-                                linhaComprada.azulejo = azulejo;
-                                linhaComprada.posicao = linha.posicao;
-                                comprou = true;
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        azulejo = centro.azulejos.Find(azulejoFind => azulejoFind.id == linha.azulejo.id);
-                        if (azulejo != null)
-                        {
-                            local = "C";
-                            linhaComprada.azulejo = azulejo;
-                            linhaComprada.posicao = linha.posicao;
-                            comprou = true;
-                        }
-                    }
+                        id = jogadaBoa.id,
+                        IdFabrica = jogadaBoa.IdFabrica,
+                        quantidade = jogadaBoa.quantidade,
+                        LinhaModelo = linha.posicao,
+                        Local = "F"
+                    };
+                    compras.Add(compra);
                 }
             }
 
-            return compra;
+            return compras;
         }
         public static void PreencheComCentro()
         {
