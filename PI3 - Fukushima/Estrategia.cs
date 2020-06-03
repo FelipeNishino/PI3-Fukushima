@@ -22,21 +22,24 @@ namespace PI3___Fukushima
 
 
             //procura a maior quantidade entre as jogadas
-            jogadasMaiorQuantidade = jogadas.FindAll(jogada => (jogada.quantidade == maiorQuantidadeFabrica && jogada.IdFabrica != 0) || (jogada.quantidade == maiorQuantidadeCentro && jogada.IdFabrica == 0 && maiorQuantidadeCentro <= 5));
+            jogadasMaiorQuantidade = jogadas.FindAll(jogada => (jogada.quantidade == maiorQuantidadeFabrica && jogada.IdFabrica != 0) || (jogada.quantidade == maiorQuantidadeCentro && jogada.IdFabrica == 0 && 0 < maiorQuantidadeCentro && maiorQuantidadeCentro <= 5));
             
             //prucura uma linha vazia que caiba a maiorquantidade
-            linha linhaVazia = Array.Find(linhasVazias, linha => linha.posicao == maiorQuantidadeFabrica || (linha.posicao == maiorQuantidadeCentro && maiorQuantidadeCentro <= 5));
+            linha linhaVazia = Array.Find(linhasVazias, linha => linha.posicao == maiorQuantidadeFabrica || (linha.posicao == maiorQuantidadeCentro && 0 < maiorQuantidadeCentro && maiorQuantidadeCentro <= 5));
 
             //configura a list de compras validas
             for (int i = 0; i < jogadasMaiorQuantidade.Count; i++)
             {
-                Compra compra = new Compra();
-                compra.id = jogadasMaiorQuantidade[i].id;
-                compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
-                compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
-                compra.Local = (compra.id == 0)? "C" : "F";
-                compra.LinhaModelo = linhaVazia.posicao;
-                compras.Add(compra);
+                if (!tabuleiro.verificarAzulejoParede(jogadasMaiorQuantidade[i].id, linhaVazia.posicao - 1, tabuleiro))
+                {
+                    Compra compra = new Compra();
+                    compra.id = jogadasMaiorQuantidade[i].id; 
+                    compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
+                    compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
+                    compra.Local = (compra.IdFabrica == 0)? "C" : "F";
+                    compra.LinhaModelo = linhaVazia.posicao;
+                    compras.Add(compra);
+                }
             }
 
             return compras;

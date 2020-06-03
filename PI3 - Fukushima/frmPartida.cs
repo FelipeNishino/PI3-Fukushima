@@ -253,11 +253,13 @@ namespace PI3___Fukushima
             {
                 case Local.Fabrica:
                     menorQuantidadeFabrica = 0;
-                    maiorQuantidadeFabrica = 5;
+                    //maiorQuantidadeFabrica = 5;
+                    maiorQuantidadeFabrica = -1;
                     break;
                 case Local.Centro:
                     menorQuantidadeCentro = 0;
-                    maiorQuantidadeCentro = 30;
+                    //maiorQuantidadeCentro = 30;
+                    maiorQuantidadeCentro = -1;
                     break;
                 default:
                     break;
@@ -321,8 +323,8 @@ namespace PI3___Fukushima
                 azulejo.carregarImagem();
                 azulejos[i - 1].Add(azulejo);
 
-                if (maiorQuantidadeFabrica < azulejo.quantidade) maiorQuantidadeFabrica = azulejo.quantidade;
-                if (menorQuantidadeFabrica > azulejo.quantidade) menorQuantidadeFabrica = azulejo.quantidade;
+                if (maiorQuantidadeFabrica <= azulejo.quantidade) maiorQuantidadeFabrica = azulejo.quantidade;
+                if (menorQuantidadeFabrica >= azulejo.quantidade) menorQuantidadeFabrica = azulejo.quantidade;
 
                 j++;
 
@@ -526,11 +528,15 @@ namespace PI3___Fukushima
             {
                 linha linhaAux = new linha();
 
-                linhaAux = Array.Find(linhasPreenchidas, linha => linha.posicao == i+1);
+                linhaAux = Array.Find(linhasPreenchidas, linha => linha.posicao == i);
 
                 if (linhaAux.azulejo == null)
                 {
-                    linhasVazias[i].posicao = i;
+                    linhasVazias[i].posicao = i+1;
+                }
+                else
+                {
+                    linhasVazias[i].posicao = -1;
                 }
             }
 
@@ -540,11 +546,12 @@ namespace PI3___Fukushima
             }
             else
             {
-                compras.Concat(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
+                //compras.Concat(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
+                compras = Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro);
             }
 
             Random rand = new Random();
-            int k = rand.Next(1, compras.Count);
+            int k = rand.Next(0, compras.Count - 1);
 
             Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].id, compras[k].LinhaModelo);
 
