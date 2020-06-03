@@ -129,6 +129,7 @@ namespace PI3___Fukushima
 
             while (keepRunning)
             {
+                Debug.Print("comeca timer");
                 Thread.Sleep(sleepTime);
                 sleepTime = 2000;
                 string timeElapsedInstring = (DateTime.Now - startTime).ToString(@"hh\:mm\:ss");
@@ -146,11 +147,11 @@ namespace PI3___Fukushima
                     }
                     else
                     {
-                        if (vez.Substring(0, vez.IndexOf(",")) == dadosJogador[0])
+                        if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0])
                         {
                             queuedRead += 2;
                         }
-
+                        //J,41,1
 
                         if (round < ((retorno.Length - retorno.Replace("Fábricas preenchidas!\r\n", "").Length) / "Fábricas preenchidas!\r\n".Length))
                         {
@@ -238,7 +239,9 @@ namespace PI3___Fukushima
                     e.Cancel = true;
                     break;
                 }
+                Debug.Print("Termina timer");
             }
+
         }
 
         private void final()
@@ -252,13 +255,11 @@ namespace PI3___Fukushima
             switch (local)
             {
                 case Local.Fabrica:
-                    menorQuantidadeFabrica = 0;
-                    //maiorQuantidadeFabrica = 5;
+                    menorQuantidadeFabrica = 5;                    
                     maiorQuantidadeFabrica = -1;
                     break;
                 case Local.Centro:
-                    menorQuantidadeCentro = 0;
-                    //maiorQuantidadeCentro = 30;
+                    menorQuantidadeCentro = 30;                    
                     maiorQuantidadeCentro = -1;
                     break;
                 default:
@@ -505,6 +506,7 @@ namespace PI3___Fukushima
         }
         private void BotCompra()
         {
+            Debug.Print("Comeca compra");
             int idFabricaComprada = -1;
             linha linhaComprada = new linha(-1, null);
             List<Compra> compras = new List<Compra>();
@@ -690,6 +692,7 @@ namespace PI3___Fukushima
             isBuying = false;
             frmTabuleiro.limparFabricas(compras[k].IdFabrica);
             btnListarCentro_Click(null, null);
+            Debug.Print("termina compra");
         }
 
         public bool jogarPadrao(Azulejo azulejo, int idFabricaComprada)
