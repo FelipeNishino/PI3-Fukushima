@@ -542,12 +542,12 @@ namespace PI3___Fukushima
 
             if (linhasPreenchidas.Length > 0)
             {
-                compras.Concat(Estrategia.PreencheComFabrica(jogadas, linhasPreenchidas, tabuleiro));
+                compras.AddRange(Estrategia.PreencheComFabrica(jogadas, linhasPreenchidas, tabuleiro));
             }
             else
             {
                 //compras.Concat(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
-                compras = Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro);
+                compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
             }
 
             Random rand = new Random();

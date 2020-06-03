@@ -396,7 +396,6 @@ namespace PI3___Fukushima
                 }
             }
         }
-
         public void limparCentro()
         {
             PictureBox pbo = new PictureBox();
