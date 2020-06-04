@@ -60,8 +60,13 @@ namespace PI3___Fukushima
             return tabuleiro.parede[linhaModelo, (linhaModelo + (idAzulejo - 1)) % 5]; ;
         }
 
-        public bool verificaModelo() {
-            return true;
+        public bool verificaModelo(Tabuleiro tabuleiro, int linhaModelo) {
+            
+            if(tabuleiro.modelo.linhas[linhaModelo].azulejo.id == -1) return true;
+
+
+            return false;
+        
         }
     }
 }

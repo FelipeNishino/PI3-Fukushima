@@ -363,6 +363,7 @@ namespace PI3___Fukushima
 
             for (int i = 0; i < retorno.Length - 1; i++)
             {
+                Jogada novaJogada = new Jogada();
                 Azulejo azulejo = new Azulejo();
                 Jogada novaJogada = new Jogada();
                 itensRetorno = retorno[i].Split(',');

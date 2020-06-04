@@ -190,22 +190,28 @@ namespace PI3___Fukushima
                 //}
 
                 linhaModelo = listaAux[listaAux.Count - 1].posicao;
-                //percorre todas as jogadas de menor quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
-                for (i = 0; i < jogadasMenorQuantidade.Count; i++)
-                {
-                    if (!tabuleiro.verificarAzulejoParede(jogadasMenorQuantidade[i].id, linhaModelo - 1, tabuleiro))
+
+                if (tabuleiro.verificaModelo(tabuleiro, linhaModelo)) { 
+                    for (i = 0; i < jogadasMenorQuantidade.Count; i++)
                     {
-                        Compra compra = new Compra();
-                        compra.id = jogadasMenorQuantidade[i].id;
-                        compra.quantidade = jogadasMenorQuantidade[i].quantidade;
-                        compra.IdFabrica = jogadasMenorQuantidade[i].IdFabrica;
-                        compra.Local = "C";
-                        compra.LinhaModelo = linhaModelo;
-                        compra.Fonte = "MenorCentro";
-                        compras.Add(compra);
+                        if (!tabuleiro.verificarAzulejoParede(jogadasMenorQuantidade[i].id, linhaModelo - 1, tabuleiro))
+                        {
+                            Compra compra = new Compra();
+                            compra.id = jogadasMenorQuantidade[i].id;
+                            compra.quantidade = jogadasMenorQuantidade[i].quantidade;
+                            compra.IdFabrica = jogadasMenorQuantidade[i].IdFabrica;
+                            compra.Local = "C";
+                            compra.LinhaModelo = linhaModelo;
+                            compra.Fonte = "MenorCentro";
+                            compras.Add(compra);
+                        }
                     }
                 }
+                //percorre todas as jogadas de menor quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
             }
+
+            
+            //procura a menor quantidade entre as jogadas
 
             return compras;
         }
@@ -230,23 +236,26 @@ namespace PI3___Fukushima
                 //}
 
                 linhaModelo = listaAux[listaAux.Count - 1].posicao;
-                //percorre todas as jogadas de maior quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
-                for (i = 0; i < jogadasMaiorQuantidade.Count; i++)
-                {
-                    if (!tabuleiro.verificarAzulejoParede(jogadasMaiorQuantidade[i].id, linhaModelo - 1, tabuleiro))
+
+                if (tabuleiro.verificaModelo(tabuleiro, linhaModelo)) { 
+                    for (i = 0; i < jogadasMaiorQuantidade.Count; i++)
                     {
-                        Compra compra = new Compra();
-                        compra.id = jogadasMaiorQuantidade[i].id;
-                        compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
-                        compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
-                        compra.Local = "C";
-                        compra.LinhaModelo = linhaModelo;
-                        compra.Fonte = "MaiorCentro";
-                        compras.Add(compra);
+                        if (!tabuleiro.verificarAzulejoParede(jogadasMaiorQuantidade[i].id, linhaModelo - 1, tabuleiro))
+                        {
+                            Compra compra = new Compra();
+                            compra.id = jogadasMaiorQuantidade[i].id;
+                            compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
+                            compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
+                            compra.Local = "C";
+                            compra.LinhaModelo = linhaModelo;
+                            compra.Fonte = "MaiorCentro";
+                            compras.Add(compra);
+                        }
                     }
                 }
+                //percorre todas as jogadas de maior quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
             }
-
+           
             return compras;
         }
     }
