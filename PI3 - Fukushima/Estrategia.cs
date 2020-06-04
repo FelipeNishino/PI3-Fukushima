@@ -31,7 +31,8 @@ namespace PI3___Fukushima
                     IdFabrica = jogadaBoa.IdFabrica,
                     quantidade = jogadaBoa.quantidade,
                     LinhaModelo = 0,
-                    Local = (jogadaBoa.IdFabrica == 0) ? "C" : "F"
+                    Local = (jogadaBoa.IdFabrica == 0) ? "C" : "F",
+                    Fonte = "MenorChao"
                 };
                 compras.Add(compra);
             }
@@ -62,6 +63,7 @@ namespace PI3___Fukushima
                     compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
                     compra.Local = "F";
                     compra.LinhaModelo = linhaVaziaFabricas.posicao;
+                    compra.Fonte = "MaiorModelo";
                     compras.Add(compra);
                 }
             }
@@ -93,6 +95,7 @@ namespace PI3___Fukushima
                     compra.IdFabrica = jogadasMenorQuantidade[i].IdFabrica;
                     compra.Local = "F";
                     compra.LinhaModelo = linhaVaziaFabricas.posicao;
+                    compra.Fonte = "MenorModelo";
                     compras.Add(compra);
                 }
             }
@@ -119,7 +122,8 @@ namespace PI3___Fukushima
                         IdFabrica = jogadaBoa.IdFabrica,
                         quantidade = jogadaBoa.quantidade,
                         LinhaModelo = linha.posicao,
-                        Local = "F"
+                        Local = "F",
+                        Fonte = "PreencheComFabrica"
                     };
                     compras.Add(compra);
                 }
@@ -147,7 +151,8 @@ namespace PI3___Fukushima
                         IdFabrica = 0,
                         quantidade = jogadaBoa.quantidade,
                         LinhaModelo = linha.posicao,
-                        Local = "C"
+                        Local = "C",
+                        Fonte = "PreencheComCentro"
                     };
                     compras.Add(compra);
                 }
@@ -183,6 +188,7 @@ namespace PI3___Fukushima
                     compra.IdFabrica = jogadasMenorQuantidade[i].IdFabrica;
                     compra.Local = "C";
                     compra.LinhaModelo = linhaModelo;
+                    compra.Fonte = "MenorCentro";
                     compras.Add(compra);
                 }
             }
@@ -217,6 +223,7 @@ namespace PI3___Fukushima
                     compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
                     compra.Local = "C";
                     compra.LinhaModelo = linhaModelo;
+                    compra.Fonte = "MaiorCentro";
                     compras.Add(compra);
                 }
             }

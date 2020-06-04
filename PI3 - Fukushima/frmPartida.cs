@@ -544,16 +544,34 @@ namespace PI3___Fukushima
 
             if (linhasPreenchidas.Length > 0)
             {
-                compras.AddRange(Estrategia.PreencheComFabrica(jogadas, linhasPreenchidas, tabuleiro));
+                if (fabricas.Count > 0)
+                {
+                    compras.AddRange(Estrategia.PreencheComFabrica(jogadas, linhasPreenchidas, tabuleiro));
+                }
+                compras.AddRange(Estrategia.PreencheComCentro(jogadas, linhasPreenchidas, tabuleiro));
             }
-            else
-            { 
-                compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
+
+            if (linhasVazias.Length > 0)
+            {
+                if (fabricas.Count > 0)
+                {
+                    compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
+                    compras.AddRange(Estrategia.MenorModelo(linhasVazias, jogadas, jogadasBoas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
+                }
+                compras.AddRange(Estrategia.MaiorCentro(linhasVazias, jogadas, maiorQuantidadeCentro, tabuleiro));
+                compras.AddRange(Estrategia.MenorCentro(linhasVazias, jogadas, menorQuantidadeCentro, tabuleiro));
+
             }
+
+            if (compras.Count == 0)
+            {
+                compras.AddRange(Estrategia.MenorChao(jogadas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
+            }
+                
 
             Random rand = new Random();
             int k = rand.Next(0, compras.Count - 1);
-
+            Debug.Print(compras[k].Fonte);
             Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].id, compras[k].LinhaModelo);
 
             //Azulejo azulejoComprar = new Azulejo();
