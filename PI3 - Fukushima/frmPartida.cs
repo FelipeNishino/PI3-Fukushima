@@ -325,7 +325,7 @@ namespace PI3___Fukushima
                 azulejos[i - 1].Add(azulejo);
 
                 if (maiorQuantidadeFabrica <= azulejo.quantidade) maiorQuantidadeFabrica = azulejo.quantidade;
-                if (menorQuantidadeFabrica >= azulejo.quantidade) menorQuantidadeFabrica = azulejo.quantidade;
+                if (menorQuantidadeFabrica >= azulejo.quantidade && azulejo.quantidade > 0) menorQuantidadeFabrica = azulejo.quantidade;
 
                 j++;
 
@@ -372,7 +372,7 @@ namespace PI3___Fukushima
                 novaJogada.IdFabrica = 0;
 
                 if (maiorQuantidadeCentro < azulejo.quantidade) maiorQuantidadeCentro = azulejo.quantidade;
-                if (menorQuantidadeCentro > azulejo.quantidade) menorQuantidadeCentro = azulejo.quantidade;
+                if (menorQuantidadeCentro > azulejo.quantidade && azulejo.quantidade > 0) menorQuantidadeCentro = azulejo.quantidade;
 
                 azulejos.Add(azulejo);
                 jogadas.Add(novaJogada);
@@ -472,6 +472,7 @@ namespace PI3___Fukushima
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            isBuying = false;
             workerThread.RunWorkerAsync();
         }
 
@@ -523,24 +524,42 @@ namespace PI3___Fukushima
             tabuleiro = frmTabuleiro.retornaTabuleiro();
 
             linha[] linhasPreenchidas = Array.FindAll(tabuleiro.modelo.linhas, linha => linha.azulejo.id != -1 || linha.azulejo.quantidade != -1);
-            linha[] linhasVazias = new linha[5];
+            List<linha> linhasVazias = new List<linha>();            
 
-            //pega todas as linhas que não estao preenchidas
+            int k = 0;
             for (int i = 0; i < 5; i++)
             {
-                linha linhaAux = new linha();
+                linha linhaVazia = new linha();
 
-                linhaAux = Array.Find(linhasPreenchidas, linha => linha.posicao == i);
+                if (k < linhasPreenchidas.Length)
+                {
+                    if (linhasPreenchidas[k].posicao == i)
+                    {
+                        k++;
+                        continue;
+                    }
+                }
 
-                if (linhaAux.azulejo == null)
-                {
-                    linhasVazias[i].posicao = i+1;
-                }
-                else
-                {
-                    linhasVazias[i].posicao = -1;
-                }
+                linhaVazia.posicao = i;
+                linhasVazias.Add(linhaVazia);
             }
+
+            //pega todas as linhas que não estao preenchidas
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    linha linhaAux = new linha();
+
+            //    linhaAux = Array.Find(linhasPreenchidas, linha => linha.posicao == i);
+
+            //    if (linhaAux.azulejo == null)
+            //    {
+            //        linhasVazias[i].posicao = i+1;
+            //    }
+            //    else
+            //    {
+            //        linhasVazias[i].posicao = -1;
+            //    }
+            //}
 
             if (linhasPreenchidas.Length > 0)
             {
@@ -551,7 +570,7 @@ namespace PI3___Fukushima
                 compras.AddRange(Estrategia.PreencheComCentro(jogadas, linhasPreenchidas, tabuleiro));
             }
 
-            if (linhasVazias.Length > 0)
+            if (linhasVazias.Count > 0)
             {
                 if (fabricas.Count > 0)
                 {
@@ -570,7 +589,7 @@ namespace PI3___Fukushima
                 
 
             Random rand = new Random();
-            int k = rand.Next(0, compras.Count - 1);
+            k = rand.Next(0, compras.Count - 1);
             Debug.Print(compras[k].Fonte);
             Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].id, compras[k].LinhaModelo);
 

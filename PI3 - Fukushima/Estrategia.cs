@@ -39,7 +39,7 @@ namespace PI3___Fukushima
 
             return compras;
         }
-        public static List<Compra> MaiorModelo(linha[] linhasVazias,List<Jogada> jogadas, List<Jogada> jogadasBoas, int maiorQuantidadeFabrica, int maiorQuantidadeCentro, Tabuleiro tabuleiro)
+        public static List<Compra> MaiorModelo(List<linha> linhasVazias,List<Jogada> jogadas, List<Jogada> jogadasBoas, int maiorQuantidadeFabrica, int maiorQuantidadeCentro, Tabuleiro tabuleiro)
         {
             
             List<Jogada> jogadasMaiorQuantidade = new List<Jogada>();
@@ -49,28 +49,33 @@ namespace PI3___Fukushima
             jogadasMaiorQuantidade = jogadas.FindAll(jogada => (jogada.quantidade == maiorQuantidadeFabrica && jogada.IdFabrica != 0) || (jogada.quantidade == maiorQuantidadeCentro && jogada.IdFabrica == 0 && 0 < maiorQuantidadeCentro && maiorQuantidadeCentro <= 5));
             
             //prucura uma linha vazia que caiba a maiorquantidade
-            linha linhaVaziaFabricas = Array.Find(linhasVazias, linha => linha.posicao == maiorQuantidadeFabrica);
-           
-            //percorre todas as jogadas de maior quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
-            for (int i = 0; i < jogadasMaiorQuantidade.Count; i++)
+            linha linhaVaziaFabricas = linhasVazias.Find(linha => linha.posicao == maiorQuantidadeFabrica);
+
+            if (linhaVaziaFabricas.posicao > 0)
             {
-               
-                //realiza a configuração da compra
-                if (!tabuleiro.verificarAzulejoParede(jogadasMaiorQuantidade[i].id, linhaVaziaFabricas.posicao - 1, tabuleiro)) {
-                    Compra compra = new Compra();
-                    compra.id = jogadasMaiorQuantidade[i].id;
-                    compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
-                    compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
-                    compra.Local = "F";
-                    compra.LinhaModelo = linhaVaziaFabricas.posicao;
-                    compra.Fonte = "MaiorModelo";
-                    compras.Add(compra);
+
+                //percorre todas as jogadas de maior quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
+                for (int i = 0; i < jogadasMaiorQuantidade.Count; i++)
+                {
+
+                    //realiza a configuração da compra
+                    if (!tabuleiro.verificarAzulejoParede(jogadasMaiorQuantidade[i].id, linhaVaziaFabricas.posicao - 1, tabuleiro))
+                    {
+                        Compra compra = new Compra();
+                        compra.id = jogadasMaiorQuantidade[i].id;
+                        compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
+                        compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
+                        compra.Local = "F";
+                        compra.LinhaModelo = linhaVaziaFabricas.posicao;
+                        compra.Fonte = "MaiorModelo";
+                        compras.Add(compra);
+                    }
                 }
             }
 
             return compras;
         }
-        public static List<Compra> MenorModelo(linha[] linhasVazias, List<Jogada> jogadas, List<Jogada> jogadasBoas, int menorQuantidadeFabrica, int menorQuantidadeCentro, Tabuleiro tabuleiro)
+        public static List<Compra> MenorModelo(List<linha> linhasVazias, List<Jogada> jogadas, List<Jogada> jogadasBoas, int menorQuantidadeFabrica, int menorQuantidadeCentro, Tabuleiro tabuleiro)
         {
 
             List<Jogada> jogadasMenorQuantidade = new List<Jogada>();
@@ -80,23 +85,27 @@ namespace PI3___Fukushima
             jogadasMenorQuantidade = jogadas.FindAll(jogada => (jogada.quantidade == menorQuantidadeFabrica && jogada.IdFabrica != 0) || (jogada.quantidade == menorQuantidadeFabrica && jogada.IdFabrica == 0 && 0 < menorQuantidadeFabrica && menorQuantidadeFabrica <= 5));
 
             //prucura uma linha vazia que caiba a menor quantidade
-            linha linhaVaziaFabricas = Array.Find(linhasVazias, linha => linha.posicao == menorQuantidadeFabrica);
+            linha linhaVaziaFabricas = linhasVazias.Find(linha => linha.posicao == menorQuantidadeFabrica);
 
-            //percorre todas as jogadas de menor quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
-            for (int i = 0; i < jogadasMenorQuantidade.Count; i++)
+            if (linhaVaziaFabricas.posicao > 0)
             {
 
-                //realiza a configuração da compra
-                if (!tabuleiro.verificarAzulejoParede(jogadasMenorQuantidade[i].id, linhaVaziaFabricas.posicao - 1, tabuleiro))
+                //percorre todas as jogadas de menor quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
+                for (int i = 0; i < jogadasMenorQuantidade.Count; i++)
                 {
-                    Compra compra = new Compra();
-                    compra.id = jogadasMenorQuantidade[i].id;
-                    compra.quantidade = jogadasMenorQuantidade[i].quantidade;
-                    compra.IdFabrica = jogadasMenorQuantidade[i].IdFabrica;
-                    compra.Local = "F";
-                    compra.LinhaModelo = linhaVaziaFabricas.posicao;
-                    compra.Fonte = "MenorModelo";
-                    compras.Add(compra);
+
+                    //realiza a configuração da compra
+                    if (!tabuleiro.verificarAzulejoParede(jogadasMenorQuantidade[i].id, linhaVaziaFabricas.posicao - 1, tabuleiro))
+                    {
+                        Compra compra = new Compra();
+                        compra.id = jogadasMenorQuantidade[i].id;
+                        compra.quantidade = jogadasMenorQuantidade[i].quantidade;
+                        compra.IdFabrica = jogadasMenorQuantidade[i].IdFabrica;
+                        compra.Local = "F";
+                        compra.LinhaModelo = linhaVaziaFabricas.posicao;
+                        compra.Fonte = "MenorModelo";
+                        compras.Add(compra);
+                    }
                 }
             }
 
@@ -160,7 +169,7 @@ namespace PI3___Fukushima
 
             return compras;
         }
-        public static List<Compra> MenorCentro(linha[] linhasVazias, List<Jogada> jogadas, int menorQuantidadeCentro, Tabuleiro tabuleiro)
+        public static List<Compra> MenorCentro(List<linha> linhasVazias, List<Jogada> jogadas, int menorQuantidadeCentro, Tabuleiro tabuleiro)
         {
             List<Jogada> jogadasMenorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
@@ -171,9 +180,10 @@ namespace PI3___Fukushima
 
             //percorre as linhas do modelo procurando uma linha onde possa colocar a menor quantidade do centro
             int i = 0;
-            while (i != 4 || linhasVazias[i].posicao <= menorQuantidadeCentro)
+            while (i != 4 && linhasVazias[i].posicao <= menorQuantidadeCentro)
             {
                 linhaModelo = linhasVazias[i].posicao;
+                i++;
             }
 
 
@@ -195,7 +205,7 @@ namespace PI3___Fukushima
 
             return compras;
         }
-        public static List<Compra> MaiorCentro(linha[] linhasVazias, List<Jogada> jogadas, int maiorQuantidadeCentro, Tabuleiro tabuleiro)
+        public static List<Compra> MaiorCentro(List<linha> linhasVazias, List<Jogada> jogadas, int maiorQuantidadeCentro, Tabuleiro tabuleiro)
         {
             List<Jogada> jogadasMaiorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
@@ -206,9 +216,10 @@ namespace PI3___Fukushima
 
             //percorre as linhas do modelo procurando uma linha onde possa colocar a maior quantidade do centro
             int i = 0;
-            while (i != 4 || linhasVazias[i].posicao <= maiorQuantidadeCentro)
+            while (i != 4 && linhasVazias[i].posicao <= maiorQuantidadeCentro)
             {
                 linhaModelo = linhasVazias[i].posicao;
+                i++;
             }
 
 
