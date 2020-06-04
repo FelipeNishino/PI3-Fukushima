@@ -355,7 +355,6 @@ namespace PI3___Fukushima
             string[] itensRetorno;
             centro = new Centro();
             List<Azulejo> azulejos = new List<Azulejo>();
-            Jogada novaJogada = new Jogada();
 
             retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
@@ -365,6 +364,7 @@ namespace PI3___Fukushima
             for (int i = 0; i < retorno.Length - 1; i++)
             {
                 Azulejo azulejo = new Azulejo();
+                Jogada novaJogada = new Jogada();
                 itensRetorno = retorno[i].Split(',');
 
                 novaJogada.id = azulejo.id = Convert.ToInt32(itensRetorno[0]);
@@ -579,7 +579,6 @@ namespace PI3___Fukushima
                 }
                 compras.AddRange(Estrategia.MaiorCentro(linhasVazias, jogadas, maiorQuantidadeCentro, tabuleiro));
                 compras.AddRange(Estrategia.MenorCentro(linhasVazias, jogadas, menorQuantidadeCentro, tabuleiro));
-
             }
 
             if (compras.Count == 0)
