@@ -547,8 +547,7 @@ namespace PI3___Fukushima
                 compras.AddRange(Estrategia.PreencheComFabrica(jogadas, linhasPreenchidas, tabuleiro));
             }
             else
-            {
-                //compras.Concat(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
+            { 
                 compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
             }
 
