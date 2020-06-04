@@ -355,7 +355,6 @@ namespace PI3___Fukushima
             string[] itensRetorno;
             centro = new Centro();
             List<Azulejo> azulejos = new List<Azulejo>();
-            Jogada novaJogada = new Jogada();
 
             retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
@@ -364,6 +363,7 @@ namespace PI3___Fukushima
 
             for (int i = 0; i < retorno.Length - 1; i++)
             {
+                Jogada novaJogada = new Jogada();
                 Azulejo azulejo = new Azulejo();
                 itensRetorno = retorno[i].Split(',');
 

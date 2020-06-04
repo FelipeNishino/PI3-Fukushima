@@ -176,33 +176,41 @@ namespace PI3___Fukushima
             List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao >= menorQuantidadeCentro);
             int linhaModelo = 0;
 
-            //procura a menor quantidade entre as jogadas
-            jogadasMenorQuantidade = jogadas.FindAll(jogada => jogada.quantidade == menorQuantidadeCentro && jogada.IdFabrica == 0 && 0 < menorQuantidadeCentro);
 
-            //percorre as linhas do modelo procurando uma linha onde possa colocar a menor quantidade do centro
-            int i = 0;
-            //while (i != 4 && linhasVazias[i].posicao <= menorQuantidadeCentro)
-            //{
-            //    linhaModelo = linhasVazias[i].posicao;
-            //    i++;
-            //}
+            if (listaAux.Count > 0) {
+                jogadasMenorQuantidade = jogadas.FindAll(jogada => jogada.quantidade == menorQuantidadeCentro && jogada.IdFabrica == 0 && 0 < menorQuantidadeCentro);
 
-            linhaModelo = listaAux[listaAux.Count - 1].posicao;
-            //percorre todas as jogadas de menor quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
-            for (i = 0; i < jogadasMenorQuantidade.Count; i++)
-            {
-                if (!tabuleiro.verificarAzulejoParede(jogadasMenorQuantidade[i].id, linhaModelo - 1, tabuleiro))
-                {
-                    Compra compra = new Compra();
-                    compra.id = jogadasMenorQuantidade[i].id;
-                    compra.quantidade = jogadasMenorQuantidade[i].quantidade;
-                    compra.IdFabrica = jogadasMenorQuantidade[i].IdFabrica;
-                    compra.Local = "C";
-                    compra.LinhaModelo = linhaModelo;
-                    compra.Fonte = "MenorCentro";
-                    compras.Add(compra);
+                //percorre as linhas do modelo procurando uma linha onde possa colocar a menor quantidade do centro
+                int i = 0;
+                //while (i != 4 && linhasVazias[i].posicao <= menorQuantidadeCentro)
+                //{
+                //    linhaModelo = linhasVazias[i].posicao;
+                //    i++;
+                //}
+
+                linhaModelo = listaAux[listaAux.Count - 1].posicao;
+
+                if (tabuleiro.verificaModelo(tabuleiro, linhaModelo)) { 
+                    for (i = 0; i < jogadasMenorQuantidade.Count; i++)
+                    {
+                        if (!tabuleiro.verificarAzulejoParede(jogadasMenorQuantidade[i].id, linhaModelo - 1, tabuleiro))
+                        {
+                            Compra compra = new Compra();
+                            compra.id = jogadasMenorQuantidade[i].id;
+                            compra.quantidade = jogadasMenorQuantidade[i].quantidade;
+                            compra.IdFabrica = jogadasMenorQuantidade[i].IdFabrica;
+                            compra.Local = "C";
+                            compra.LinhaModelo = linhaModelo;
+                            compra.Fonte = "MenorCentro";
+                            compras.Add(compra);
+                        }
+                    }
                 }
+                //percorre todas as jogadas de menor quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
             }
+
+            
+            //procura a menor quantidade entre as jogadas
 
             return compras;
         }
@@ -213,34 +221,39 @@ namespace PI3___Fukushima
             List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao <= maiorQuantidadeCentro);
             int linhaModelo = 0;
 
-            //procura a maior quantidade entre as jogadas
-            jogadasMaiorQuantidade = jogadas.FindAll(jogada => jogada.quantidade == maiorQuantidadeCentro && jogada.IdFabrica == 0 && 0 < maiorQuantidadeCentro);
+            if (listaAux.Count > 0) {
+                //procura a maior quantidade entre as jogadas
+                jogadasMaiorQuantidade = jogadas.FindAll(jogada => jogada.quantidade == maiorQuantidadeCentro && jogada.IdFabrica == 0 && 0 < maiorQuantidadeCentro);
 
-            //percorre as linhas do modelo procurando uma linha onde possa colocar a maior quantidade do centro
-            int i = 0;
-            //while (i != 4 && linhasVazias[i].posicao <= maiorQuantidadeCentro)
-            //{
-            //    linhaModelo = linhasVazias[i].posicao;
-            //    i++;
-            //}
+                //percorre as linhas do modelo procurando uma linha onde possa colocar a maior quantidade do centro
+                int i = 0;
+                //while (i != 4 && linhasVazias[i].posicao <= maiorQuantidadeCentro)
+                //{
+                //    linhaModelo = linhasVazias[i].posicao;
+                //    i++;
+                //}
 
-            linhaModelo = listaAux[listaAux.Count - 1].posicao;
-            //percorre todas as jogadas de maior quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
-            for (i = 0; i < jogadasMaiorQuantidade.Count; i++)
-            {
-                if (!tabuleiro.verificarAzulejoParede(jogadasMaiorQuantidade[i].id, linhaModelo - 1, tabuleiro))
-                {
-                    Compra compra = new Compra();
-                    compra.id = jogadasMaiorQuantidade[i].id;
-                    compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
-                    compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
-                    compra.Local = "C";
-                    compra.LinhaModelo = linhaModelo;
-                    compra.Fonte = "MaiorCentro";
-                    compras.Add(compra);
+                linhaModelo = listaAux[listaAux.Count - 1].posicao;
+
+                if (tabuleiro.verificaModelo(tabuleiro, linhaModelo)) { 
+                    for (i = 0; i < jogadasMaiorQuantidade.Count; i++)
+                    {
+                        if (!tabuleiro.verificarAzulejoParede(jogadasMaiorQuantidade[i].id, linhaModelo - 1, tabuleiro))
+                        {
+                            Compra compra = new Compra();
+                            compra.id = jogadasMaiorQuantidade[i].id;
+                            compra.quantidade = jogadasMaiorQuantidade[i].quantidade;
+                            compra.IdFabrica = jogadasMaiorQuantidade[i].IdFabrica;
+                            compra.Local = "C";
+                            compra.LinhaModelo = linhaModelo;
+                            compra.Fonte = "MaiorCentro";
+                            compras.Add(compra);
+                        }
+                    }
                 }
+                //percorre todas as jogadas de maior quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
             }
-
+           
             return compras;
         }
     }
