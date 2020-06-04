@@ -365,7 +365,6 @@ namespace PI3___Fukushima
             {
                 Jogada novaJogada = new Jogada();
                 Azulejo azulejo = new Azulejo();
-                Jogada novaJogada = new Jogada();
                 itensRetorno = retorno[i].Split(',');
 
                 novaJogada.id = azulejo.id = Convert.ToInt32(itensRetorno[0]);
@@ -587,10 +586,9 @@ namespace PI3___Fukushima
                 compras.AddRange(Estrategia.MenorChao(jogadas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
             }
                 
-
             Random rand = new Random();
             k = rand.Next(0, compras.Count - 1);
-            Debug.Print(compras[k].Fonte);
+            Debug.Print(compras[k].Fonte + ": Local " + compras[k].Local + ", IdF " + compras[k].IdFabrica + ", Id" + compras[k].id + ", quantidade " + compras[k].quantidade + ",linha " + compras[k].LinhaModelo);
             Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].id, compras[k].LinhaModelo);
 
             //Azulejo azulejoComprar = new Azulejo();

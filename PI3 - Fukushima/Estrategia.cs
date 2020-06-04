@@ -44,14 +44,14 @@ namespace PI3___Fukushima
             
             List<Jogada> jogadasMaiorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
-        
+
             //procura a maior quantidade entre as jogadas
-            jogadasMaiorQuantidade = jogadas.FindAll(jogada => (jogada.quantidade == maiorQuantidadeFabrica && jogada.IdFabrica != 0) || (jogada.quantidade == maiorQuantidadeCentro && jogada.IdFabrica == 0 && 0 < maiorQuantidadeCentro && maiorQuantidadeCentro <= 5));
+            jogadasMaiorQuantidade = jogadas.FindAll(jogada => jogada.quantidade == maiorQuantidadeFabrica && jogada.IdFabrica != 0);
             
             //prucura uma linha vazia que caiba a maiorquantidade
-            linha linhaVaziaFabricas = linhasVazias.Find(linha => linha.posicao == maiorQuantidadeFabrica);
+            linha linhaVaziaFabricas = linhasVazias.Find(linha => linha.posicao >= maiorQuantidadeFabrica);
 
-            if (linhaVaziaFabricas.posicao > 0)
+            if (linhaVaziaFabricas.posicao > 0 && tabuleiro.verificaModelo(tabuleiro, linhaVaziaFabricas.posicao))
             {
 
                 //percorre todas as jogadas de maior quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
@@ -82,12 +82,12 @@ namespace PI3___Fukushima
             List<Compra> compras = new List<Compra>();
 
             //procura a menor quantidade entre as jogadas
-            jogadasMenorQuantidade = jogadas.FindAll(jogada => (jogada.quantidade == menorQuantidadeFabrica && jogada.IdFabrica != 0) || (jogada.quantidade == menorQuantidadeFabrica && jogada.IdFabrica == 0 && 0 < menorQuantidadeFabrica && menorQuantidadeFabrica <= 5));
+            jogadasMenorQuantidade = jogadas.FindAll(jogada => jogada.quantidade == menorQuantidadeFabrica && jogada.IdFabrica != 0);
 
             //prucura uma linha vazia que caiba a menor quantidade
-            linha linhaVaziaFabricas = linhasVazias.Find(linha => linha.posicao == menorQuantidadeFabrica);
+            linha linhaVaziaFabricas = linhasVazias.Find(linha => linha.posicao >= menorQuantidadeFabrica);
 
-            if (linhaVaziaFabricas.posicao > 0)
+            if (linhaVaziaFabricas.posicao > 0 && tabuleiro.verificaModelo(tabuleiro, linhaVaziaFabricas.posicao))
             {
 
                 //percorre todas as jogadas de menor quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
@@ -121,7 +121,7 @@ namespace PI3___Fukushima
                 // Para cada linha já preenchida do modelo, procura todas as jogadas 
                 // possíveis tanto do centro como das fábricas que não resultam em azulejos no chão.
 
-                jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade - 1 < linha.posicao && jogada.quantidade - 1 > 0 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
+                jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade <= (linha.posicao + 1 - linha.azulejo.quantidade) && jogada.quantidade > 0 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
                 foreach (Jogada jogadaBoa in jogadasBoas)
                 {
                     // Cada jogada encontrada é transformada numa compra e adicionada na lista.
@@ -130,7 +130,7 @@ namespace PI3___Fukushima
                         id = jogadaBoa.id,
                         IdFabrica = jogadaBoa.IdFabrica,
                         quantidade = jogadaBoa.quantidade,
-                        LinhaModelo = linha.posicao,
+                        LinhaModelo = linha.posicao + 1,
                         Local = "F",
                         Fonte = "PreencheComFabrica"
                     };
@@ -150,7 +150,7 @@ namespace PI3___Fukushima
                 // Para cada linha já preenchida do modelo, procura todas as jogadas 
                 // possíveis tanto do centro como das fábricas que não resultam em azulejos no chão.
 
-                jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade - 1 < linha.posicao && jogada.quantidade - 1 > 0 && jogada.id == linha.azulejo.id);
+                jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade <= (linha.posicao + 1 - linha.azulejo.quantidade) && jogada.quantidade > 0 && jogada.IdFabrica == 0 && jogada.id == linha.azulejo.id);
                 foreach (Jogada jogadaBoa in jogadasBoas)
                 {
                     // Cada jogada encontrada é transformada numa compra e adicionada na lista.
@@ -159,7 +159,7 @@ namespace PI3___Fukushima
                         id = jogadaBoa.id,
                         IdFabrica = 0,
                         quantidade = jogadaBoa.quantidade,
-                        LinhaModelo = linha.posicao,
+                        LinhaModelo = linha.posicao + 1,
                         Local = "C",
                         Fonte = "PreencheComCentro"
                     };
@@ -191,7 +191,7 @@ namespace PI3___Fukushima
 
                 linhaModelo = listaAux[listaAux.Count - 1].posicao;
 
-                if (tabuleiro.verificaModelo(tabuleiro, linhaModelo)) { 
+                if (tabuleiro.verificaModelo(tabuleiro, linhaModelo )) { 
                     for (i = 0; i < jogadasMenorQuantidade.Count; i++)
                     {
                         if (!tabuleiro.verificarAzulejoParede(jogadasMenorQuantidade[i].id, linhaModelo - 1, tabuleiro))
@@ -219,7 +219,7 @@ namespace PI3___Fukushima
         {
             List<Jogada> jogadasMaiorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
-            List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao <= maiorQuantidadeCentro);
+            List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao >= maiorQuantidadeCentro);
             int linhaModelo = 0;
 
             if (listaAux.Count > 0)
