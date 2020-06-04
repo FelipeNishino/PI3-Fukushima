@@ -173,6 +173,7 @@ namespace PI3___Fukushima
         {
             List<Jogada> jogadasMenorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
+            List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao >= menorQuantidadeCentro);
             int linhaModelo = 0;
 
             //procura a menor quantidade entre as jogadas
@@ -180,13 +181,13 @@ namespace PI3___Fukushima
 
             //percorre as linhas do modelo procurando uma linha onde possa colocar a menor quantidade do centro
             int i = 0;
-            while (i != 4 && linhasVazias[i].posicao <= menorQuantidadeCentro)
-            {
-                linhaModelo = linhasVazias[i].posicao;
-                i++;
-            }
+            //while (i != 4 && linhasVazias[i].posicao <= menorQuantidadeCentro)
+            //{
+            //    linhaModelo = linhasVazias[i].posicao;
+            //    i++;
+            //}
 
-
+            linhaModelo = listaAux[listaAux.Count - 1].posicao;
             //percorre todas as jogadas de menor quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
             for (i = 0; i < jogadasMenorQuantidade.Count; i++)
             {
@@ -209,6 +210,7 @@ namespace PI3___Fukushima
         {
             List<Jogada> jogadasMaiorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
+            List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao <= maiorQuantidadeCentro);
             int linhaModelo = 0;
 
             //procura a maior quantidade entre as jogadas
@@ -216,13 +218,13 @@ namespace PI3___Fukushima
 
             //percorre as linhas do modelo procurando uma linha onde possa colocar a maior quantidade do centro
             int i = 0;
-            while (i != 4 && linhasVazias[i].posicao <= maiorQuantidadeCentro)
-            {
-                linhaModelo = linhasVazias[i].posicao;
-                i++;
-            }
+            //while (i != 4 && linhasVazias[i].posicao <= maiorQuantidadeCentro)
+            //{
+            //    linhaModelo = linhasVazias[i].posicao;
+            //    i++;
+            //}
 
-
+            linhaModelo = listaAux[listaAux.Count - 1].posicao;
             //percorre todas as jogadas de maior quantidade verificando se é possivel colocar um determinado azulejo em um determinado local no modelo
             for (i = 0; i < jogadasMaiorQuantidade.Count; i++)
             {
