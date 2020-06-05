@@ -172,15 +172,14 @@ namespace PI3___Fukushima
                                 {
                                     historico += "C,";
                                     historico += "0,";
-                                    resetFlags(Local.Centro);
                                 }
                                 else
                                 {
                                     historico += "F,";
                                     historico += retorno.Substring(retorno.IndexOf("fábrica") + "fábrica ".Length, 1) + ",";
-                                    resetFlags(Local.Fabrica);
                                 }
-
+                                resetFlags(Local.Centro);
+                                resetFlags(Local.Fabrica);
                                 // Isso aqui tá feio hein
                                 if (retorno.Contains("Azul")) historico += 1 + ",";
                                 else if (retorno.Contains("Amarelo")) historico += 2 + ",";
