@@ -495,12 +495,7 @@ namespace PI3___Fukushima
         private void BotCompra()
         {
             Debug.Print("Comeca compra");
-            int idFabricaComprada = -1;
-            linha linhaComprada = new linha(-1, null);
             List<Compra> compras = new List<Compra>();
-
-            String local = "";
-            bool comprou = false;
 
             Azulejo azulejo = new Azulejo
             {
@@ -563,6 +558,8 @@ namespace PI3___Fukushima
             //foreach para controle de prioridades, assim o find achando todas as compras com o valor igual a maiorPrioridade
             foreach (Compra compra in compras)
             {
+                compra.Prioridade += tabuleiro.verificarColuna(compra.id, compra.LinhaModelo, tabuleiro);
+                compra.Prioridade += tabuleiro.verificarCor(compra.id, compra.LinhaModelo, tabuleiro);
                 if (maiorPrioridade < compra.Prioridade) maiorPrioridade = compra.Prioridade;
                 if (menorPrioridade > compra.Prioridade) menorPrioridade = compra.Prioridade;
             }

@@ -86,8 +86,39 @@ namespace PI3___Fukushima
             return adjacentes;
         }
 
-        public bool verificaModelo(Tabuleiro tabuleiro, int linhaModelo) {
-            
+        public int verificarColuna(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro)
+        {
+            int i, nAzulejos = 0;
+
+            for (i = 0; i < 5; i++)
+            {
+                if (tabuleiro.parede[i, (linhaModelo - 1 + (idAzulejo - 1)) % 5]) nAzulejos++;
+            }
+
+            switch (nAzulejos)
+            {
+                case 3:
+                    return 1;
+                case 4:
+                    return 10;
+                default:
+                    return 0;                   
+            }
+        }
+
+        public int verificarCor(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro)
+        {
+            int i, nAzulejos = 0;
+
+            for (i = 0; i < 5; i++)
+            {
+                if (tabuleiro.parede[i, (idAzulejo - 1 + i) % 5]) nAzulejos++;
+            }
+
+            return (nAzulejos == 4) ? 100 : 0;
+        }
+
+        public bool verificaModelo(Tabuleiro tabuleiro, int linhaModelo) {        
             if(tabuleiro.modelo.linhas[linhaModelo].azulejo.id == -1) return true;
 
             return false;

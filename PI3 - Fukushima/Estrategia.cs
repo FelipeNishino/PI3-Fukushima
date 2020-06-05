@@ -78,6 +78,9 @@ namespace PI3___Fukushima
                         compra.LinhaModelo = linhaVaziaFabricas.posicao + 1;
                         compra.Fonte = "MaiorModelo";
                         compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
+
+                        if (compra.LinhaModelo - compra.quantidade > 2) compra.Prioridade--;                        
+
                         compras.Add(compra);
                     }
                 }
@@ -87,7 +90,6 @@ namespace PI3___Fukushima
         }
         public static List<Compra> MenorModelo(List<linha> linhasVazias, List<Jogada> jogadas, List<Jogada> jogadasBoas, int menorQuantidadeFabrica, int menorQuantidadeCentro, Tabuleiro tabuleiro)
         {
-
             List<Jogada> jogadasMenorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
             linha linhaVaziaFabricas = new linha(-1, null);
@@ -126,6 +128,7 @@ namespace PI3___Fukushima
                         compra.LinhaModelo = linhaVaziaFabricas.posicao + 1;
                         compra.Fonte = "MenorModelo";
                         compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
+                        if (compra.LinhaModelo - compra.quantidade > 2) compra.Prioridade--;
                         compras.Add(compra);
                     }
                 }
@@ -143,15 +146,9 @@ namespace PI3___Fukushima
                 // Para cada linha já preenchida do modelo, procura todas as jogadas 
                 // possíveis tanto do centro como das fábricas que não resultam em azulejos no chão.
 
-                if (forcar)
-                {
-                    jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade > 0 && linha.azulejo.quantidade != linha.posicao + 1 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
-                }
-                else
-                {
-                    jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade <= (linha.posicao + 1 - linha.azulejo.quantidade) && jogada.quantidade > 0 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
-                }
-
+                if (forcar) jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade > 0 && linha.azulejo.quantidade != linha.posicao + 1 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
+                else jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade <= (linha.posicao + 1 - linha.azulejo.quantidade) && jogada.quantidade > 0 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
+                
                 foreach (Jogada jogadaBoa in jogadasBoas)
                 {
                     // Cada jogada encontrada é transformada numa compra e adicionada na lista.
@@ -164,7 +161,8 @@ namespace PI3___Fukushima
                     compra.Local = "F";
                     compra.Fonte = "PreencheComFabrica";
                     compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-
+                    if (!forcar) compra.Prioridade++;
+                    else if ((linha.posicao + 1) - (compra.quantidade + linha.azulejo.quantidade) < -1) compra.Prioridade--;
                     compras.Add(compra);
                 }
             }
@@ -201,37 +199,8 @@ namespace PI3___Fukushima
                     compra.Local = "C";
                     compra.Fonte = "PreencheComCentro";
                     compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-
-                    compras.Add(compra);
-                }
-            }
-
-            return compras;
-        }
-
-        public static List<Compra> asdPreencheComFabrica(List<Jogada> jogadas, linha[] linhasPreenchidas, Tabuleiro tabuleiro)
-        {
-            List<Jogada> jogadasBoas = new List<Jogada>();
-            List<Compra> compras = new List<Compra>();
-
-            foreach (linha linha in linhasPreenchidas)
-            {
-                // Para cada linha já preenchida do modelo, procura todas as jogadas 
-                // possíveis tanto do centro como das fábricas que não resultam em azulejos no chão.
-
-                jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade <= (linha.posicao + 1 - linha.azulejo.quantidade) && jogada.quantidade > 0 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
-                foreach (Jogada jogadaBoa in jogadasBoas)
-                {
-                    // Cada jogada encontrada é transformada numa compra e adicionada na lista.
-                    Compra compra = new Compra();
-                    compra.id = jogadaBoa.id;
-                    compra.IdFabrica = jogadaBoa.IdFabrica;
-                    compra.quantidade = jogadaBoa.quantidade;
-                    compra.LinhaModelo = linha.posicao + 1;
-                    compra.Local = "F";
-                    compra.Fonte = "PreencheComFabrica";
-                    compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-
+                    if (!forcar) compra.Prioridade++;
+                    else if (linha.posicao + 1 - (compra.quantidade + linha.azulejo.quantidade) < -1) compra.Prioridade--;
                     compras.Add(compra);
                 }
             }
@@ -274,7 +243,7 @@ namespace PI3___Fukushima
                             compra.LinhaModelo = linhaModelo + 1;
                             compra.Fonte = "MenorCentro";
                             compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-
+                            if (compra.LinhaModelo - compra.quantidade > 2) compra.Prioridade--;
                             compras.Add(compra);
                         }
                     }
@@ -322,7 +291,7 @@ namespace PI3___Fukushima
                             compra.LinhaModelo = linhaModelo + 1;
                             compra.Fonte = "MaiorCentro";
                             compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-
+                            if (compra.LinhaModelo - compra.quantidade > 2) compra.Prioridade--;
                             compras.Add(compra);
                         }
                     }
