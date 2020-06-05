@@ -77,9 +77,7 @@ namespace PI3___Fukushima
                         compra.Local = "F";
                         compra.LinhaModelo = linhaVaziaFabricas.posicao + 1;
                         compra.Fonte = "MaiorModelo";
-                        compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-
-                        if (compra.LinhaModelo - compra.quantidade > 2) compra.Prioridade--;                        
+                        if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;                        
 
                         compras.Add(compra);
                     }
@@ -127,8 +125,7 @@ namespace PI3___Fukushima
                         compra.Local = "F";
                         compra.LinhaModelo = linhaVaziaFabricas.posicao + 1;
                         compra.Fonte = "MenorModelo";
-                        compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-                        if (compra.LinhaModelo - compra.quantidade > 2) compra.Prioridade--;
+                        if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
                         compras.Add(compra);
                     }
                 }
@@ -160,8 +157,7 @@ namespace PI3___Fukushima
                     compra.LinhaModelo = linha.posicao + 1;
                     compra.Local = "F";
                     compra.Fonte = "PreencheComFabrica";
-                    compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-                    if (!forcar) compra.Prioridade++;
+                    if (!forcar || compra.quantidade == compra.LinhaModelo - linha.azulejo.quantidade) compra.Prioridade++;
                     else if ((linha.posicao + 1) - (compra.quantidade + linha.azulejo.quantidade) < -1) compra.Prioridade--;
                     compras.Add(compra);
                 }
@@ -198,8 +194,7 @@ namespace PI3___Fukushima
                     compra.LinhaModelo = linha.posicao + 1;
                     compra.Local = "C";
                     compra.Fonte = "PreencheComCentro";
-                    compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-                    if (!forcar) compra.Prioridade++;
+                    if (!forcar || compra.quantidade == compra.LinhaModelo - linha.azulejo.quantidade) compra.Prioridade++;
                     else if (linha.posicao + 1 - (compra.quantidade + linha.azulejo.quantidade) < -1) compra.Prioridade--;
                     compras.Add(compra);
                 }
@@ -242,8 +237,7 @@ namespace PI3___Fukushima
                             compra.Local = "C";
                             compra.LinhaModelo = linhaModelo + 1;
                             compra.Fonte = "MenorCentro";
-                            compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-                            if (compra.LinhaModelo - compra.quantidade > 2) compra.Prioridade--;
+                            if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
                             compras.Add(compra);
                         }
                     }
@@ -290,8 +284,7 @@ namespace PI3___Fukushima
                             compra.Local = "C";
                             compra.LinhaModelo = linhaModelo + 1;
                             compra.Fonte = "MaiorCentro";
-                            compra.Prioridade = tabuleiro.verificarAdjacentes(compra.id, compra.LinhaModelo, tabuleiro);
-                            if (compra.LinhaModelo - compra.quantidade > 2) compra.Prioridade--;
+                            if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
                             compras.Add(compra);
                         }
                     }

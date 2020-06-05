@@ -554,17 +554,19 @@ namespace PI3___Fukushima
             {
                 compras.AddRange(Estrategia.MenorChao(jogadas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
             }
-
-            //foreach para controle de prioridades, assim o find achando todas as compras com o valor igual a maiorPrioridade
-            foreach (Compra compra in compras)
+            else
             {
-                compra.Prioridade += tabuleiro.verificarColuna(compra.id, compra.LinhaModelo, tabuleiro);
-                compra.Prioridade += tabuleiro.verificarCor(compra.id, compra.LinhaModelo, tabuleiro);
-                if (maiorPrioridade < compra.Prioridade) maiorPrioridade = compra.Prioridade;
-                if (menorPrioridade > compra.Prioridade) menorPrioridade = compra.Prioridade;
+
+                //foreach para controle de prioridades, assim o find achando todas as compras com o valor igual a maiorPrioridade
+                foreach (Compra compra in compras)
+                {
+                    compra.Prioridade += tabuleiro.verificarPrioridades(compra.id, compra.LinhaModelo, tabuleiro);
+                    if (maiorPrioridade < compra.Prioridade) maiorPrioridade = compra.Prioridade;
+                    if (menorPrioridade > compra.Prioridade) menorPrioridade = compra.Prioridade;
+                }
+                compras = compras.FindAll(compra => compra.Prioridade == maiorPrioridade);
             }
 
-            compras = compras.FindAll(compra => compra.Prioridade == maiorPrioridade);
 
             Random rand = new Random();
             k = rand.Next(0, compras.Count - 1);

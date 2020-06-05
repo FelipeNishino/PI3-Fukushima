@@ -106,6 +106,67 @@ namespace PI3___Fukushima
             }
         }
 
+
+        public int verificarPrioridades(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro)
+        {
+            int i, j, coluna, linhaAux, colunaAux, prioridade, nAzulejos, nCor;
+            prioridade = nAzulejos = nCor = 0;
+
+            // transforma idAzulejo e linhaModelo pra base 0
+            linhaModelo--;
+            idAzulejo--;
+
+            // Verifica os azulejos adjacentes que já estão preenchidos, incrementando a prioridade para cada um
+
+            coluna = (linhaModelo + idAzulejo) % 5;
+
+            j = 2;
+            for (i = -1; i <= 2; ++i)
+            {
+                linhaAux = linhaModelo + (i % 2);
+                colunaAux = coluna + (j % 2);
+
+                if (linhaAux >= 0 && linhaAux <= 4 && colunaAux >= 0 && colunaAux <= 4)
+                {
+                    if (tabuleiro.parede[linhaAux, colunaAux] == true)
+                    {
+                        prioridade++;
+                    }
+                }
+                j--;
+            }
+
+            // Verifica quantos azulejos tem na mesma coluna e concede um bonus
+
+            for (i = 0; i < 5; i++)
+            {
+                if (tabuleiro.parede[i, coluna]) nAzulejos++;
+            }
+
+            switch (nAzulejos)
+            {
+                case 3:
+                    prioridade += 1;
+                    break;
+                case 4:
+                    prioridade += 10;
+                    break;
+                default:                    
+                    break;
+            }
+
+            // Se houverem quatro azulejos da mesma cor na parede, a compra que completaria a cor recebe a maior prioridade possível
+
+            if (tabuleiro.parede[i, (idAzulejo - 1 + i) % 5]) nCor++;
+            if (nCor == 4) prioridade += 100;
+
+            // Dá prioridade a compras que preenchem a coluna central
+
+            if (coluna == 2) prioridade++;
+
+            return prioridade;
+        }
+
         public int verificarCor(int idAzulejo, int linhaModelo, Tabuleiro tabuleiro)
         {
             int i, nAzulejos = 0;
