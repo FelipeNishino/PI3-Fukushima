@@ -141,6 +141,7 @@ namespace PI3___Fukushima
             for (i = 0; i < 5; i++)
             {
                 if (tabuleiro.parede[i, coluna]) nAzulejos++;
+                if (tabuleiro.parede[i, (idAzulejo + i) % 5]) nCor++;
             }
 
             switch (nAzulejos)
@@ -157,7 +158,6 @@ namespace PI3___Fukushima
 
             // Se houverem quatro azulejos da mesma cor na parede, a compra que completaria a cor recebe a maior prioridade possível
 
-            if (tabuleiro.parede[i, (idAzulejo - 1 + i) % 5]) nCor++;
             if (nCor == 4) prioridade += 100;
 
             // Dá prioridade a compras que preenchem a coluna central

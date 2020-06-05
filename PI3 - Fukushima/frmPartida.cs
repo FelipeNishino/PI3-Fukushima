@@ -543,12 +543,24 @@ namespace PI3___Fukushima
             {
                 if (fabricas.Count > 0)
                 {
-                    compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro));
-                    compras.AddRange(Estrategia.MenorModelo(linhasVazias, jogadas, jogadasBoas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
+                    compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro, false));
+                    compras.AddRange(Estrategia.MenorModelo(linhasVazias, jogadas, jogadasBoas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro, false));
                 }
-                compras.AddRange(Estrategia.MaiorCentro(linhasVazias, jogadas, maiorQuantidadeCentro, tabuleiro));
-                compras.AddRange(Estrategia.MenorCentro(linhasVazias, jogadas, menorQuantidadeCentro, tabuleiro));
+                compras.AddRange(Estrategia.MaiorCentro(linhasVazias, jogadas, maiorQuantidadeCentro, tabuleiro, false));
+                compras.AddRange(Estrategia.MenorCentro(linhasVazias, jogadas, menorQuantidadeCentro, tabuleiro, false));
             }
+
+            if (compras.Count == 0)
+            {
+                if (fabricas.Count > 0)
+                {
+                    compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro, true));
+                    compras.AddRange(Estrategia.MenorModelo(linhasVazias, jogadas, jogadasBoas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro, true));
+                }
+                compras.AddRange(Estrategia.MaiorCentro(linhasVazias, jogadas, maiorQuantidadeCentro, tabuleiro, true));
+                compras.AddRange(Estrategia.MenorCentro(linhasVazias, jogadas, menorQuantidadeCentro, tabuleiro, true));
+            }
+
 
             if (compras.Count == 0)
             {
@@ -556,7 +568,6 @@ namespace PI3___Fukushima
             }
             else
             {
-
                 //foreach para controle de prioridades, assim o find achando todas as compras com o valor igual a maiorPrioridade
                 foreach (Compra compra in compras)
                 {

@@ -39,7 +39,7 @@ namespace PI3___Fukushima
 
             return compras;
         }
-        public static List<Compra> MaiorModelo(List<linha> linhasVazias,List<Jogada> jogadas, List<Jogada> jogadasBoas, int maiorQuantidadeFabrica, int maiorQuantidadeCentro, Tabuleiro tabuleiro)
+        public static List<Compra> MaiorModelo(List<linha> linhasVazias,List<Jogada> jogadas, List<Jogada> jogadasBoas, int maiorQuantidadeFabrica, int maiorQuantidadeCentro, Tabuleiro tabuleiro, bool forcar)
         {
             
             List<Jogada> jogadasMaiorQuantidade = new List<Jogada>();
@@ -54,9 +54,20 @@ namespace PI3___Fukushima
 
             foreach (linha linha1 in linhasVazias)
             {
-                if (linha1.posicao + 1 >= maiorQuantidadeFabrica) {
-                    linhaVaziaFabricas = linha1;
-                    break;
+                if (!forcar)
+                {
+                    if (maiorQuantidadeFabrica >= linha1.posicao + 1 && maiorQuantidadeFabrica <= linha1.posicao + 2) {
+                        linhaVaziaFabricas = linha1;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (maiorQuantidadeFabrica <= linha1.posicao + 2)
+                    {
+                        linhaVaziaFabricas = linha1;
+                        break;
+                    }
                 }
             }
 
@@ -77,7 +88,8 @@ namespace PI3___Fukushima
                         compra.Local = "F";
                         compra.LinhaModelo = linhaVaziaFabricas.posicao + 1;
                         compra.Fonte = "MaiorModelo";
-                        if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;                        
+                        if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
+                        if (compra.quantidade == compra.LinhaModelo) compra.Prioridade++;
 
                         compras.Add(compra);
                     }
@@ -86,7 +98,7 @@ namespace PI3___Fukushima
 
             return compras;
         }
-        public static List<Compra> MenorModelo(List<linha> linhasVazias, List<Jogada> jogadas, List<Jogada> jogadasBoas, int menorQuantidadeFabrica, int menorQuantidadeCentro, Tabuleiro tabuleiro)
+        public static List<Compra> MenorModelo(List<linha> linhasVazias, List<Jogada> jogadas, List<Jogada> jogadasBoas, int menorQuantidadeFabrica, int menorQuantidadeCentro, Tabuleiro tabuleiro, bool forcar)
         {
             List<Jogada> jogadasMenorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
@@ -100,11 +112,21 @@ namespace PI3___Fukushima
 
             foreach (linha linha1 in linhasVazias)
             {
-                if (linha1.posicao + 1 >= menorQuantidadeFabrica)
+                if (!forcar)
                 {
-                    linhaVaziaFabricas = linha1;
-
-                    break;
+                    if (menorQuantidadeFabrica >= linha1.posicao + 1 && menorQuantidadeFabrica <= linha1.posicao + 2)
+                    {
+                        linhaVaziaFabricas = linha1;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (menorQuantidadeFabrica <= linha1.posicao + 2)
+                    {
+                        linhaVaziaFabricas = linha1;
+                        break;
+                    }
                 }
             }
 
@@ -126,6 +148,7 @@ namespace PI3___Fukushima
                         compra.LinhaModelo = linhaVaziaFabricas.posicao + 1;
                         compra.Fonte = "MenorModelo";
                         if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
+                        if (compra.quantidade == compra.LinhaModelo) compra.Prioridade++;
                         compras.Add(compra);
                     }
                 }
@@ -203,14 +226,18 @@ namespace PI3___Fukushima
             return compras;
         }
 
-        public static List<Compra> MenorCentro(List<linha> linhasVazias, List<Jogada> jogadas, int menorQuantidadeCentro, Tabuleiro tabuleiro)
+        public static List<Compra> MenorCentro(List<linha> linhasVazias, List<Jogada> jogadas, int menorQuantidadeCentro, Tabuleiro tabuleiro, bool forcar)
         {
             List<Jogada> jogadasMenorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
-            List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao + 1 >= menorQuantidadeCentro);
+            List<linha> listaAux = new List<linha>();
+
+            if (!forcar) listaAux = linhasVazias.FindAll(linha => menorQuantidadeCentro >= linha.posicao + 1 && menorQuantidadeCentro <= linha.posicao + 2);
+            else listaAux = linhasVazias.FindAll(linha => menorQuantidadeCentro <= linha.posicao + 2);
+         
             int linhaModelo = 0;
 
-            if (listaAux.Count > 0)
+                if (listaAux.Count > 0)
             {
                 //procura a menor quantidade entre as jogadas
                 jogadasMenorQuantidade = jogadas.FindAll(jogada => jogada.quantidade == menorQuantidadeCentro && jogada.IdFabrica == 0 && 0 < menorQuantidadeCentro);
@@ -238,6 +265,7 @@ namespace PI3___Fukushima
                             compra.LinhaModelo = linhaModelo + 1;
                             compra.Fonte = "MenorCentro";
                             if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
+                            if (compra.quantidade == compra.LinhaModelo) compra.Prioridade++;
                             compras.Add(compra);
                         }
                     }
@@ -250,11 +278,15 @@ namespace PI3___Fukushima
 
             return compras;
         }
-        public static List<Compra> MaiorCentro(List<linha> linhasVazias, List<Jogada> jogadas, int maiorQuantidadeCentro, Tabuleiro tabuleiro)
+        public static List<Compra> MaiorCentro(List<linha> linhasVazias, List<Jogada> jogadas, int maiorQuantidadeCentro, Tabuleiro tabuleiro, bool forcar)
         {
             List<Jogada> jogadasMaiorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
-            List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao + 1 >= maiorQuantidadeCentro);
+            List<linha> listaAux = new List<linha>();
+
+            if (!forcar) listaAux = linhasVazias.FindAll(linha => maiorQuantidadeCentro >= linha.posicao + 1 && maiorQuantidadeCentro <= linha.posicao + 2);
+            else listaAux = linhasVazias.FindAll(linha => maiorQuantidadeCentro <= linha.posicao + 2);
+
             int linhaModelo = 0;
 
             if (listaAux.Count > 0)
@@ -285,6 +317,7 @@ namespace PI3___Fukushima
                             compra.LinhaModelo = linhaModelo + 1;
                             compra.Fonte = "MaiorCentro";
                             if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
+                            if (compra.quantidade == compra.LinhaModelo) compra.Prioridade++;
                             compras.Add(compra);
                         }
                     }
