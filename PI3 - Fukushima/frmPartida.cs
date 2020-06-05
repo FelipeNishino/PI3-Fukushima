@@ -5,9 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
-using System.CodeDom;
 using System.Diagnostics;
-using System.Linq;
 
 namespace PI3___Fukushima
 {
@@ -53,9 +51,9 @@ namespace PI3___Fukushima
         private void FrmPartida_Load(object sender, EventArgs e)
         {
             lblDadosJogador.Text = dadosJogador[0] + "," + dadosJogador[1];
-            resetFlags(Flags.Fabrica);
-            resetFlags(Flags.Centro);
-            resetFlags(Flags.Prioridade);
+            ResetFlags(Flags.Fabrica);
+            ResetFlags(Flags.Centro);
+            ResetFlags(Flags.Prioridade);
             jogadasBoas = new List<Jogada>();
 
             nFabricas = 2 * nFabricas + 1;
@@ -94,7 +92,7 @@ namespace PI3___Fukushima
         {
             workerThread = new BackgroundWorker();
             workerThread.ProgressChanged += WorkerThreadTick;
-            workerThread.DoWork += WorkerThread_DoWork;
+            workerThread.DoWork += WorkerThreadTimer;
             workerThread.RunWorkerCompleted += WorkerThread_RunWorkerCompleted;
             workerThread.WorkerReportsProgress = true;
             workerThread.WorkerSupportsCancellation = true;
@@ -116,11 +114,10 @@ namespace PI3___Fukushima
             }
         }
 
-        private void WorkerThread_DoWork(object sender, DoWorkEventArgs e)
+        private void WorkerThreadTimer(object sender, DoWorkEventArgs e)
         {
             DateTime startTime = DateTime.Now;
             string vez, historico, retorno;
-            string[] narracao;
             int queuedRead = 1;
 
             keepRunning = true;
@@ -132,12 +129,10 @@ namespace PI3___Fukushima
 
             while (keepRunning)
             {
-                Debug.Print("comeca timer");
                 Thread.Sleep(sleepTime);
                 sleepTime = 2000;
-                string timeElapsedInstring = (DateTime.Now - startTime).ToString(@"hh\:mm\:ss");
 
-                Action finaliza = () => final();
+                Action finaliza = () => Final();
                 if (!isBuying)
                 {
                     vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
@@ -158,8 +153,8 @@ namespace PI3___Fukushima
                         if (round < ((retorno.Length - retorno.Replace("Fábricas preenchidas!\r\n", "").Length) / "Fábricas preenchidas!\r\n".Length))
                         {
                             round++;
-                            frmTabuleiro.limparCentro();                            
-                            frmTabuleiro.setPlacar();
+                            frmTabuleiro.LimparCentro();                            
+                            frmTabuleiro.SetPlacar();
                             queuedRead++;
                         }
 
@@ -180,9 +175,9 @@ namespace PI3___Fukushima
                                     historico += "F,";
                                     historico += retorno.Substring(retorno.IndexOf("fábrica") + "fábrica ".Length, 1) + ",";                                    
                                 }
-                                resetFlags(Flags.Centro);
-                                resetFlags(Flags.Fabrica);
-                                resetFlags(Flags.Prioridade);
+                                ResetFlags(Flags.Centro);
+                                ResetFlags(Flags.Fabrica);
+                                ResetFlags(Flags.Prioridade);
 
                                 // Isso aqui tá feio hein
                                 if (retorno.Contains("Azul")) historico += 1 + ",";
@@ -204,20 +199,17 @@ namespace PI3___Fukushima
                                 {                                    
                                     lastPlay = historico;
 
-                                    frmTabuleiro.limparFabricas(Convert.ToInt32(lastPlay.Substring(lastPlay.IndexOf(",") + 3, 1)));
+                                    frmTabuleiro.LimparFabricas(Convert.ToInt32(lastPlay.Substring(lastPlay.IndexOf(",") + 3, 1)));
 
-                                    btnListarCentro_Click(null, null);
+                                    ListarCentro();
                                 }
                             }
                         }
-                        Debug.Print("antes do if: " + queuedRead);
                         if (queuedRead > 0)
                         {
-                            Debug.Print("entrou");
-                            frmTabuleiro.lerTabuleiro();
+                            frmTabuleiro.LerTabuleiro();
                             queuedRead--;
                         }
-                        Debug.Print("Depois do if: " + queuedRead);
                         Invoke((MethodInvoker)delegate
                         {
                             lblVez.Text = "Vez: " + vez;
@@ -228,32 +220,27 @@ namespace PI3___Fukushima
                     if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0] && chkBot.Checked && keepRunning)
                     {
                         isBuying = true;
-                        btnListarFabricas_Click(null, null);
-                        btnListarCentro_Click(null, null);
+                        ListarFabricas();
+                        ListarCentro();
                         BotCompra();
                     }
                 }
 
-                workerThread.ReportProgress(0, timeElapsedInstring);
-
                 if (workerThread.CancellationPending)
                 {
-                    // this is important as it set the cancelled property of RunWorkerCompletedEventArgs to true
                     e.Cancel = true;
                     break;
                 }
-                Debug.Print("Termina timer");
             }
-
         }
 
-        private void final()
+        private void Final()
         {
             btnComprarAzulejo.Enabled = false;
             MessageBox.Show("Jogo Encerrado!", "Azul - Fukushima");
         }
 
-        private void resetFlags(Flags local)
+        private void ResetFlags(Flags local)
         {
             switch (local)
             {
@@ -273,7 +260,7 @@ namespace PI3___Fukushima
                     break;
             }
         }
-        private void limparJogadas(Flags local)
+        private void LimparJogadas(Flags local)
         {
             List<Jogada> jogadasRemovidas = new List<Jogada>();
 
@@ -295,7 +282,7 @@ namespace PI3___Fukushima
             }
         }
 
-        private void btnListarFabricas_Click(object sender, EventArgs e)
+        private void ListarFabricas()
         {
             string[] retorno;
             retorno = Jogo.LerFabricas(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
@@ -303,7 +290,7 @@ namespace PI3___Fukushima
             fabricas = new List<Fabrica>();
             List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
 
-            if (jogadas != null) limparJogadas(Flags.Fabrica); 
+            if (jogadas != null) LimparJogadas(Flags.Fabrica); 
 
             if (retorno[0] == "" && fabricas != null)
             {
@@ -326,37 +313,42 @@ namespace PI3___Fukushima
                 
                 novaJogada.IdFabrica = i;
 
-                novaJogada.id = azulejo.id = Convert.ToInt32(retorno[j].Substring(2, 1));
-                novaJogada.quantidade = azulejo.quantidade = Convert.ToInt32(retorno[j].Substring(retorno[j].LastIndexOf(",") + 1, 1));
-                azulejo.carregarImagem();
+                novaJogada.Id = azulejo.Id = Convert.ToInt32(retorno[j].Substring(2, 1));
+                novaJogada.Quantidade = azulejo.Quantidade = Convert.ToInt32(retorno[j].Substring(retorno[j].LastIndexOf(",") + 1, 1));
+                azulejo.CarregarImagem();
                 azulejos[i - 1].Add(azulejo);
 
-                if (maiorQuantidadeFabrica <= azulejo.quantidade) maiorQuantidadeFabrica = azulejo.quantidade;
-                if (menorQuantidadeFabrica >= azulejo.quantidade && azulejo.quantidade > 0) menorQuantidadeFabrica = azulejo.quantidade;
+                if (maiorQuantidadeFabrica <= azulejo.Quantidade) maiorQuantidadeFabrica = azulejo.Quantidade;
+                if (menorQuantidadeFabrica >= azulejo.Quantidade && azulejo.Quantidade > 0) menorQuantidadeFabrica = azulejo.Quantidade;
 
                 j++;
 
                 if (retorno[j] != "" && i != Convert.ToInt32(retorno[j].Substring(0, 1)))
                 {
-                    Fabrica fabrica = new Fabrica();
-                    fabrica.id = i;
-                    fabrica.azulejos = azulejos[i - 1];
+                    Fabrica fabrica = new Fabrica
+                    {
+                        Id = i,
+                        Azulejos = azulejos[i - 1]
+                    };
+
                     fabricas.Add(fabrica);
                     i = Convert.ToInt32(retorno[j].Substring(0, 1));
                 }
                 else if (retorno[j] == "")
                 {
-                    Fabrica fabrica = new Fabrica();
-                    fabrica.id = i;
-                    fabrica.azulejos = azulejos[i - 1];
+                    Fabrica fabrica = new Fabrica
+                    {
+                        Id = i,
+                        Azulejos = azulejos[i - 1]
+                    };
                     fabricas.Add(fabrica);
                 }
                 jogadas.Add(novaJogada);
             }             
-            frmTabuleiro.lerFabricas(fabricas);
+            frmTabuleiro.LerFabricas(fabricas);
         }
 
-        private void btnListarCentro_Click(object sender, EventArgs e)
+        private void ListarCentro()
         {
             string[] retorno;
             string[] itensRetorno;
@@ -366,7 +358,7 @@ namespace PI3___Fukushima
             retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
             //verificarErro(retorno);
-            if (jogadas != null) limparJogadas(Flags.Centro);
+            if (jogadas != null) LimparJogadas(Flags.Centro);
 
             for (int i = 0; i < retorno.Length - 1; i++)
             {
@@ -374,20 +366,20 @@ namespace PI3___Fukushima
                 Azulejo azulejo = new Azulejo();
                 itensRetorno = retorno[i].Split(',');
 
-                novaJogada.id = azulejo.id = Convert.ToInt32(itensRetorno[0]);
-                novaJogada.quantidade = azulejo.quantidade = Convert.ToInt32(itensRetorno[2]);
+                novaJogada.Id = azulejo.Id = Convert.ToInt32(itensRetorno[0]);
+                novaJogada.Quantidade = azulejo.Quantidade = Convert.ToInt32(itensRetorno[2]);
                 novaJogada.IdFabrica = 0;
 
-                if (maiorQuantidadeCentro < azulejo.quantidade) maiorQuantidadeCentro = azulejo.quantidade;
-                if (menorQuantidadeCentro > azulejo.quantidade && azulejo.quantidade > 0) menorQuantidadeCentro = azulejo.quantidade;
+                if (maiorQuantidadeCentro < azulejo.Quantidade) maiorQuantidadeCentro = azulejo.Quantidade;
+                if (menorQuantidadeCentro > azulejo.Quantidade && azulejo.Quantidade > 0) menorQuantidadeCentro = azulejo.Quantidade;
 
                 azulejos.Add(azulejo);
                 jogadas.Add(novaJogada);
-                frmTabuleiro.setCentro(i, azulejo.quantidade);
+                frmTabuleiro.SetCentro(i, azulejo.Quantidade);
             }
 
-            centro.azulejos = azulejos;
-            centro.marca1 = retorno[0].Substring(retorno[0].LastIndexOf(',') + 1, 1) == "1";
+            centro.Azulejos = azulejos;
+            centro.Marca1 = retorno[0].Substring(retorno[0].LastIndexOf(',') + 1, 1) == "1";
         }
 
         private void btnComprarAzulejo_Click(object sender, EventArgs e)
@@ -499,19 +491,19 @@ namespace PI3___Fukushima
 
             Azulejo azulejo = new Azulejo
             {
-                id = 0,
-                quantidade = 0
+                Id = 0,
+                Quantidade = 0
             };
 
-            tabuleiro = frmTabuleiro.retornaTabuleiro();
+            tabuleiro = frmTabuleiro.RetornaTabuleiro();
 
-            linha[] linhasPreenchidas = Array.FindAll(tabuleiro.modelo.linhas, linha => linha.azulejo.id != -1 || linha.azulejo.quantidade != -1);
-            List<linha> linhasVazias = new List<linha>();            
+            Linha[] linhasPreenchidas = Array.FindAll(tabuleiro.Modelo.linhas, linha => linha.azulejo.Id != -1 || linha.azulejo.Quantidade != -1);
+            List<Linha> linhasVazias = new List<Linha>();            
 
             int k = 0;
             for (int i = 0; i < 5; i++)
             {
-                linha linhaVazia = new linha();
+                Linha linhaVazia = new Linha();
 
                 if (k < linhasPreenchidas.Length)
                 {
@@ -543,7 +535,7 @@ namespace PI3___Fukushima
             {
                 if (fabricas.Count > 0)
                 {
-                    compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro, false));
+                    compras.AddRange(Estrategia.MaiorFabrica(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro, false));
                     compras.AddRange(Estrategia.MenorModelo(linhasVazias, jogadas, jogadasBoas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro, false));
                 }
                 compras.AddRange(Estrategia.MaiorCentro(linhasVazias, jogadas, maiorQuantidadeCentro, tabuleiro, false));
@@ -554,7 +546,7 @@ namespace PI3___Fukushima
             {
                 if (fabricas.Count > 0)
                 {
-                    compras.AddRange(Estrategia.MaiorModelo(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro, true));
+                    compras.AddRange(Estrategia.MaiorFabrica(linhasVazias, jogadas, jogadasBoas, maiorQuantidadeFabrica, maiorQuantidadeCentro, tabuleiro, true));
                     compras.AddRange(Estrategia.MenorModelo(linhasVazias, jogadas, jogadasBoas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro, true));
                 }
                 compras.AddRange(Estrategia.MaiorCentro(linhasVazias, jogadas, maiorQuantidadeCentro, tabuleiro, true));
@@ -564,14 +556,14 @@ namespace PI3___Fukushima
 
             if (compras.Count == 0)
             {
-                compras.AddRange(Estrategia.MenorChao(jogadas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
+                compras.AddRange(Estrategia.MenorFabrica(jogadas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
             }
             else
             {
                 //foreach para controle de prioridades, assim o find achando todas as compras com o valor igual a maiorPrioridade
                 foreach (Compra compra in compras)
                 {
-                    compra.Prioridade += tabuleiro.verificarPrioridades(compra.id, compra.LinhaModelo, tabuleiro);
+                    compra.Prioridade += tabuleiro.VerificaPrioridades(compra.Id, compra.LinhaModelo, tabuleiro);
                     if (maiorPrioridade < compra.Prioridade) maiorPrioridade = compra.Prioridade;
                     if (menorPrioridade > compra.Prioridade) menorPrioridade = compra.Prioridade;
                 }
@@ -581,14 +573,14 @@ namespace PI3___Fukushima
 
             Random rand = new Random();
             k = rand.Next(0, compras.Count - 1);
-            Debug.Print(compras[k].Fonte + ": Local " + compras[k].Local + ", IdF " + compras[k].IdFabrica + ", Id" + compras[k].id + ", quantidade " + compras[k].quantidade + ",linha " + compras[k].LinhaModelo);
-            Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].id, compras[k].LinhaModelo);
+            Debug.Print(compras[k].Fonte + ": Local " + compras[k].Local + ", IdF " + compras[k].IdFabrica + ", Id" + compras[k].Id + ", quantidade " + compras[k].Quantidade + ",linha " + compras[k].LinhaModelo);
+            Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].Id, compras[k].LinhaModelo);
 
             isBuying = false;
 
 
             //verifica se a apartidad foi finalizada depois de uma jogada
-            Action finaliza = () => final();
+            Action finaliza = () => Final();
             string vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
             if (vez.Substring(0, 1) == "E") {
                 Invoke(finaliza);
@@ -597,8 +589,8 @@ namespace PI3___Fukushima
             }
             else
             {
-                frmTabuleiro.limparFabricas(compras[k].IdFabrica);
-                btnListarCentro_Click(null, null);
+                frmTabuleiro.LimparFabricas(compras[k].IdFabrica);
+                ListarCentro();
                 Debug.Print("termina compra");
             }
         }

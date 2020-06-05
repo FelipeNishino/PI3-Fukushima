@@ -1,12 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Timers;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AzulServer;
 using System.Diagnostics;
@@ -37,7 +30,7 @@ namespace PI3___Fukushima
             
             foreach (Partida partida in partidas)
             {
-                cboPartidas.Items.Add(partida.id + "," + partida.nome + "," + partida.dataCriacao + "," + partida.status);
+                cboPartidas.Items.Add(partida.Id + "," + partida.Nome + "," + partida.DataCriacao + "," + partida.Status);
             }
         }
 
@@ -70,8 +63,8 @@ namespace PI3___Fukushima
 
             lstSala.Items.Clear();
 
-            foreach (Jogador jogador in Partida.listarJogadores(Convert.ToInt32(txtEntrarId.Text))){
-                lstSala.Items.Add(jogador.id + ", " + jogador.nome + ", " + jogador.score);
+            foreach (Jogador jogador in Partida.ListarJogadores(Convert.ToInt32(txtEntrarId.Text))){
+                lstSala.Items.Add(jogador.Id + ", " + jogador.Nome + ", " + jogador.Score);
             }
         }
 

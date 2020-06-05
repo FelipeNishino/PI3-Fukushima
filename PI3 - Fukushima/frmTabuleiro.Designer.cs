@@ -877,7 +877,7 @@
             this.Name = "FrmTabuleiro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Tabuleiro - Fukushima";
-            this.Load += new System.EventHandler(this.frmTabuleiro_Load);
+            this.Load += new System.EventHandler(this.FrmTabuleiro_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pboCentro5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboCentro4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboCentro3)).EndInit();

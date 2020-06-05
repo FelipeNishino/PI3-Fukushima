@@ -1,40 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
 namespace PI3___Fukushima
 {
     public class Azulejo
     {
-        public int id { get; set; }
-        public int quantidade { get; set; }
-        public Image imagem { get; set; }
+        public int Id { get; set; }
+        public int Quantidade { get; set; }
+        public Image Imagem { get; set; }
 
-        public void carregarImagem() {
-            switch (this.id)
+        public void CarregarImagem() {
+            switch (this.Id)
             {
                 case 1:
-                    this.imagem = Properties.Resources.Azul;
+                    this.Imagem = Properties.Resources.Azul;
                     break;
 
                 case 2:
-                    this.imagem = Properties.Resources.Amarelo;
+                    this.Imagem = Properties.Resources.Amarelo;
                     break;
 
                 case 3:
-                    this.imagem = Properties.Resources.Vermelho;
+                    this.Imagem = Properties.Resources.Vermelho;
                     break;
 
                 case 4:
-                    this.imagem = Properties.Resources.Preto;
+                    this.Imagem = Properties.Resources.Preto;
                     break;
 
                 case 5:
-                    this.imagem = Properties.Resources.Branco;
+                    this.Imagem = Properties.Resources.Branco;
                     break;
 
                 default:

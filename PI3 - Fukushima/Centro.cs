@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PI3___Fukushima
 {
     class Centro
     {
-        public bool marca1 { get; set; }
-        public List<Azulejo> azulejos { get; set; }
+        public bool Marca1 { get; set; }
+        public List<Azulejo> Azulejos { get; set; }
     }
 }

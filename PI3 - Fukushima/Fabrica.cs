@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PI3___Fukushima
 {
     public class Fabrica
     {
-        public int id { get; set; }
-
-        public List<Azulejo> azulejos { get; set; }
-
+        public int Id { get; set; }
+        public List<Azulejo> Azulejos { get; set; }
     }
 }

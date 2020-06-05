@@ -63,16 +63,6 @@ namespace PI3___Fukushima.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _1 {
-            get {
-                object obj = ResourceManager.GetObject("1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap A8nlUrz {
             get {
                 object obj = ResourceManager.GetObject("A8nlUrz", resourceCulture);
@@ -126,26 +116,6 @@ namespace PI3___Fukushima.Properties {
         internal static System.Drawing.Bitmap Branco {
             get {
                 object obj = ResourceManager.GetObject("Branco", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chao {
-            get {
-                object obj = ResourceManager.GetObject("chao", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chao1 {
-            get {
-                object obj = ResourceManager.GetObject("chao1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

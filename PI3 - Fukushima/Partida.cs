@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AzulServer;
 
 namespace PI3___Fukushima
 {
     class Partida
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public string nome { get; set; }
+        public string Nome { get; set; }
 
-        public string status { get; set; }
+        public string Status { get; set; }
 
-        public string dataCriacao { get; set; }
+        public string DataCriacao { get; set; }
 
         public static List<Partida> listarPartidas() {
             List<Partida> partidas = new List<Partida>();
@@ -30,10 +27,10 @@ namespace PI3___Fukushima
                 string[] itens = partidasRetorno[i].Split(',');
 
                 Partida partida = new Partida();
-                partida.id = Convert.ToInt32(itens[0]);
-                partida.nome = itens[1];
-                partida.dataCriacao = itens[2];
-                partida.status = itens[3];
+                partida.Id = Convert.ToInt32(itens[0]);
+                partida.Nome = itens[1];
+                partida.DataCriacao = itens[2];
+                partida.Status = itens[3];
 
                 partidas.Add(partida);
             }
@@ -41,7 +38,7 @@ namespace PI3___Fukushima
             return partidas;
         }
 
-        public static List<Jogador> listarJogadores(int id)
+        public static List<Jogador> ListarJogadores(int id)
         {
             List<Jogador> jogadores = new List<Jogador>();
 
@@ -51,10 +48,12 @@ namespace PI3___Fukushima
             for (int i = 0; i < jogadoresRetorno.Length && jogadoresRetorno[i] != ""; i++){
                 string[] itens = jogadoresRetorno[i].Split(',');
 
-                Jogador jogador = new Jogador();
-                jogador.id = Convert.ToInt32(itens[0]);
-                jogador.nome = itens[1];
-                jogador.score = Convert.ToInt32(itens[2]);
+                Jogador jogador = new Jogador
+                {
+                    Id = Convert.ToInt32(itens[0]),
+                    Nome = itens[1],
+                    Score = Convert.ToInt32(itens[2])
+                };
 
                 jogadores.Add(jogador);
             }

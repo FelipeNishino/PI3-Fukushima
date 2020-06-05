@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PI3___Fukushima
 {
-    public struct linha
+    public struct Linha
     {
         public int posicao;
         public Azulejo azulejo;
 
-        public linha(int posicao, Azulejo azulejo) {
+        public Linha(int posicao, Azulejo azulejo) {
             this.posicao = -1;
-            this.azulejo = new Azulejo();
-            this.azulejo.id = -1;
-            this.azulejo.quantidade = -1;
+            this.azulejo = new Azulejo
+            {
+                Id = -1,
+                Quantidade = -1
+            };
         }
     }
 
@@ -26,20 +22,20 @@ namespace PI3___Fukushima
     {
         //public Azulejo[] arrayAzulejos { get; set; }
 
-        public linha[] linhas { get; set; }
+        public Linha[] linhas { get; set; }
 
         public Modelo(){
             Azulejo azulejo = new Azulejo
             {
-                id = -1,
-                quantidade = -1
+                Id = -1,
+                Quantidade = -1
             };
 
-            this.linhas = new linha[1];
+            this.linhas = new Linha[1];
             this.linhas[0].azulejo = azulejo;
             this.linhas[0].posicao = -1;
         }
-        public int listarModelo(String[] geral)
+        public int ListarModelo(String[] geral)
         {
             int i = 1;
 
@@ -48,9 +44,9 @@ namespace PI3___Fukushima
                
                 int linha = Convert.ToInt32(geral[i].Substring(0, 1));
 
-                azulejo.id = Convert.ToInt32(geral[i].Substring(2, 1));
-                azulejo.quantidade = Convert.ToInt32(geral[i].Substring(4, 1));
-                azulejo.carregarImagem();
+                azulejo.Id = Convert.ToInt32(geral[i].Substring(2, 1));
+                azulejo.Quantidade = Convert.ToInt32(geral[i].Substring(4, 1));
+                azulejo.CarregarImagem();
 
                 this.linhas[linha - 1].azulejo = azulejo;
                 this.linhas[linha - 1].posicao = linha - 1;
