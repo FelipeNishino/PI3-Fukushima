@@ -9,7 +9,7 @@ using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AzulServer;
-
+using System.Diagnostics;
 
 namespace PI3___Fukushima
 {
@@ -26,6 +26,7 @@ namespace PI3___Fukushima
         {
             lblVersaoDll.Text = "Versao DLL: " + Jogo.Versao;
             lblFeedback.Text = "";
+            Debug.Print((-1 % 2).ToString() + " " + (1 % 2).ToString());        
         }
 
         private void btnListarPartidas_Click(object sender, EventArgs e)

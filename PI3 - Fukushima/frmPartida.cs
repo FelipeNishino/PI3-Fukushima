@@ -15,7 +15,7 @@ namespace PI3___Fukushima
     {
         string[] dadosJogador;
         string lastPlay;
-        int idPartida, nFabricas, tickCounter, sleepTime, round, menorQuantidadeFabrica, menorQuantidadeCentro, maiorQuantidadeFabrica, maiorQuantidadeCentro;
+        int idPartida, nFabricas, tickCounter, sleepTime, round, menorQuantidadeFabrica, menorQuantidadeCentro, maiorQuantidadeFabrica, maiorQuantidadeCentro, maiorPrioridade, menorPrioridade;
         public Tabuleiro tabuleiro;
         public List<Fabrica> fabricas;
         public FrmTabuleiro frmTabuleiro;
@@ -24,10 +24,11 @@ namespace PI3___Fukushima
         List<Jogada> jogadas;
         List<Jogada> jogadasBoas;
 
-        private enum Local
+        private enum Flags
         {
             Fabrica,
-            Centro
+            Centro,
+            Prioridade
         }
 
         bool keepRunning = false;
@@ -52,8 +53,9 @@ namespace PI3___Fukushima
         private void FrmPartida_Load(object sender, EventArgs e)
         {
             lblDadosJogador.Text = dadosJogador[0] + "," + dadosJogador[1];
-            resetFlags(Local.Fabrica);
-            resetFlags(Local.Centro);
+            resetFlags(Flags.Fabrica);
+            resetFlags(Flags.Centro);
+            resetFlags(Flags.Prioridade);
             jogadasBoas = new List<Jogada>();
 
             nFabricas = 2 * nFabricas + 1;
@@ -178,8 +180,9 @@ namespace PI3___Fukushima
                                     historico += "F,";
                                     historico += retorno.Substring(retorno.IndexOf("fábrica") + "fábrica ".Length, 1) + ",";                                    
                                 }
-                                resetFlags(Local.Centro);
-                                resetFlags(Local.Fabrica);
+                                resetFlags(Flags.Centro);
+                                resetFlags(Flags.Fabrica);
+                                resetFlags(Flags.Prioridade);
 
                                 // Isso aqui tá feio hein
                                 if (retorno.Contains("Azul")) historico += 1 + ",";
@@ -250,32 +253,36 @@ namespace PI3___Fukushima
             MessageBox.Show("Jogo Encerrado!", "Azul - Fukushima");
         }
 
-        private void resetFlags(Local local)
+        private void resetFlags(Flags local)
         {
             switch (local)
             {
-                case Local.Fabrica:
+                case Flags.Fabrica:
                     menorQuantidadeFabrica = 5;                    
                     maiorQuantidadeFabrica = -1;
                     break;
-                case Local.Centro:
+                case Flags.Centro:
                     menorQuantidadeCentro = 30;                    
                     maiorQuantidadeCentro = -1;
+                    break;
+                case Flags.Prioridade:
+                    maiorPrioridade = -100;
+                    menorPrioridade = 100;
                     break;
                 default:
                     break;
             }
         }
-        private void limparJogadas(Local local)
+        private void limparJogadas(Flags local)
         {
             List<Jogada> jogadasRemovidas = new List<Jogada>();
 
             switch (local)
             {
-                case Local.Fabrica:
+                case Flags.Fabrica:
                     jogadasRemovidas = jogadas.FindAll(jogada => jogada.IdFabrica != 0);
                     break;
-                case Local.Centro:
+                case Flags.Centro:
                     jogadasRemovidas = jogadas.FindAll(jogada => jogada.IdFabrica == 0);
                     break;
                 default:
@@ -296,7 +303,7 @@ namespace PI3___Fukushima
             fabricas = new List<Fabrica>();
             List<Azulejo>[] azulejos = new List<Azulejo>[nFabricas];
 
-            if (jogadas != null) limparJogadas(Local.Fabrica); 
+            if (jogadas != null) limparJogadas(Flags.Fabrica); 
 
             if (retorno[0] == "" && fabricas != null)
             {
@@ -359,7 +366,7 @@ namespace PI3___Fukushima
             retorno = Jogo.LerCentro(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]).Replace("\r", "").Split('\n');
 
             //verificarErro(retorno);
-            if (jogadas != null) limparJogadas(Local.Centro);
+            if (jogadas != null) limparJogadas(Flags.Centro);
 
             for (int i = 0; i < retorno.Length - 1; i++)
             {
@@ -565,9 +572,9 @@ namespace PI3___Fukushima
             {
                 if (fabricas.Count > 0)
                 {
-                    compras.AddRange(Estrategia.PreencheComFabrica(jogadas, linhasPreenchidas, tabuleiro));
+                    compras.AddRange(Estrategia.PreencheComFabrica(jogadas, linhasPreenchidas, tabuleiro, false));
                 }
-                compras.AddRange(Estrategia.PreencheComCentro(jogadas, linhasPreenchidas, tabuleiro));
+                compras.AddRange(Estrategia.PreencheComCentro(jogadas, linhasPreenchidas, tabuleiro, false));
             }
 
             if (linhasVazias.Count > 0)
@@ -585,7 +592,15 @@ namespace PI3___Fukushima
             {
                 compras.AddRange(Estrategia.MenorChao(jogadas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
             }
-                
+
+            foreach (Compra compra in compras)
+            {
+                if (maiorPrioridade < compra.Prioridade) maiorPrioridade = compra.Prioridade;
+                if (menorPrioridade > compra.Prioridade) menorPrioridade = compra.Prioridade;
+            }
+
+            compras = compras.FindAll(compra => compra.Prioridade == maiorPrioridade);
+
             Random rand = new Random();
             k = rand.Next(0, compras.Count - 1);
             Debug.Print(compras[k].Fonte + ": Local " + compras[k].Local + ", IdF " + compras[k].IdFabrica + ", Id" + compras[k].id + ", quantidade " + compras[k].quantidade + ",linha " + compras[k].LinhaModelo);

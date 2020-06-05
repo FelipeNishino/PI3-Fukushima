@@ -350,11 +350,8 @@ namespace PI3___Fukushima
                         break;
 
                     default:
-
                         break;
                 }
-
-
             }
             tabuleiro.chao = new[] { -1, -1, -1, -1, -1, -1, -1 };
         }

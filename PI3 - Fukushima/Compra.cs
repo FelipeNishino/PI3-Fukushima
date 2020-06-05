@@ -11,6 +11,7 @@ namespace PI3___Fukushima
         public string Local { get; set; }
         public string Fonte{ get; set; }
 
+        public int Prioridade { get; set; }
         public int LinhaModelo { get; set; }
     }
 }
