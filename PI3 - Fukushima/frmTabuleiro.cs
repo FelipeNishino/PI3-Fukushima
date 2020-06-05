@@ -221,7 +221,6 @@ namespace PI3___Fukushima
                 });
             }
         }
-
         public void setCentro(int index, int quantidade)
         {
             Label lblCentro = new Label();

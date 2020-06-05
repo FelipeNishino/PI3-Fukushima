@@ -88,7 +88,7 @@ namespace PI3___Fukushima
                         compra.Local = "F";
                         compra.LinhaModelo = linhaVaziaFabricas.posicao + 1;
                         compra.Fonte = "MaiorModelo";
-                        if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
+                        if (compra.LinhaModelo - compra.quantidade <= -2) compra.Prioridade--;
                         if (compra.quantidade == compra.LinhaModelo) compra.Prioridade++;
 
                         compras.Add(compra);
@@ -147,7 +147,7 @@ namespace PI3___Fukushima
                         compra.Local = "F";
                         compra.LinhaModelo = linhaVaziaFabricas.posicao + 1;
                         compra.Fonte = "MenorModelo";
-                        if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
+                        if (compra.LinhaModelo - compra.quantidade <= -2) compra.Prioridade--;
                         if (compra.quantidade == compra.LinhaModelo) compra.Prioridade++;
                         compras.Add(compra);
                     }
@@ -264,7 +264,7 @@ namespace PI3___Fukushima
                             compra.Local = "C";
                             compra.LinhaModelo = linhaModelo + 1;
                             compra.Fonte = "MenorCentro";
-                            if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
+                            if (compra.LinhaModelo - compra.quantidade <= -2) compra.Prioridade--;
                             if (compra.quantidade == compra.LinhaModelo) compra.Prioridade++;
                             compras.Add(compra);
                         }
@@ -316,7 +316,7 @@ namespace PI3___Fukushima
                             compra.Local = "C";
                             compra.LinhaModelo = linhaModelo + 1;
                             compra.Fonte = "MaiorCentro";
-                            if (compra.LinhaModelo - compra.quantidade > -2) compra.Prioridade--;
+                            if (compra.LinhaModelo - compra.quantidade <= -2) compra.Prioridade--;
                             if (compra.quantidade == compra.LinhaModelo) compra.Prioridade++;
                             compras.Add(compra);
                         }

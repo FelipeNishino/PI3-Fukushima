@@ -120,6 +120,7 @@ namespace PI3___Fukushima
         {
             DateTime startTime = DateTime.Now;
             string vez, historico, retorno;
+            string[] narracao;
             int queuedRead = 1;
 
             keepRunning = true;
@@ -141,7 +142,7 @@ namespace PI3___Fukushima
                 {
                     vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
                     retorno = Jogo.LerNarracao(idPartida);
-
+                    
                     if (vez.Substring(0, 1) == "E")
                     {
                         keepRunning = false;
@@ -151,9 +152,8 @@ namespace PI3___Fukushima
                     {
                         if (vez.Substring(vez.IndexOf(",") + 1, vez.LastIndexOf(",") - (vez.IndexOf(",") + 1)) == dadosJogador[0])
                         {
-                            queuedRead += 2;
+                            queuedRead = 2;
                         }
-                        //J,41,1
 
                         if (round < ((retorno.Length - retorno.Replace("Fábricas preenchidas!\r\n", "").Length) / "Fábricas preenchidas!\r\n".Length))
                         {
@@ -167,7 +167,7 @@ namespace PI3___Fukushima
                         {
                             retorno = retorno.Substring(0, retorno.IndexOf("\r"));
 
-                            if (!retorno.Contains("preenchidas"))
+                            if (!retorno.Contains("preenchidas") && !retorno.Contains("ponto"))
                             {
                                 historico = retorno.Substring(0, retorno.IndexOf(" ")) + ",";
                                 if (retorno.Contains("centro"))
@@ -593,6 +593,7 @@ namespace PI3___Fukushima
             if (vez.Substring(0, 1) == "E") {
                 Invoke(finaliza);
                 keepRunning = false;
+                isBuying = true;
             }
             else
             {
