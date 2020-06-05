@@ -112,7 +112,6 @@
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Senha";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -134,7 +133,6 @@
             this.chkBot.TabIndex = 14;
             this.chkBot.Text = "Usar bot";
             this.chkBot.UseVisualStyleBackColor = false;
-            this.chkBot.CheckedChanged += new System.EventHandler(this.chkBot_CheckedChanged);
             // 
             // label5
             // 
@@ -145,7 +143,6 @@
             this.label5.Size = new System.Drawing.Size(42, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Modelo";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // cboModeloCompra
             // 
@@ -162,7 +159,6 @@
             this.cboModeloCompra.Name = "cboModeloCompra";
             this.cboModeloCompra.Size = new System.Drawing.Size(121, 21);
             this.cboModeloCompra.TabIndex = 5;
-            this.cboModeloCompra.SelectedIndexChanged += new System.EventHandler(this.cboModeloCompra_SelectedIndexChanged);
             // 
             // cboAzulejoCompra
             // 

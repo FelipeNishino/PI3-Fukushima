@@ -483,26 +483,6 @@ namespace PI3___Fukushima
             workerThread.RunWorkerAsync();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkBot_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboModeloCompra_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnStop_Click(object sender, EventArgs e)
         {
             keepRunning = false;
@@ -551,8 +531,8 @@ namespace PI3___Fukushima
                 linhasVazias.Add(linhaVazia);
             }
 
-            //pega todas as linhas que não estao preenchidas
-
+            
+            //cadeia de manipulação das estrategias
             if (linhasPreenchidas.Length > 0)
             {
                 if (fabricas.Count > 0)
@@ -580,6 +560,7 @@ namespace PI3___Fukushima
                 compras.AddRange(Estrategia.MenorChao(jogadas, menorQuantidadeFabrica, menorQuantidadeCentro, tabuleiro));
             }
 
+            //foreach para controle de prioridades, assim o find achando todas as compras com o valor igual a maiorPrioridade
             foreach (Compra compra in compras)
             {
                 if (maiorPrioridade < compra.Prioridade) maiorPrioridade = compra.Prioridade;
@@ -594,9 +575,21 @@ namespace PI3___Fukushima
             Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].id, compras[k].LinhaModelo);
 
             isBuying = false;
-            frmTabuleiro.limparFabricas(compras[k].IdFabrica);
-            btnListarCentro_Click(null, null);
-            Debug.Print("termina compra");
+
+
+            //verifica se a apartidad foi finalizada depois de uma jogada
+            Action finaliza = () => final();
+            string vez = Jogo.VerificarVez(Convert.ToInt32(dadosJogador[0]), dadosJogador[1]);
+            if (vez.Substring(0, 1) == "E") {
+                Invoke(finaliza);
+                keepRunning = false;
+            }
+            else
+            {
+                frmTabuleiro.limparFabricas(compras[k].IdFabrica);
+                btnListarCentro_Click(null, null);
+                Debug.Print("termina compra");
+            }
         }
     }
 }
