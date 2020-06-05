@@ -145,7 +145,7 @@ namespace PI3___Fukushima
 
                 if (forcar)
                 {
-                    jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade > 0 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
+                    jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade > 0 && linha.azulejo.quantidade != linha.posicao + 1 && jogada.IdFabrica > 0 && jogada.id == linha.azulejo.id);
                 }
                 else
                 {
@@ -183,7 +183,7 @@ namespace PI3___Fukushima
 
                 if (forcar)
                 {
-                    jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade > 0 && jogada.IdFabrica == 0 && jogada.id == linha.azulejo.id);        
+                    jogadasBoas = jogadas.FindAll(jogada => jogada.quantidade > 0 && linha.azulejo.quantidade != linha.posicao + 1 && jogada.IdFabrica == 0 && jogada.id == linha.azulejo.id);        
                 }
                 else
                 {
