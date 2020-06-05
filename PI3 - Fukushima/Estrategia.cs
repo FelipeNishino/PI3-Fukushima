@@ -50,14 +50,12 @@ namespace PI3___Fukushima
             jogadasMaiorQuantidade = jogadas.FindAll(jogada => jogada.quantidade == maiorQuantidadeFabrica && jogada.IdFabrica != 0);
 
             //prucura uma linha vazia que caiba a maiorquantidade
-            //linha linhaVaziaFabricas = linhasVazias.Find(linha => linha.posicao + 1 >= maiorQuantidadeFabrica);
+            //linhaVaziaFabricas = linhasVazias.Find(linha => linha.posicao + 1>= maiorQuantidadeFabrica);
 
             foreach (linha linha1 in linhasVazias)
             {
-                if (linha1.posicao + 1 >= maiorQuantidadeFabrica)
-                {
+                if (linha1.posicao + 1 >= maiorQuantidadeFabrica) {
                     linhaVaziaFabricas = linha1;
-
                     break;
                 }
             }
@@ -241,7 +239,7 @@ namespace PI3___Fukushima
         {
             List<Jogada> jogadasMaiorQuantidade = new List<Jogada>();
             List<Compra> compras = new List<Compra>();
-            List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao >= maiorQuantidadeCentro);
+            List<linha> listaAux = linhasVazias.FindAll(linha => linha.posicao + 1 >= maiorQuantidadeCentro);
             int linhaModelo = 0;
 
             if (listaAux.Count > 0)
