@@ -165,7 +165,6 @@
             this.lblCentro1.TabIndex = 62;
             this.lblCentro1.Text = "n";
             this.lblCentro1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCentro1.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // lblCentro2
             // 
@@ -244,7 +243,6 @@
             this.pboCentro3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboCentro3.TabIndex = 58;
             this.pboCentro3.TabStop = false;
-            this.pboCentro3.Click += new System.EventHandler(this.pboCentro3_Click);
             // 
             // pboCentro1
             // 
@@ -645,7 +643,6 @@
             this.pboModelo55.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboModelo55.TabIndex = 15;
             this.pboModelo55.TabStop = false;
-            this.pboModelo55.Click += new System.EventHandler(this.pboModelo55_Click);
             // 
             // pboModelo54
             // 

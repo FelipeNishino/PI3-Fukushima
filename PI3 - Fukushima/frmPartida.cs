@@ -577,7 +577,7 @@ namespace PI3___Fukushima
             Jogo.Jogar(Convert.ToInt32(dadosJogador[0]), dadosJogador[1], compras[k].Local, compras[k].IdFabrica, compras[k].Id, compras[k].LinhaModelo);
 
             isBuying = false;
-
+            ResetFlags(Flags.Prioridade);
 
             //verifica se a apartidad foi finalizada depois de uma jogada
             Action finaliza = () => Final();
